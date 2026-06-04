@@ -1,0 +1,292 @@
+/* ============================================================
+   WELLNESS — styles.css
+   Todos os estilos visuais da tela de início
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   RESET GLOBAL
+   Remove margens e paddings padrão do navegador,
+   e faz o box-sizing incluir bordas no tamanho dos elementos
+   ---------------------------------------------------------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+
+
+
+/* ----------------------------------------------------------
+   CORPO DA PÁGINA
+   Ocupa a tela inteira, sem scroll,
+   centraliza tudo com flexbox
+   ---------------------------------------------------------- */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* impede scroll — é uma tela de entrada */
+}
+
+body {
+    /* Gradiente baseado na cor principal #6aab70 */
+    background: linear-gradient(
+        148deg,
+        #1e3d24 0%,
+        #2e6438 22%,
+        #4a8c58 50%,
+        #3a7248 78%,
+        #1e3d24 100%
+    );
+
+    /* Centraliza o conteúdo no meio da tela */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+
+
+/* ----------------------------------------------------------
+   LUZES AMBIENTE (brilhos sutis nos cantos)
+   Criados com ::before e ::after sem precisar de HTML extra.
+   São círculos com gradiente radial bem transparentes,
+   que dão profundidade ao fundo.
+   ---------------------------------------------------------- */
+
+/* Brilho no canto superior direito */
+body::before {
+    content: '';
+    position: fixed;
+    top: -15%;
+    right: -8%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(106, 171, 112, 0.18) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Brilho no canto inferior esquerdo */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -20%;
+    left: -8%;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(106, 171, 112, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* ----------------------------------------------------------
+   CURSOR PERSONALIZADO
+   ---------------------------------------------------------- */
+
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    background: #6aab70;
+    border: 2.5px solid rgba(255, 255, 255, 0.90);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.30);
+    transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, opacity 0.2s ease;
+    will-change: left, top;
+    opacity: 0;
+}
+
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 46px;
+    height: 46px;
+    border: 2px solid rgba(255, 255, 255, 0.70);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.18);
+    transition: width 0.22s ease, height 0.22s ease, border-color 0.22s ease, opacity 0.2s ease;
+    will-change: left, top;
+    opacity: 0;
+}
+
+body:has(a:hover) .cursor-dot,
+body:has(button:hover) .cursor-dot {
+    width: 18px;
+    height: 18px;
+    background: #8dd192;
+    border-color: rgba(255, 255, 255, 1);
+}
+
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+    width: 62px;
+    height: 62px;
+    border-color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* ----------------------------------------------------------
+   CONTAINER DAS FOLHAS DE FUNDO
+   Ocupa a tela inteira, fica atrás de tudo (z-index: 0).
+   O JavaScript cria as folhas dentro dele.
+   pointer-events: none → o mouse passa por cima sem bloquear cliques
+   ---------------------------------------------------------- */
+#leaves-bg {
+    position: fixed;
+    inset: 0; /* equivale a top:0, right:0, bottom:0, left:0 */
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Cada folha tem dois elementos:
+   .leaf-wrap → posicionamento fixo na tela (JS controla o parallax aqui)
+   .leaf-anim → animação de subida + rotação (CSS @keyframes) */
+
+.leaf-wrap {
+    position: absolute;
+    will-change: transform; /* avisa o browser que vai animar → mais suave */
+}
+
+.leaf-anim {
+    will-change: transform, opacity;
+}
+
+@keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    5%   { opacity: var(--op); }
+    82%  { opacity: calc(var(--op) * 0.75); }
+    100% { transform: translateY(var(--dist)) rotate(var(--spin)); opacity: 0; }
+}
+
+
+/* ----------------------------------------------------------
+   CONTEÚDO PRINCIPAL (hero)
+   Fica na frente de tudo (z-index: 1),
+   centralizado e com animação de entrada
+   ---------------------------------------------------------- */
+.hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+
+    animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* A animação de entrada do conteúdo principal */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px); /* começa 28px abaixo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* sobe para a posição normal */
+    }
+}
+
+
+/* ----------------------------------------------------------
+   LOGO
+   ---------------------------------------------------------- */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    height: 420px;
+    width: auto;
+    filter: drop-shadow(0 6px 36px rgba(0, 0, 0, 0.30));
+}
+
+
+/* ----------------------------------------------------------
+   TAGLINE (frase abaixo da logo)
+   ---------------------------------------------------------- */
+.tagline {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.5px;
+    margin-bottom: 44px;
+}
+
+
+/* ----------------------------------------------------------
+   BOTÃO PRINCIPAL "Começar agora"
+   ---------------------------------------------------------- */
+.cta {
+    display: inline-block;
+    padding: 18px 58px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #1a4d32;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.20);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.cta:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+
+
+/* ----------------------------------------------------------
+   LINK "Já tenho uma conta"
+   ---------------------------------------------------------- */
+.login {
+    display: block;
+    margin-top: 22px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* Clareia o texto ao passar o mouse */
+.login:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* ----------------------------------------------------------
+   FRASE DO RODAPÉ
+   Fixada na parte de baixo da tela
+   ---------------------------------------------------------- */
+.bottom-phrase {
+    position: fixed;
+    bottom: 28px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11.5px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.28);
+    letter-spacing: 0.5px;
+    z-index: 1;
+}

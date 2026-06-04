@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness — Apresentação</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+
+<div class="ob-page">
+<div class="ob-card">
+
+    <!-- ══════════════════════════════════════
+         TOPO — Imagem + setas de navegação
+    ══════════════════════════════════════ -->
+    <div class="ob-top">
+
+        <!-- Slides empilhados, crossfade via JS -->
+        <div class="ob-img ob-img--1 is-active">
+            <img src="assets/slide1.png" alt="Slide 1">
+        </div>
+        <div class="ob-img ob-img--2">
+            <img src="assets/slide2.png" alt="Slide 2">
+        </div>
+        <div class="ob-img ob-img--3"></div>
+        <div class="ob-img ob-img--4"></div>
+        <div class="ob-img ob-img--5"></div>
+
+        <!-- Seta esquerda -->
+        <button class="ob-arrow ob-arrow--left" id="obPrev" aria-label="Anterior">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <!-- Seta direita -->
+        <button class="ob-arrow ob-arrow--right" id="obNext" aria-label="Próximo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+    </div>
+
+    <!-- ══════════════════════════════════════
+         BAIXO — Conteúdo branco
+    ══════════════════════════════════════ -->
+    <div class="ob-bottom">
+
+        <!-- Título e descrição (atualizados via JS) -->
+        <div class="ob-content" id="obContent">
+            <h2 class="ob-title" id="obTitle">Sua jornada começa aqui</h2>
+            <p class="ob-text"  id="obText">Descubra hábitos, estratégias e recomendações criadas para a sua realidade.</p>
+        </div>
+
+        <!-- Indicador de progresso (dots) -->
+        <div class="ob-dots" id="obDots">
+            <span class="ob-dot ob-dot--active"></span>
+            <span class="ob-dot"></span>
+            <span class="ob-dot"></span>
+            <span class="ob-dot"></span>
+            <span class="ob-dot"></span>
+        </div>
+
+        <!-- Botão CTA fixo -->
+        <button class="ob-btn" id="obBtn">Começar minha dieta</button>
+
+    </div>
+
+</div>
+</div>
+
+<script src="onboarding.js"></script>
+</body>
+</html>
