@@ -172,8 +172,18 @@ document.addEventListener('mouseenter', () => {
     }
 
     /* Anel do cursor segue o mouse com inércia suave */
-    ringX += (rawX - ringX) * 0.10;
-    ringY += (rawY - ringY) * 0.10;
+    const _dx = rawX - ringX;
+    const _dy = rawY - ringY;
+    const _dist = Math.sqrt(_dx * _dx + _dy * _dy);
+    const _max = 72;
+    if (_dist > _max) {
+        const _a = Math.atan2(_dy, _dx);
+        ringX = rawX - Math.cos(_a) * _max;
+        ringY = rawY - Math.sin(_a) * _max;
+    } else {
+        ringX += _dx * 0.07;
+        ringY += _dy * 0.07;
+    }
     cursorRing.style.left = ringX.toFixed(1) + 'px';
     cursorRing.style.top  = ringY.toFixed(1) + 'px';
 
