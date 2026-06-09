@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+
+  <!--
+    Remove fundo PRETO, preserva cores originais.
+
+    Alpha = 4R + 4G + 4B - 1
+
+    Preto  (0,0,0):           4(0) -1 = -1 → 0 TRANSPARENTE
+    Verde  (0.42,0.67,0.44):  4(1.53)-1 = 5 → 1 OPACO
+    Bordas anti-alias:        valor intermediário → suave
+  -->
+  <filter id="remove-black"
+          color-interpolation-filters="sRGB"
+          x="0%" y="0%" width="100%" height="100%">
+    <feColorMatrix type="matrix" values="
+      1 0 0 0 0
+      0 1 0 0 0
+      0 0 1 0 0
+      4 4 4 0 -1
+    "/>
+  </filter>
+
+</svg>

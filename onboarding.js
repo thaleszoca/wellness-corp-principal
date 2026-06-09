@@ -3,6 +3,11 @@ document.getElementById('obBtnPrimary').addEventListener('click', () => {
     window.location.href = 'avaliacao.html';
 });
 
+/* ── Como funciona ── */
+document.getElementById('obBtnHow').addEventListener('click', () => {
+    window.location.href = 'como-funciona.html';
+});
+
 /* ── Slideshow automático ── */
 const slides = document.querySelectorAll('.ob-slide');
 const dots   = document.querySelectorAll('.slide-dot');
