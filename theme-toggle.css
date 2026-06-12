@@ -818,3 +818,60 @@
 
 /* Footer */
 [data-theme="light"] .pq-footer      { background: #F8FAF9; border-top-color: #e0eae0; }
+
+
+/* ══════════════════════════════════════════
+   TEMA CLARO — CONTINUAR PERFIL
+══════════════════════════════════════════ */
+
+[data-theme="light"] body:has(.cp-page) {
+    background: #F8FAF9;
+    color: #1A1A2E;
+}
+
+[data-theme="light"] .cp-page {
+    background:
+        radial-gradient(ellipse at 14% 14%, rgba(106,171,113,0.05) 0%, transparent 48%),
+        radial-gradient(ellipse at 86% 86%, rgba(63,112,69,0.04) 0%, transparent 48%),
+        #F8FAF9;
+}
+
+[data-theme="light"] .cp-orb--1 { background: #6AAB71; opacity: 0.05; }
+[data-theme="light"] .cp-orb--2 { background: #3d7a4b; opacity: 0.04; }
+
+[data-theme="light"] .cp-title  { color: #1A1A2E; }
+[data-theme="light"] .cp-body   { color: #6B7280; }
+[data-theme="light"] .cp-note   { color: #6B7280; }
+
+/* SVG — elementos de fundo */
+[data-theme="light"] .cpsvg-ring-outer   { stroke: #d8e8d8; }
+[data-theme="light"] .cpsvg-ring-mid     { stroke: #d8e8d8; }
+[data-theme="light"] .cpsvg-center-bg    { fill: #ffffff; stroke: #d8e8d8; }
+[data-theme="light"] .cpsvg-center-inner { fill: #f5fdf7; }
+[data-theme="light"] .cpsvg-leaf-vein    { stroke: #f5fdf7; }
+[data-theme="light"] .cpsvg-leaf-nerve   { stroke: #f5fdf7; }
+
+/* SVG — nódulos lit */
+[data-theme="light"] .cpsvg-node-lit-ring { fill: #ffffff; }
+[data-theme="light"] .cpsvg-node-lit-core { fill: #ffffff; }
+
+/* SVG — nódulos dim */
+[data-theme="light"] .cpsvg-node-dim-ring { fill: #f0f4f0; stroke: #d8e8d8; }
+[data-theme="light"] .cpsvg-node-dim-dot  { fill: #d0ddd0; }
+[data-theme="light"] .cpsvg-plus          { fill: #b0c8b0; }
+
+/* SVG — pontos externos */
+[data-theme="light"] .cpsvg-outer-dot { fill: #f0f4f0; stroke: #d8e8d8; }
+
+/* SVG — linhas */
+[data-theme="light"] .cpsvg-connect-dim { stroke: #d8e8d8; }
+
+/* Botão secundário */
+[data-theme="light"] .cp-btn-secondary {
+    border-color: #d0ddd0;
+    color: #6B7280;
+}
+[data-theme="light"] .cp-btn-secondary:hover {
+    border-color: rgba(106,171,113,0.50);
+    color: #2D7A4F;
+}

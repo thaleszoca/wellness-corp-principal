@@ -260,7 +260,7 @@ function finish() {
     continueBtn.disabled    = true;
 
     setTimeout(() => {
-        window.location.href = 'index.html'; /* substituir pela próxima tela quando disponível */
+        window.location.href = 'continuar-perfil.html';
     }, 1600);
 }
 

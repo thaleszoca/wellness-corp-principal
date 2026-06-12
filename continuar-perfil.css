@@ -1,0 +1,417 @@
+/* ============================================================
+   WELLNESS — continuar-perfil.css
+   Tela de escolha de personalização adicional
+   Tema: dark premium
+   ============================================================ */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: #0F1115;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+
+/* ══════════════════════════════════════════
+   CURSOR
+══════════════════════════════════════════ */
+
+.cursor-dot {
+    position: fixed; top: 0; left: 0;
+    width: 8px; height: 8px;
+    background: #6AAB71; border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(106,171,113,0.45);
+    transition: width 0.15s, height 0.15s, opacity 0.2s;
+    will-change: left, top; opacity: 0;
+}
+
+.cursor-ring {
+    position: fixed; top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1.5px solid rgba(106,171,113,0.35);
+    border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.22s, height 0.22s, opacity 0.2s;
+    will-change: left, top; opacity: 0;
+}
+
+body:has(a:hover) .cursor-dot,
+body:has(button:hover) .cursor-dot  { width: 12px; height: 12px; }
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring { width: 46px; height: 46px; border-color: rgba(106,171,113,0.60); }
+
+
+/* ══════════════════════════════════════════
+   PÁGINA
+══════════════════════════════════════════ */
+
+.cp-page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 52px 24px;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 14% 14%, rgba(106,171,113,0.07) 0%, transparent 48%),
+        radial-gradient(ellipse at 86% 86%, rgba(63,112,69,0.07) 0%, transparent 48%),
+        linear-gradient(145deg, #0F1115 0%, #131720 55%, #0F1115 100%);
+}
+
+/* Luz ambiente — orbs decorativos */
+.cp-bg {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
+}
+
+.cp-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+}
+
+.cp-orb--1 {
+    width: 440px; height: 440px;
+    background: #6AAB71;
+    top: -140px; right: -100px;
+    opacity: 0.07;
+}
+
+.cp-orb--2 {
+    width: 380px; height: 380px;
+    background: #3d7a4b;
+    bottom: -100px; left: -100px;
+    opacity: 0.06;
+}
+
+
+/* ══════════════════════════════════════════
+   CONTEÚDO
+══════════════════════════════════════════ */
+
+.cp-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* ══════════════════════════════════════════
+   ILUSTRAÇÃO SVG
+══════════════════════════════════════════ */
+
+.cp-visual {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 36px;
+    animation: cpFloat 5.5s ease-in-out infinite;
+    opacity: 0;
+    animation: cpFloat 5.5s ease-in-out infinite, cpFadeIn 0.70s ease 0.05s both;
+}
+
+.cp-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* ── Elementos do SVG via CSS ── */
+
+.cpsvg-ring-outer { stroke: #273041; }
+.cpsvg-ring-glow  { stroke: #6AAB71; stroke-opacity: 0.14; }
+.cpsvg-ring-mid   { stroke: #273041; }
+
+/* Arco verde — animado */
+.cp-arc {
+    stroke: #6AAB71;
+    stroke-dasharray: 191 478;
+    stroke-dashoffset: 191;
+    animation: cpArcDraw 1.40s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+@keyframes cpArcDraw {
+    from { stroke-dashoffset: 191; }
+    to   { stroke-dashoffset: 0; }
+}
+
+/* Centro */
+.cpsvg-center-bg    { fill: #1B2230; stroke: #273041; stroke-width: 1.5; }
+.cpsvg-center-inner { fill: #131720; }
+
+/* Folha */
+.cpsvg-leaf      { fill: #6AAB71; }
+.cpsvg-leaf-vein { stroke: #131720; stroke-width: 1.4; opacity: 0.45; }
+.cpsvg-leaf-nerve { stroke: #131720; opacity: 0.38; }
+
+/* Linhas de conexão */
+.cpsvg-connect-lit { stroke: #6AAB71; stroke-width: 0.8; stroke-opacity: 0.35; fill: none; }
+.cpsvg-connect-dim { stroke: #273041; stroke-width: 0.8; fill: none; }
+
+/* Nódulos lit */
+.cpsvg-node-lit-ring { fill: #1B2230; stroke: #6AAB71; }
+.cpsvg-node-lit-dot  { fill: #6AAB71; }
+.cpsvg-node-lit-core { fill: #131720; }
+
+/* Nódulos dim */
+.cpsvg-node-dim-ring { fill: #131720; stroke: #273041; }
+.cpsvg-node-dim-dot  { fill: #273041; }
+.cpsvg-plus          { fill: #4A5568; }
+
+/* Pontos externos */
+.cpsvg-outer-dot { fill: #131720; stroke: #273041; stroke-width: 1; }
+
+/* Partículas */
+.cpsvg-sparkle { fill: #6AAB71; }
+
+/* Pulso do centro */
+.cp-pulse {
+    stroke: #6AAB71;
+    stroke-opacity: 0.45;
+    animation: cpPulse 3.2s ease-in-out infinite;
+    transform-origin: 120px 120px;
+}
+
+@keyframes cpPulse {
+    0%, 100% { transform: scale(1);    stroke-opacity: 0.45; }
+    50%       { transform: scale(1.22); stroke-opacity: 0.08; }
+}
+
+@keyframes cpFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-9px); }
+}
+
+@keyframes cpFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+/* ══════════════════════════════════════════
+   BADGE
+══════════════════════════════════════════ */
+
+.cp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #6AAB71;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 15px;
+    border-radius: 999px;
+    letter-spacing: 0.15px;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: cpSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.20s both;
+}
+
+
+/* ══════════════════════════════════════════
+   TÍTULO
+══════════════════════════════════════════ */
+
+.cp-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(24px, 5vw, 34px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.20;
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: cpSlideUp 0.70s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.cp-title em {
+    font-style: italic;
+    color: #6AAB71;
+    font-weight: 300;
+}
+
+
+/* ══════════════════════════════════════════
+   TEXTO DE APOIO
+══════════════════════════════════════════ */
+
+.cp-body {
+    font-size: clamp(14px, 2vw, 15.5px);
+    font-weight: 400;
+    color: #B5BEC8;
+    line-height: 1.80;
+    max-width: 420px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: cpSlideUp 0.70s cubic-bezier(0.22, 1, 0.36, 1) 0.50s both;
+}
+
+
+/* ══════════════════════════════════════════
+   NOTA OPCIONAL
+══════════════════════════════════════════ */
+
+.cp-note {
+    border-left: 3px solid #6AAB71;
+    padding-left: 14px;
+    text-align: left;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 400;
+    color: #8C95A3;
+    line-height: 1.65;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: cpSlideUp 0.70s cubic-bezier(0.22, 1, 0.36, 1) 0.62s both;
+}
+
+
+/* ══════════════════════════════════════════
+   AÇÕES
+══════════════════════════════════════════ */
+
+.cp-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    animation: cpSlideUp 0.70s cubic-bezier(0.22, 1, 0.36, 1) 0.74s both;
+}
+
+
+/* ── Botão Primário ── */
+.cp-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 17px 24px;
+    background: #6AAB71;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 22px rgba(106,171,113,0.32);
+    transition: background 0.20s ease, transform 0.16s ease, box-shadow 0.20s ease;
+    letter-spacing: 0.01em;
+}
+
+.cp-btn-primary:hover {
+    background: #5F9D66;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(106,171,113,0.42);
+}
+
+.cp-btn-primary:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(106,171,113,0.22);
+}
+
+.cp-btn-primary svg {
+    flex-shrink: 0;
+    transition: transform 0.20s ease;
+}
+
+.cp-btn-primary:hover svg {
+    transform: translateX(4px);
+}
+
+
+/* ── Botão Secundário ── */
+.cp-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 24px;
+    background: transparent;
+    color: #8C95A3;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1.5px solid #273041;
+    border-radius: 14px;
+    transition: border-color 0.22s ease, color 0.22s ease, transform 0.16s ease;
+    letter-spacing: 0.01em;
+}
+
+.cp-btn-secondary:hover {
+    border-color: rgba(106,171,113,0.50);
+    color: #B5BEC8;
+    transform: translateY(-1px);
+}
+
+.cp-btn-secondary:active {
+    transform: scale(0.98);
+}
+
+
+/* ══════════════════════════════════════════
+   ANIMAÇÃO BASE
+══════════════════════════════════════════ */
+
+@keyframes cpSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVO
+══════════════════════════════════════════ */
+
+@media (min-width: 480px) {
+    .cp-actions {
+        flex-direction: row;
+    }
+
+    .cp-btn-primary,
+    .cp-btn-secondary {
+        flex: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .cp-visual {
+        width: 240px;
+        height: 240px;
+        margin-bottom: 44px;
+    }
+
+    .cp-title {
+        font-size: clamp(28px, 3.5vw, 36px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .cp-content {
+        max-width: 540px;
+    }
+}
