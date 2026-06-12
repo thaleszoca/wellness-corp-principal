@@ -11,7 +11,7 @@ document.getElementById('cpBtnContinue').addEventListener('click', () => {
 
     /* Redireciona para as perguntas adaptativas (próxima tela a ser criada) */
     setTimeout(() => {
-        window.location.href = 'index.html'; /* substituir pela tela de perguntas adaptativas */
+        window.location.href = 'evolucao-perfil.html';
     }, 1000);
 });
 
