@@ -1,6 +1,6 @@
 /* ── CTA principal ── */
 document.getElementById('obBtnPrimary').addEventListener('click', () => {
-    window.location.href = 'avaliacao.html';
+    window.location.href = 'cadastro.html';
 });
 
 /* ── Como funciona ── */

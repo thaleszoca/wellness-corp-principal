@@ -676,3 +676,145 @@
 /* CTA orbs */
 [data-theme="light"] .cf-cta-orb--1 { background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 58%); }
 [data-theme="light"] .cf-cta-orb--2 { background: radial-gradient(circle, rgba(45,100,55,0.45) 0%, transparent 60%); }
+
+
+/* ══════════════════════════════════════════
+   TEMA CLARO — CADASTRO (cadastro.html / cadastro.css)
+══════════════════════════════════════════ */
+
+[data-theme="light"] .cad-brand {
+    background:
+        radial-gradient(ellipse at 15% 25%, rgba(255, 255, 255, 0.14) 0%, transparent 50%),
+        linear-gradient(148deg, #1e3d24 0%, #2e6438 22%, #4a8c58 50%, #3a7248 78%, #1e3d24 100%);
+    border-right: none;
+}
+
+[data-theme="light"] .cad-panel        { background: #ffffff; border-left: none; }
+[data-theme="light"] .strength-bar     { background: #e0e8e0; }
+[data-theme="light"] .strength-label   { color: #7a9a7a; }
+[data-theme="light"] .link-login       { color: #6aab71; }
+[data-theme="light"] .link-login:hover { color: #3d7a4b; }
+[data-theme="light"] .cad-toast {
+    background: #1a2e1a;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ══════════════════════════════════════════
+   TEMA CLARO — PERGUNTAS ESSENCIAIS
+══════════════════════════════════════════ */
+
+[data-theme="light"] body:has(.pq-main) {
+    background: #F8FAF9;
+}
+
+[data-theme="light"] .pq-progress-bar { background: #e0eae0; }
+
+[data-theme="light"] .pq-header {
+    background: #F8FAF9;
+    border-bottom-color: #e0eae0;
+}
+
+[data-theme="light"] .pq-back-btn {
+    background: #ffffff;
+    border-color: #d0ddd0;
+    color: #4a5e4a;
+}
+[data-theme="light"] .pq-back-btn:hover {
+    border-color: #6aab71;
+    color: #2D7A4F;
+}
+
+[data-theme="light"] .pq-step-counter { color: #6a8a6a; }
+[data-theme="light"] .pq-step-num     { color: #2D7A4F; }
+
+[data-theme="light"] .pq-question     { color: #1a2e1a; }
+[data-theme="light"] .pq-hint         { color: #5a7a5a; }
+
+/* Número (idade) */
+[data-theme="light"] .pq-number-input {
+    background: #ffffff;
+    border-color: #d0ddd0;
+    color: #1a2e1a;
+}
+[data-theme="light"] .pq-number-input:focus {
+    border-color: #6aab71;
+    box-shadow: 0 0 0 4px rgba(106,171,113,0.10);
+}
+[data-theme="light"] .pq-unit         { color: #6a8a6a; }
+[data-theme="light"] .pq-unit--measure { color: #6a8a6a; }
+[data-theme="light"] .pq-big-value    { color: #1a2e1a; }
+
+/* Cards de sexo */
+[data-theme="light"] .pq-gender-card {
+    background: #ffffff;
+    border-color: #d0ddd0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+[data-theme="light"] .pq-gender-card:hover {
+    border-color: rgba(106,171,113,0.50);
+    background: #f5fdf7;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+}
+[data-theme="light"] .pq-gender-card.selected {
+    background: #edf7f0;
+    border-color: #6aab71;
+    box-shadow: 0 0 0 1px rgba(106,171,113,0.35), 0 8px 24px rgba(106,171,113,0.12);
+}
+[data-theme="light"] .pq-gender-icon {
+    background: #f5fdf7;
+    border-color: #d4e8da;
+    color: #5a7a5a;
+}
+[data-theme="light"] .pq-gender-card:hover .pq-gender-icon  { background: #edf7f0; }
+[data-theme="light"] .pq-gender-card.selected .pq-gender-icon { background: #ddf0e5; }
+[data-theme="light"] .pq-gender-label { color: #3a5a3a; }
+
+/* Stepper */
+[data-theme="light"] .pq-stepper-btn {
+    background: #ffffff;
+    border-color: #d0ddd0;
+    color: #4a6a4a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+[data-theme="light"] .pq-stepper-btn:hover {
+    background: #f5fdf7;
+    border-color: #6aab71;
+    color: #2D7A4F;
+}
+
+/* Slider */
+[data-theme="light"] .pq-slider::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px rgba(106,171,113,0.18), 0 2px 8px rgba(0,0,0,0.20);
+}
+
+/* Cards de objetivo */
+[data-theme="light"] .pq-goal-card {
+    background: #ffffff;
+    border-color: #d0ddd0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+[data-theme="light"] .pq-goal-card:hover {
+    border-color: rgba(106,171,113,0.50);
+    background: #f5fdf7;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+}
+[data-theme="light"] .pq-goal-card.selected {
+    background: #edf7f0;
+    border-color: #6aab71;
+    box-shadow: 0 0 0 1px rgba(106,171,113,0.35), 0 8px 24px rgba(106,171,113,0.12);
+}
+[data-theme="light"] .pq-goal-icon-wrap {
+    background: #f5fdf7;
+    border-color: #d4e8da;
+    color: #5a7a5a;
+}
+[data-theme="light"] .pq-goal-card:hover .pq-goal-icon-wrap  { background: #edf7f0; color: #2D7A4F; }
+[data-theme="light"] .pq-goal-card.selected .pq-goal-icon-wrap { background: #ddf0e5; }
+[data-theme="light"] .pq-goal-title  { color: #2a3e2a; }
+[data-theme="light"] .pq-goal-desc   { color: #5a7a5a; }
+[data-theme="light"] .pq-goal-check  { background: #f0f0f0; border-color: #d0d8d0; }
+
+/* Footer */
+[data-theme="light"] .pq-footer      { background: #F8FAF9; border-top-color: #e0eae0; }

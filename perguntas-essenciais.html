@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness — Primeiras Perguntas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="perguntas-essenciais.css">
+    <link rel="stylesheet" href="theme-toggle.css">
+    <script src="theme-toggle.js"></script>
+</head>
+<body>
+
+<!-- Barra de progresso (fixed top) -->
+<div class="pq-progress-bar">
+    <div class="pq-progress-fill" id="progressFill"></div>
+</div>
+
+<!-- Header -->
+<header class="pq-header">
+    <button class="pq-back-btn" id="backBtn" aria-label="Voltar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+        </svg>
+    </button>
+    <div class="pq-step-counter">
+        <span class="pq-step-num" id="stepNum">1</span>
+        <span class="pq-step-sep"> de 5</span>
+    </div>
+    <div style="width:40px"></div>
+</header>
+
+<!-- Conteúdo principal -->
+<main class="pq-main">
+
+    <!-- ── Step 1: Idade ── -->
+    <div class="pq-step active" id="step-age" data-step="1">
+
+        <div class="pq-visual">
+            <svg class="pq-visual-svg" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Calendar body -->
+                <rect x="12" y="18" width="64" height="58" rx="10" fill="#131720" stroke="#273041" stroke-width="2"/>
+                <!-- Calendar header band -->
+                <rect x="12" y="18" width="64" height="22" rx="10" fill="#1B2230"/>
+                <rect x="12" y="30" width="64" height="10" fill="#1B2230"/>
+                <!-- Pin left -->
+                <rect x="28" y="10" width="4" height="14" rx="2" fill="#6AAB71"/>
+                <!-- Pin right -->
+                <rect x="56" y="10" width="4" height="14" rx="2" fill="#6AAB71"/>
+                <!-- Grid dots -->
+                <circle cx="28" cy="52" r="2.5" fill="#273041"/>
+                <circle cx="44" cy="52" r="2.5" fill="#273041"/>
+                <circle cx="60" cy="52" r="2.5" fill="#273041"/>
+                <circle cx="28" cy="64" r="2.5" fill="#273041"/>
+                <circle cx="44" cy="64" r="2.5" fill="#273041"/>
+                <circle cx="60" cy="64" r="2.5" fill="#273041"/>
+                <!-- Highlighted today -->
+                <circle cx="44" cy="52" r="10" fill="#6AAB71" opacity="0.18"/>
+                <circle cx="44" cy="52" r="2.5" fill="#6AAB71"/>
+                <!-- Person inside header -->
+                <circle cx="44" cy="27" r="5" fill="#6AAB71"/>
+            </svg>
+        </div>
+
+        <h2 class="pq-question">Quantos anos você tem?</h2>
+        <p class="pq-hint">Suas recomendações serão adaptadas à sua faixa etária.</p>
+
+        <div class="pq-input-area">
+            <div class="pq-number-input-wrap">
+                <input
+                    type="number"
+                    id="inputAge"
+                    class="pq-number-input"
+                    min="13"
+                    max="99"
+                    placeholder="—"
+                    autocomplete="off"
+                    inputmode="numeric">
+                <span class="pq-unit">anos</span>
+            </div>
+            <p class="pq-field-error" id="errorAge"></p>
+        </div>
+
+    </div>
+
+    <!-- ── Step 2: Sexo ── -->
+    <div class="pq-step" id="step-gender" data-step="2">
+
+        <div class="pq-visual">
+            <svg class="pq-visual-svg" viewBox="0 0 88 88" fill="none">
+                <!-- Left profile -->
+                <circle cx="30" cy="30" r="14" fill="#1B2230" stroke="#273041" stroke-width="2"/>
+                <circle cx="30" cy="27" r="6" fill="#559962"/>
+                <path d="M18 46c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#559962" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <!-- Right profile -->
+                <circle cx="58" cy="30" r="14" fill="#1B2230" stroke="#273041" stroke-width="2"/>
+                <circle cx="58" cy="27" r="6" fill="#6AAB71"/>
+                <path d="M46 46c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <!-- Center badge -->
+                <circle cx="44" cy="62" r="12" fill="#131720" stroke="#273041" stroke-width="2"/>
+                <path d="M39 62l3.5 3.5 7-7" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <h2 class="pq-question">Qual é o seu sexo biológico?</h2>
+        <p class="pq-hint">Usado apenas para cálculos fisiológicos como IMC e metabolismo.</p>
+
+        <div class="pq-gender-grid" id="genderGrid">
+            <button class="pq-gender-card" data-value="masculino" type="button">
+                <div class="pq-gender-icon">
+                    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="17" cy="23" r="10"/>
+                        <line x1="24.1" y1="15.9" x2="35" y2="5"/>
+                        <polyline points="28,5 35,5 35,12"/>
+                    </svg>
+                </div>
+                <span class="pq-gender-label">Masculino</span>
+            </button>
+            <button class="pq-gender-card" data-value="feminino" type="button">
+                <div class="pq-gender-icon">
+                    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="20" cy="16" r="10"/>
+                        <line x1="20" y1="26" x2="20" y2="38"/>
+                        <line x1="13" y1="32" x2="27" y2="32"/>
+                    </svg>
+                </div>
+                <span class="pq-gender-label">Feminino</span>
+            </button>
+        </div>
+        <p class="pq-field-error" id="errorGender"></p>
+
+    </div>
+
+    <!-- ── Step 3: Altura ── -->
+    <div class="pq-step" id="step-height" data-step="3">
+
+        <div class="pq-visual">
+            <svg class="pq-visual-svg" viewBox="0 0 88 88" fill="none">
+                <!-- Ruler body -->
+                <rect x="32" y="8" width="18" height="72" rx="5" fill="#131720" stroke="#273041" stroke-width="2"/>
+                <!-- Major ticks (left side = long) -->
+                <line x1="38" y1="16" x2="50" y2="16" stroke="#6AAB71" stroke-width="2" stroke-linecap="round"/>
+                <line x1="38" y1="30" x2="50" y2="30" stroke="#6AAB71" stroke-width="2" stroke-linecap="round"/>
+                <line x1="38" y1="44" x2="50" y2="44" stroke="#6AAB71" stroke-width="2" stroke-linecap="round"/>
+                <line x1="38" y1="58" x2="50" y2="58" stroke="#6AAB71" stroke-width="2" stroke-linecap="round"/>
+                <line x1="38" y1="72" x2="50" y2="72" stroke="#6AAB71" stroke-width="2" stroke-linecap="round"/>
+                <!-- Minor ticks -->
+                <line x1="40" y1="23" x2="50" y2="23" stroke="#4a6050" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="40" y1="37" x2="50" y2="37" stroke="#4a6050" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="40" y1="51" x2="50" y2="51" stroke="#4a6050" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="40" y1="65" x2="50" y2="65" stroke="#4a6050" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Arrow indicator (left) -->
+                <line x1="10" y1="44" x2="30" y2="44" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round"/>
+                <polyline points="16,38 10,44 16,50" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <!-- Glow dot at tick -->
+                <circle cx="41" cy="44" r="3" fill="#6AAB71"/>
+            </svg>
+        </div>
+
+        <h2 class="pq-question">Qual é a sua altura?</h2>
+        <p class="pq-hint">Utilize centímetros para maior precisão.</p>
+
+        <div class="pq-measure-wrap">
+            <div class="pq-stepper-row">
+                <button class="pq-stepper-btn" id="heightMinus" type="button" aria-label="Diminuir">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="pq-big-value-wrap">
+                    <span class="pq-big-value" id="heightDisplay">170</span>
+                    <span class="pq-unit pq-unit--measure">cm</span>
+                </div>
+                <button class="pq-stepper-btn" id="heightPlus" type="button" aria-label="Aumentar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+            </div>
+            <input type="range" class="pq-slider" id="heightSlider" min="100" max="250" value="170">
+            <input type="hidden" id="inputHeight" value="170">
+        </div>
+
+    </div>
+
+    <!-- ── Step 4: Peso ── -->
+    <div class="pq-step" id="step-weight" data-step="4">
+
+        <div class="pq-visual">
+            <svg class="pq-visual-svg" viewBox="0 0 88 88" fill="none">
+                <!-- Scale base -->
+                <ellipse cx="44" cy="74" rx="30" ry="6" fill="#1B2230" stroke="#273041" stroke-width="2"/>
+                <!-- Scale arch -->
+                <path d="M14 74 C14 38 74 38 74 74" fill="#131720" stroke="#273041" stroke-width="2"/>
+                <!-- Dial face -->
+                <circle cx="44" cy="58" r="16" fill="#1B2230" stroke="#273041" stroke-width="2"/>
+                <!-- Dial marks -->
+                <line x1="29" y1="54" x2="32" y2="57" stroke="#6AAB71" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="33" y1="45" x2="35.5" y2="48" stroke="#4a6050" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="44" y1="43" x2="44" y2="46" stroke="#6AAB71" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="55" y1="45" x2="52.5" y2="48" stroke="#4a6050" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="59" y1="54" x2="56" y2="57" stroke="#6AAB71" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Needle -->
+                <line x1="44" y1="58" x2="51" y2="50" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Center pin -->
+                <circle cx="44" cy="58" r="3.5" fill="#273041"/>
+                <circle cx="44" cy="58" r="2" fill="#6AAB71"/>
+            </svg>
+        </div>
+
+        <h2 class="pq-question">Qual é o seu peso atual?</h2>
+        <p class="pq-hint">Em quilogramas. Pode usar uma casa decimal.</p>
+
+        <div class="pq-measure-wrap">
+            <div class="pq-stepper-row">
+                <button class="pq-stepper-btn" id="weightMinus" type="button" aria-label="Diminuir">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="pq-big-value-wrap">
+                    <span class="pq-big-value" id="weightDisplay">70</span>
+                    <span class="pq-unit pq-unit--measure">kg</span>
+                </div>
+                <button class="pq-stepper-btn" id="weightPlus" type="button" aria-label="Aumentar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+            </div>
+            <input type="range" class="pq-slider" id="weightSlider" min="30" max="200" value="70" step="0.5">
+            <input type="hidden" id="inputWeight" value="70">
+        </div>
+
+    </div>
+
+    <!-- ── Step 5: Objetivo ── -->
+    <div class="pq-step" id="step-goal" data-step="5">
+
+        <div class="pq-visual">
+            <svg class="pq-visual-svg" viewBox="0 0 88 88" fill="none">
+                <!-- Target rings -->
+                <circle cx="44" cy="44" r="36" fill="#131720" stroke="#1B2230" stroke-width="2"/>
+                <circle cx="44" cy="44" r="26" fill="#131720" stroke="#273041" stroke-width="2"/>
+                <circle cx="44" cy="44" r="16" fill="#1B2230" stroke="#273041" stroke-width="2"/>
+                <circle cx="44" cy="44" r="7"  fill="#6AAB71" opacity="0.25"/>
+                <circle cx="44" cy="44" r="4"  fill="#6AAB71"/>
+                <!-- Arrow -->
+                <line x1="70" y1="18" x2="48" y2="40" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round"/>
+                <polyline points="63,15 70,18 67,25" stroke="#6AAB71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </div>
+
+        <h2 class="pq-question">Qual é o seu principal objetivo?</h2>
+        <p class="pq-hint">Isso define todo o seu plano personalizado na Wellness.</p>
+
+        <div class="pq-goal-grid" id="goalGrid">
+
+            <button class="pq-goal-card" data-value="ganhar-massa" type="button">
+                <div class="pq-goal-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="18" width="7" height="8" rx="2"/>
+                        <rect x="35" y="18" width="7" height="8" rx="2"/>
+                        <rect x="8" y="14" width="5" height="16" rx="1.5"/>
+                        <rect x="31" y="14" width="5" height="16" rx="1.5"/>
+                        <line x1="13" y1="22" x2="31" y2="22"/>
+                    </svg>
+                </div>
+                <div class="pq-goal-text">
+                    <span class="pq-goal-title">Ganhar Massa</span>
+                    <span class="pq-goal-desc">Aumentar músculo e força</span>
+                </div>
+                <div class="pq-goal-check">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+            </button>
+
+            <button class="pq-goal-card" data-value="emagrecer" type="button">
+                <div class="pq-goal-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 5C22 5 30 13 28 20C26 27 20 26 20 33C20 38.5 22 41 22 41"/>
+                        <path d="M15 23C15 23 19 29 19 34C19 38 21 40 22 41"/>
+                        <path d="M29 18C29 18 25 25 25 29C25 34 23 38 22 41"/>
+                    </svg>
+                </div>
+                <div class="pq-goal-text">
+                    <span class="pq-goal-title">Emagrecer</span>
+                    <span class="pq-goal-desc">Reduzir gordura corporal</span>
+                </div>
+                <div class="pq-goal-check">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+            </button>
+
+            <button class="pq-goal-card" data-value="melhorar-alimentacao" type="button">
+                <div class="pq-goal-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Fork -->
+                        <line x1="13" y1="5" x2="13" y2="18"/>
+                        <line x1="9"  y1="5" x2="9"  y2="12"/>
+                        <line x1="17" y1="5" x2="17" y2="12"/>
+                        <path d="M9 12 Q13 16 13 18"/>
+                        <path d="M17 12 Q13 16 13 18"/>
+                        <line x1="13" y1="18" x2="13" y2="38"/>
+                        <!-- Heart -->
+                        <path d="M26 18 C26 15.5 28 14 30 14 C32 14 34 15.5 34 18 C34 21 30 25 30 25 C30 25 26 21 26 18Z"/>
+                    </svg>
+                </div>
+                <div class="pq-goal-text">
+                    <span class="pq-goal-title">Melhorar Relação<br>com a Comida</span>
+                    <span class="pq-goal-desc">Hábitos alimentares saudáveis</span>
+                </div>
+                <div class="pq-goal-check">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+            </button>
+
+        </div>
+        <p class="pq-field-error" id="errorGoal"></p>
+
+    </div>
+
+</main>
+
+<!-- Footer (botão continuar) -->
+<footer class="pq-footer">
+    <button class="pq-btn-continue" id="continueBtn" type="button">Continuar</button>
+</footer>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <span class="tt-icon">
+        <svg class="tt-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="tt-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </span>
+    <span class="tt-label">Claro</span>
+</button>
+
+<script src="cursor.js"></script>
+<script src="perguntas-essenciais.js"></script>
+
+</body>
+</html>
