@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness — Início</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="theme-toggle.css">
+    <script src="theme-toggle.js"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER FIXO
+══════════════════════════════════════════ -->
+<header class="db-header" id="dbHeader">
+    <div class="db-header-inner">
+
+        <div class="db-header-brand">
+            <div class="db-logo-wrap">
+                <img src="assets/logo-wellness.png" alt="Wellness" class="db-logo-img">
+            </div>
+            <span class="db-brand-name">Wellness</span>
+        </div>
+
+        <div class="db-header-right">
+            <button class="db-icon-btn" id="dbNotifBtn" aria-label="Notificações">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                <span class="db-notif-badge" aria-hidden="true"></span>
+            </button>
+
+            <button class="db-icon-btn theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                <span class="tt-icon">
+                    <svg class="tt-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="tt-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════
+     CONTEÚDO PRINCIPAL
+══════════════════════════════════════════ -->
+<main class="db-main">
+
+
+    <!-- ── Boas-vindas ── -->
+    <section class="db-welcome">
+        <div class="db-welcome-left">
+            <p class="db-greeting" id="dbGreeting">Bom dia,</p>
+            <p class="db-user-name" id="dbUserName">Bem-vindo à Wellness</p>
+            <p class="db-daily-quote" id="dbDailyQuote"></p>
+        </div>
+        <div class="db-welcome-right">
+            <div class="db-date-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span id="dbDateText"></span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ── CTA: Completar Perfil ── -->
+    <section class="db-section" id="ctaSection">
+        <div class="db-cta-card">
+
+            <div class="db-cta-inner">
+                <div class="db-cta-icon-wrap" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <div class="db-cta-text">
+                    <div class="db-cta-badge-row">
+                        <span class="db-cta-status-dot" aria-hidden="true"></span>
+                        <span class="db-cta-status-label">Perfil incompleto</span>
+                    </div>
+                    <h2 class="db-cta-title">Seu plano ainda não está pronto</h2>
+                    <p class="db-cta-desc">Responda algumas perguntas adicionais para que possamos criar recomendações personalizadas para você.</p>
+                </div>
+            </div>
+
+            <button class="db-cta-btn" id="ctaBtn">
+                Completar Meu Perfil
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- ── Progresso do Perfil ── -->
+    <section class="db-section">
+        <div class="db-progress-card">
+
+            <div class="db-progress-info">
+                <div class="db-progress-meta">
+                    <span class="db-progress-label">Perfil Wellness</span>
+                    <span class="db-progress-tag" id="dbProgressTag">Em construção</span>
+                </div>
+                <div class="db-progress-num">
+                    <span class="db-progress-pct" id="dbProgressPct">0</span>
+                    <span class="db-progress-pct-sym">%</span>
+                    <span class="db-progress-sub">concluído</span>
+                </div>
+                <div class="db-progress-bar-track">
+                    <div class="db-progress-bar" id="dbProgressBar"></div>
+                </div>
+                <p class="db-progress-hint" id="dbProgressHint">Complete as etapas para desbloquear todos os recursos</p>
+            </div>
+
+            <div class="db-ring-wrap" aria-hidden="true">
+                <svg class="db-ring-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="db-ring-track" cx="100" cy="100" r="76"/>
+                    <circle class="db-ring-fill" cx="100" cy="100" r="76"
+                            transform="rotate(-90 100 100)" id="dbRingFill"/>
+                    <circle class="db-ring-inner" cx="100" cy="100" r="59"/>
+                    <circle class="db-ring-center-bg" cx="100" cy="100" r="54"/>
+                </svg>
+                <div class="db-ring-center">
+                    <span class="db-ring-pct" id="dbRingPct">0</span>
+                    <span class="db-ring-sym">%</span>
+                    <span class="db-ring-lbl">do perfil</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ── Dados Coletados ── -->
+    <section class="db-section" id="dbStatsSection">
+        <div class="db-stats-row reveal">
+
+            <div class="db-stat-item">
+                <span class="db-stat-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </span>
+                <span class="db-stat-label">Objetivo</span>
+                <span class="db-stat-val" id="statGoalVal">—</span>
+            </div>
+
+            <div class="db-stat-divider" aria-hidden="true"></div>
+
+            <div class="db-stat-item">
+                <span class="db-stat-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </span>
+                <span class="db-stat-label">IMC</span>
+                <span class="db-stat-val" id="statBmiVal">—</span>
+            </div>
+
+            <div class="db-stat-divider" aria-hidden="true"></div>
+
+            <div class="db-stat-item">
+                <span class="db-stat-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+                    </svg>
+                </span>
+                <span class="db-stat-label">Idade</span>
+                <span class="db-stat-val" id="statAgeVal">—</span>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ── Recursos ── -->
+    <section class="db-section">
+        <div class="db-section-header">
+            <h2 class="db-section-title">Seus Recursos</h2>
+            <span class="db-section-sub">4 módulos</span>
+        </div>
+
+        <div class="db-resources-grid">
+
+            <!-- Plano Alimentar -->
+            <div class="db-rc db-rc--locked reveal" style="--reveal-delay:0ms">
+                <div class="db-rc-top">
+                    <div class="db-rc-icon-wrap db-rc-icon--green" aria-hidden="true">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                        </svg>
+                    </div>
+                    <div class="db-rc-lock-icon" aria-label="Bloqueado">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                </div>
+                <h4 class="db-rc-title">Plano Alimentar</h4>
+                <p class="db-rc-status db-rc-status--waiting">Em preparação</p>
+                <p class="db-rc-desc">Disponível após completar o perfil.</p>
+            </div>
+
+            <!-- Análise de Hábitos -->
+            <div class="db-rc db-rc--locked reveal" style="--reveal-delay:70ms">
+                <div class="db-rc-top">
+                    <div class="db-rc-icon-wrap db-rc-icon--blue" aria-hidden="true">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="db-rc-lock-icon" aria-label="Bloqueado">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                </div>
+                <h4 class="db-rc-title">Análise de Hábitos</h4>
+                <p class="db-rc-status db-rc-status--waiting">Aguardando dados</p>
+                <p class="db-rc-desc">Gerada com base no seu perfil.</p>
+            </div>
+
+            <!-- Ayla -->
+            <div class="db-rc db-rc--active reveal" style="--reveal-delay:140ms" id="aylaChatCard" role="button" tabindex="0" aria-label="Abrir chat com Ayla">
+                <div class="db-rc-top">
+                    <div class="db-rc-icon-wrap db-rc-icon--ayla" aria-hidden="true">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="db-rc-new-badge" aria-label="Novo recurso">Nova</span>
+                </div>
+                <h4 class="db-rc-title">Ayla</h4>
+                <p class="db-rc-status db-rc-status--active">Disponível agora</p>
+                <p class="db-rc-desc">Sua assistente inteligente de bem-estar.</p>
+            </div>
+
+            <!-- Histórico de Evolução -->
+            <div class="db-rc db-rc--locked reveal" style="--reveal-delay:210ms">
+                <div class="db-rc-top">
+                    <div class="db-rc-icon-wrap db-rc-icon--amber" aria-hidden="true">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="12 8 12 12 14 14"/>
+                            <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>
+                        </svg>
+                    </div>
+                    <div class="db-rc-lock-icon" aria-label="Bloqueado">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                </div>
+                <h4 class="db-rc-title">Histórico</h4>
+                <p class="db-rc-status db-rc-status--waiting">Nenhum registro</p>
+                <p class="db-rc-desc">Seu progresso aparecerá aqui.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ── Próximos Recursos ── -->
+    <section class="db-section">
+        <div class="db-unlock-card reveal">
+
+            <div class="db-unlock-header">
+                <div class="db-unlock-icon-wrap" aria-hidden="true">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="db-unlock-title">Recursos em Desbloqueio</h3>
+                    <p class="db-unlock-sub">Complete seu perfil para acessar tudo</p>
+                </div>
+            </div>
+
+            <ul class="db-unlock-list" role="list">
+                <li class="db-unlock-item db-unlock-item--done" id="ulItemEssentials">
+                    <span class="db-unlock-check" aria-hidden="true">
+                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    Dados Essenciais Coletados
+                </li>
+                <li class="db-unlock-item db-unlock-item--done" id="ulItemGoal">
+                    <span class="db-unlock-check" aria-hidden="true">
+                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    Objetivo Definido
+                </li>
+                <li class="db-unlock-item db-unlock-item--pending">
+                    <span class="db-unlock-dot" aria-hidden="true"></span>
+                    Plano Alimentar Personalizado
+                </li>
+                <li class="db-unlock-item db-unlock-item--pending">
+                    <span class="db-unlock-dot" aria-hidden="true"></span>
+                    Perfil Nutricional Completo
+                </li>
+                <li class="db-unlock-item db-unlock-item--pending">
+                    <span class="db-unlock-dot" aria-hidden="true"></span>
+                    Análise de Hábitos e Rotina
+                </li>
+                <li class="db-unlock-item db-unlock-item--pending">
+                    <span class="db-unlock-dot" aria-hidden="true"></span>
+                    Recomendações Inteligentes
+                </li>
+                <li class="db-unlock-item db-unlock-item--pending">
+                    <span class="db-unlock-dot" aria-hidden="true"></span>
+                    Registro Completo de Evolução
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+    <div class="db-nav-spacer" aria-hidden="true"></div>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════
+     NAVEGAÇÃO INFERIOR
+══════════════════════════════════════════ -->
+<nav class="db-nav" role="navigation" aria-label="Navegação principal">
+
+    <button class="db-nav-item db-nav-item--active" id="navHome" aria-label="Início" aria-current="page">
+        <div class="db-nav-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        </div>
+        <span class="db-nav-label">Início</span>
+        <span class="db-nav-dot" aria-hidden="true"></span>
+    </button>
+
+    <button class="db-nav-item" id="navPlan" aria-label="Plano Alimentar">
+        <div class="db-nav-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+        </div>
+        <span class="db-nav-label">Plano</span>
+    </button>
+
+    <button class="db-nav-item db-nav-item--ayla" id="navAyla" aria-label="Ayla">
+        <div class="db-nav-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+        </div>
+        <span class="db-nav-label">Ayla</span>
+    </button>
+
+    <button class="db-nav-item" id="navAchiev" aria-label="Conquistas">
+        <div class="db-nav-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+            </svg>
+        </div>
+        <span class="db-nav-label">Conquistas</span>
+    </button>
+
+</nav>
+
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<script src="dashboard.js"></script>
+<script src="cursor.js"></script>
+</body>
+</html>

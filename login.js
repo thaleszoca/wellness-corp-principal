@@ -57,7 +57,7 @@ form.addEventListener('submit', e => {
 
     /* Simula autenticação e redireciona para o app */
     setTimeout(() => {
-        window.location.href = 'index.html';
+        window.location.href = 'dashboard.html';
     }, 1200);
 });
 
