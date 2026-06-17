@@ -72,9 +72,8 @@ function updateUI() {
     /* Contador */
     stepNumEl.textContent = step;
 
-    /* Botão voltar */
-    if (current > 0) backBtn.classList.add('visible');
-    else             backBtn.classList.remove('visible');
+    /* Botão voltar — desabilitado na 1ª pergunta */
+    backBtn.disabled = current === 0;
 
     /* Limpar erros */
     clearError(STEPS[current]);
@@ -84,7 +83,8 @@ backBtn.addEventListener('click', () => {
     if (current > 0) goTo(current - 1, 'back');
 });
 
-continueBtn.addEventListener('click', () => {
+function advance() {
+    if (transitioning || continueBtn.disabled) return;
     if (!validateStep(STEPS[current])) return;
     captureStep(STEPS[current]);
 
@@ -93,6 +93,15 @@ continueBtn.addEventListener('click', () => {
     } else {
         finish();
     }
+}
+
+continueBtn.addEventListener('click', advance);
+
+/* ── Enter avança para a próxima pergunta ── */
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' || e.repeat) return;
+    e.preventDefault();
+    advance();
 });
 
 
@@ -256,8 +265,8 @@ function finish() {
     }));
 
     /* Estado de carregamento */
-    continueBtn.textContent = 'Analisando seu perfil...';
-    continueBtn.disabled    = true;
+    continueBtn.classList.add('loading');
+    continueBtn.disabled = true;
 
     setTimeout(() => {
         window.location.href = 'continuar-perfil.html';
@@ -302,6 +311,10 @@ function shakeBtn() {
     continueBtn.addEventListener('animationend', () => continueBtn.classList.remove('shake'), { once: true });
 }
 
+/* Foca o input de idade ao carregar (1ª pergunta) para usar o Enter de imediato */
+const ageInput = document.getElementById('inputAge');
+if (ageInput) ageInput.focus();
+
 /* Hold-to-repeat: pressionar e segurar o botão acelera a mudança */
 function setupHold(btnId, fn) {
     const btn = document.getElementById(btnId);
@@ -333,6 +346,9 @@ function setupHold(btnId, fn) {
 updateSliderFill(heightSlider);
 updateSliderFill(weightSlider);
 
+/* ── Estado inicial do botão voltar (1ª pergunta) ── */
+backBtn.disabled = current === 0;
+
 /* Shake no botão continuar */
 const style = document.createElement('style');
 style.textContent = `
@@ -343,6 +359,6 @@ style.textContent = `
         60%     { transform: translateX(-5px); }
         80%     { transform: translateX(5px); }
     }
-    .pq-btn-continue.shake { animation: btnShake 0.36s ease; }
+    .pq-btn-next.shake { animation: btnShake 0.36s ease; }
 `;
 document.head.appendChild(style);

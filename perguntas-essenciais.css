@@ -88,7 +88,7 @@ body:has(button:hover) .cursor-ring { width: 46px; height: 46px; border-color: r
     height: 60px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 20px;
     z-index: 100;
     background: #0F1115;
@@ -633,43 +633,116 @@ body:has(button:hover) .cursor-ring { width: 46px; height: 46px; border-color: r
 .pq-footer {
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    padding: 12px 24px 28px;
+    padding: 14px 24px 24px;
     background: #0F1115;
     border-top: 1px solid #1B2230;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
-.pq-btn-continue {
-    width: 100%;
-    max-width: 500px;
-    height: 52px;
+.pq-nav-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.pq-btn-back {
+    width: 48px;
+    height: 48px;
+    background: #1B2230;
+    color: #8C95A3;
+    border: 1.5px solid #273041;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.14s, opacity 0.2s;
+}
+
+.pq-btn-back:hover {
+    color: #FFFFFF;
+    border-color: rgba(106,171,113,0.50);
+    transform: translateX(-2px);
+}
+
+.pq-btn-back:active { transform: scale(0.96); }
+
+.pq-btn-back:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pq-btn-next {
+    position: relative;
+    width: 48px;
+    height: 48px;
     background: #6AAB71;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
     border: none;
-    border-radius: 999px;
+    border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 18px rgba(106,171,113,0.30);
-    transition: background 0.18s, transform 0.14s, box-shadow 0.18s, opacity 0.22s;
-    display: block;
-    margin: 0 auto;
-    letter-spacing: 0.01em;
+    box-shadow: 0 4px 20px rgba(106,171,113,0.32);
+    transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.pq-btn-continue:hover {
+.pq-btn-next:hover {
     background: #5F9D66;
-    box-shadow: 0 4px 26px rgba(106,171,113,0.38);
+    box-shadow: 0 6px 28px rgba(106,171,113,0.42);
+    transform: translateY(-2px);
 }
 
-.pq-btn-continue:active { transform: scale(0.98); }
+.pq-btn-next:active { transform: scale(0.96); }
 
-.pq-btn-continue:disabled {
-    opacity: 0.38;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+.pq-btn-next-arrow {
+    display: block;
+    transition: transform 0.18s ease, opacity 0.18s;
+}
+
+.pq-btn-next:hover .pq-btn-next-arrow { transform: translateX(3px); }
+
+/* Estado de carregamento (última pergunta) */
+.pq-btn-next.loading {
+    pointer-events: none;
+    background: #6AAB71;
+}
+.pq-btn-next.loading .pq-btn-next-arrow { opacity: 0; }
+
+.pq-btn-next-spinner {
+    display: none;
+    position: absolute;
+    width: 24px; height: 24px;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: pqSpin 0.7s linear infinite;
+}
+.pq-btn-next.loading .pq-btn-next-spinner { display: block; }
+
+@keyframes pqSpin { to { transform: rotate(360deg); } }
+
+/* Dica do Enter */
+.pq-enter-hint {
+    font-size: 12px;
+    color: #5C6470;
+    letter-spacing: 0.2px;
+}
+.pq-enter-hint kbd {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: #8C95A3;
+    background: #1B2230;
+    border: 1px solid #273041;
+    border-radius: 6px;
+    padding: 1px 7px;
 }
 
 
