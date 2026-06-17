@@ -23,6 +23,7 @@ body {
         radial-gradient(ellipse at 82% 82%, rgba(63,112,69,0.08)  0%, transparent 52%),
         linear-gradient(145deg, #0F1115 0%, #131720 55%, #0F1115 100%);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
@@ -130,6 +131,14 @@ body:has(button:hover) .cursor-ring {
 .hero {
     position: relative;
     z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 90px;
+    box-sizing: border-box;
     text-align: center;
     color: white;
     animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -152,7 +161,7 @@ body:has(button:hover) .cursor-ring {
 }
 
 .logo img {
-    height: 420px;
+    height: 340px;
     width: auto;
     filter: drop-shadow(0 4px 32px rgba(0,0,0,0.50));
 }
@@ -222,9 +231,9 @@ body:has(button:hover) .cursor-ring {
    FRASE DO RODAPÉ
    ---------------------------------------------------------- */
 .bottom-phrase {
-    position: fixed;
-    bottom: 28px;
-    left: 0; right: 0;
+    flex-shrink: 0;
+    width: 100%;
+    margin: 0 0 28px;
     text-align: center;
     font-size: 11.5px;
     font-style: italic;
