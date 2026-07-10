@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Evolução — Wellness</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/pages/evolucao-perfil.css">
+    <link rel="stylesheet" href="../../css/components/theme-toggle.css">
+    <script src="../../js/utils/theme-toggle.js"></script>
+</head>
+<body>
+
+<div class="ep-bg" aria-hidden="true">
+    <div class="ep-orb ep-orb--1"></div>
+    <div class="ep-orb ep-orb--2"></div>
+</div>
+
+<main class="ep-page">
+
+    <!-- ══ HERO ══ -->
+    <div class="ep-hero">
+        <div class="ep-badge">
+            <span class="ep-badge-pulse" aria-hidden="true"></span>
+            Perfil em construção
+        </div>
+        <h1 class="ep-title">
+            Você já começou<br>
+            <em>sua jornada Wellness.</em>
+        </h1>
+        <p class="ep-subtitle">
+            Suas primeiras informações já nos ajudam a entender melhor seu perfil.
+            Agora podemos aprofundar essa personalização para criar recomendações
+            ainda mais alinhadas aos seus hábitos, rotina e objetivos.
+        </p>
+    </div>
+
+    <!-- ══ RINGS DE ATIVIDADE ══ -->
+    <div class="ep-ring-card">
+        <div class="ep-ring-visual">
+
+            <svg class="ep-ring-svg" viewBox="0 0 220 220" aria-label="Progresso do perfil: 2 de 3 dimensões concluídas">
+
+                <!-- Trilhas de fundo -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#273041" stroke-width="9"/>
+                <circle cx="110" cy="110" r="62" fill="none" stroke="#273041" stroke-width="8"/>
+                <circle cx="110" cy="110" r="44" fill="none" stroke="#273041" stroke-width="8"/>
+
+                <!-- Ring 1 preenchido — Dados Físicos -->
+                <circle class="ep-rfill-1"
+                    cx="110" cy="110" r="80"
+                    fill="none" stroke="#6AAB71" stroke-width="9"
+                    stroke-linecap="round"
+                    transform="rotate(-90 110 110)"/>
+
+                <!-- Ring 2 preenchido — Objetivo -->
+                <circle class="ep-rfill-2"
+                    cx="110" cy="110" r="62"
+                    fill="none" stroke="#6AAB71" stroke-width="8"
+                    stroke-linecap="round"
+                    transform="rotate(-90 110 110)"/>
+
+                <!-- Círculo interno escuro -->
+                <circle cx="110" cy="110" r="33" fill="#131720"/>
+
+                <!-- Texto central -->
+                <text x="110" y="106"
+                    text-anchor="middle"
+                    font-family="Poppins, sans-serif"
+                    font-size="22" font-weight="700"
+                    fill="#6AAB71">2/3</text>
+                <text x="110" y="122"
+                    text-anchor="middle"
+                    font-family="Poppins, sans-serif"
+                    font-size="9.5" font-weight="500"
+                    fill="#8C95A3">concluído</text>
+
+            </svg>
+
+            <!-- Legenda -->
+            <div class="ep-ring-legend">
+                <div class="ep-legend-item">
+                    <span class="ep-legend-dot ep-legend-dot--lit" aria-hidden="true"></span>
+                    <span class="ep-legend-text">Dados Físicos</span>
+                </div>
+                <div class="ep-legend-item">
+                    <span class="ep-legend-dot ep-legend-dot--lit" aria-hidden="true"></span>
+                    <span class="ep-legend-text">Objetivo</span>
+                </div>
+                <div class="ep-legend-item">
+                    <span class="ep-legend-dot ep-legend-dot--dim" aria-hidden="true"></span>
+                    <span class="ep-legend-text ep-legend-text--dim">Hábitos & Rotina</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ══ CONTADORES ══ -->
+    <div class="ep-stats reveal" aria-label="Dados capturados">
+
+        <div class="ep-stat">
+            <div class="ep-stat-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+            </div>
+            <span class="ep-stat-num" data-target="5">0</span>
+            <span class="ep-stat-label">dados<br>coletados</span>
+        </div>
+
+        <div class="ep-stat-sep" aria-hidden="true"></div>
+
+        <div class="ep-stat">
+            <div class="ep-stat-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+            </div>
+            <span class="ep-stat-num" data-target="1">0</span>
+            <span class="ep-stat-label">etapa<br>concluída</span>
+        </div>
+
+        <div class="ep-stat-sep" aria-hidden="true"></div>
+
+        <div class="ep-stat">
+            <div class="ep-stat-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+            </div>
+            <span class="ep-stat-num" data-target="3">0</span>
+            <span class="ep-stat-label">insights<br>gerados</span>
+        </div>
+
+    </div>
+
+    <!-- ══ CARDS DE DADOS CAPTURADOS ══ -->
+    <div class="ep-cards">
+
+        <article class="ep-card reveal">
+            <div class="ep-card-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <div class="ep-card-body-wrap">
+                <h3 class="ep-card-title">Dados Essenciais</h3>
+                <p class="ep-card-text">Suas informações biológicas foram registradas e estão sendo analisadas.</p>
+            </div>
+            <div class="ep-card-check" aria-label="Concluído">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+        </article>
+
+        <article class="ep-card reveal">
+            <div class="ep-card-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="6"/>
+                    <circle cx="12" cy="12" r="2"/>
+                </svg>
+            </div>
+            <div class="ep-card-body-wrap">
+                <h3 class="ep-card-title">Objetivo Definido</h3>
+                <p class="ep-card-text" id="epGoalText">Seu objetivo já norteia toda a sua experiência na plataforma.</p>
+            </div>
+            <div class="ep-card-check" aria-label="Concluído">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+        </article>
+
+        <article class="ep-card reveal">
+            <div class="ep-card-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+            </div>
+            <div class="ep-card-body-wrap">
+                <h3 class="ep-card-title">Análise de Perfil</h3>
+                <p class="ep-card-text" id="epBmiText">Seu IMC foi calculado e já começa a moldar suas recomendações.</p>
+            </div>
+            <div class="ep-card-check" aria-label="Concluído">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- ══ LINHA DO TEMPO DA JORNADA ══ -->
+    <section class="ep-timeline reveal" aria-label="Etapas da personalização">
+
+        <p class="ep-section-label">Sua jornada de personalização</p>
+
+        <div class="ep-steps">
+
+            <div class="ep-step ep-step--done">
+                <div class="ep-step-dot ep-step-dot--done" aria-label="Concluído">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <div class="ep-step-content">
+                    <div class="ep-step-header">
+                        <span class="ep-step-name">Dados Essenciais</span>
+                        <span class="ep-step-tag ep-step-tag--done">Concluído</span>
+                    </div>
+                    <p class="ep-step-desc">Informações biológicas e objetivo registrados.</p>
+                </div>
+            </div>
+
+            <div class="ep-step ep-step--active">
+                <div class="ep-step-dot ep-step-dot--active" aria-label="Em andamento"></div>
+                <div class="ep-step-content">
+                    <div class="ep-step-header">
+                        <span class="ep-step-name">Perfil Aprofundado</span>
+                        <span class="ep-step-tag ep-step-tag--active">Em andamento</span>
+                    </div>
+                    <p class="ep-step-desc">Responda sobre seus hábitos, rotina e estilo de vida.</p>
+                </div>
+            </div>
+
+            <div class="ep-step ep-step--next">
+                <div class="ep-step-dot ep-step-dot--next" aria-label="Próxima etapa"></div>
+                <div class="ep-step-content">
+                    <div class="ep-step-header">
+                        <span class="ep-step-name ep-step-name--dim">Personalização Avançada</span>
+                        <span class="ep-step-tag ep-step-tag--next">Próxima</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ep-step ep-step--next ep-step--last">
+                <div class="ep-step-dot ep-step-dot--next" aria-label="Em breve"></div>
+                <div class="ep-step-content">
+                    <div class="ep-step-header">
+                        <span class="ep-step-name ep-step-name--dim">Plano Ativo</span>
+                        <span class="ep-step-tag ep-step-tag--next">Em breve</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ══ O QUE VOCÊ DESBLOQUEIA ══ -->
+    <section class="ep-unlocks reveal" aria-label="Recursos a desbloquear">
+
+        <p class="ep-section-label">Ao continuar, você desbloqueia</p>
+
+        <div class="ep-unlocks-grid">
+
+            <div class="ep-unlock-card">
+                <div class="ep-unlock-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                </div>
+                <p class="ep-unlock-title">Plano Alimentar Personalizado</p>
+                <span class="ep-unlock-tag">Em breve</span>
+            </div>
+
+            <div class="ep-unlock-card">
+                <div class="ep-unlock-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6"  y1="20" x2="6"  y2="14"/>
+                        <line x1="2"  y1="20" x2="22" y2="20"/>
+                    </svg>
+                </div>
+                <p class="ep-unlock-title">Análise de Hábitos</p>
+                <span class="ep-unlock-tag">Em breve</span>
+            </div>
+
+            <div class="ep-unlock-card">
+                <div class="ep-unlock-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="12 8 12 12 14 14"/>
+                        <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>
+                    </svg>
+                </div>
+                <p class="ep-unlock-title">Histórico de Evolução</p>
+                <span class="ep-unlock-tag">Em breve</span>
+            </div>
+
+            <div class="ep-unlock-card">
+                <div class="ep-unlock-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <p class="ep-unlock-title">Conversa com Ayla</p>
+                <span class="ep-unlock-tag">Em breve</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ══ QUOTE ROTATIVO ══ -->
+    <div class="ep-quote-box reveal" aria-live="polite" aria-atomic="true">
+        <div class="ep-quote-icon" aria-hidden="true">
+            <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+                <path d="M0 18V11C0 4.667 2.167 1 6.5 0L8 2.5C5.833 3.167 4.667 4.5 4.5 6.5H9V18H0ZM13 18V11C13 4.667 15.167 1 19.5 0L21 2.5C18.833 3.167 17.667 4.5 17.5 6.5H22V18H13Z" fill="#6AAB71" opacity="0.18"/>
+            </svg>
+        </div>
+        <p class="ep-quote-text" id="epQuoteText">
+            Cada resposta torna sua experiência mais personalizada.
+        </p>
+        <div class="ep-quote-dots" aria-hidden="true">
+            <span class="ep-dot ep-dot--active"></span>
+            <span class="ep-dot"></span>
+            <span class="ep-dot"></span>
+            <span class="ep-dot"></span>
+        </div>
+    </div>
+
+    <!-- ══ CTA ══ -->
+    <div class="ep-cta reveal">
+        <button class="ep-btn-primary" id="epBtnContinue">
+            Continuar Minha Evolução
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </button>
+    </div>
+
+</main>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <span class="tt-icon">
+        <svg class="tt-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="tt-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </span>
+    <span class="tt-label">Claro</span>
+</button>
+
+<script src="../../js/pages/evolucao-perfil.js"></script>
+<script src="../../js/utils/cursor.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness — Bem-vindo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/pages/onboarding/onboarding.css">
+    <link rel="stylesheet" href="../../css/components/theme-toggle.css">
+    <script src="../../js/utils/theme-toggle.js"></script>
+</head>
+<body>
+
+<main class="ob-page">
+
+    <div class="ob-deco" aria-hidden="true">W</div>
+
+    <!-- ── Coluna esquerda ── -->
+    <div class="ob-left">
+
+        <div class="ob-logo">
+            <img src="../../../assets/images/wellness-logo.png" alt="Wellness">
+        </div>
+
+        <div class="ob-eyebrow">Plataforma de nutrição inteligente</div>
+
+        <h1 class="ob-title">
+            Nutrição<br>
+            <em class="ob-rotator"><span class="ob-rotator-word" id="obRotator">personalizada</span><span class="ob-caret" aria-hidden="true"></span></em><br>
+            que evolui<br>com você
+        </h1>
+
+        <p class="ob-sub">Receba recomendações inteligentes, acompanhe seus hábitos e alcance seus objetivos com planos que se adaptam à sua rotina.</p>
+
+        <div class="ob-ctas">
+            <button class="ob-btn-primary" id="obBtnPrimary">Criar meu plano</button>
+            <button class="ob-btn-secondary" id="obBtnHow">Como funciona</button>
+        </div>
+
+        <ul class="ob-benefits">
+            <li><span class="ob-check" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>IA Nutricional</li>
+            <li><span class="ob-check" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Planos Personalizados</li>
+            <li><span class="ob-check" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Evolução Contínua</li>
+            <li><span class="ob-check" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Hábitos reais</li>
+        </ul>
+
+    </div>
+
+    <!-- ── Coluna direita — Slideshow ── -->
+    <div class="ob-right">
+        <div class="ob-slideshow">
+
+            <!-- ══ SLIDE 1 — Progresso ══ -->
+            <div class="ob-slide ob-slide--active" id="slide-1">
+                <div class="s-head">
+                    <span class="s-tag s-tag--green">Progresso</span>
+                    <h3 class="s-title">Seu progresso em evolução</h3>
+                </div>
+
+                <div class="s-chart-wrap">
+                    <svg class="s-chart" viewBox="0 0 300 128" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#2D7A4F" stop-opacity="0.20"/>
+                                <stop offset="100%" stop-color="#2D7A4F" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Grid lines -->
+                        <line x1="20" y1="10" x2="285" y2="10" stroke="#f0f4f0" stroke-width="1"/>
+                        <line x1="20" y1="32" x2="285" y2="32" stroke="#f0f4f0" stroke-width="1"/>
+                        <line x1="20" y1="55" x2="285" y2="55" stroke="#f0f4f0" stroke-width="1"/>
+                        <line x1="20" y1="77" x2="285" y2="77" stroke="#f0f4f0" stroke-width="1"/>
+                        <line x1="20" y1="100" x2="285" y2="100" stroke="#e8ede8" stroke-width="1"/>
+                        <!-- Y-axis labels -->
+                        <text x="15" y="13" text-anchor="end" font-size="7" fill="#c8d8c8" font-family="Poppins">100%</text>
+                        <text x="15" y="58" text-anchor="end" font-size="7" fill="#c8d8c8" font-family="Poppins">50%</text>
+                        <text x="15" y="103" text-anchor="end" font-size="7" fill="#c8d8c8" font-family="Poppins">0%</text>
+                        <!-- Area fill -->
+                        <path d="M 30,69 C 60,69 60,57 90,57 C 120,57 120,45 150,45 C 180,45 180,30 210,30 C 240,30 240,20 270,20 L 270,100 L 30,100 Z" fill="url(#grad1)"/>
+                        <!-- Line -->
+                        <path d="M 30,69 C 60,69 60,57 90,57 C 120,57 120,45 150,45 C 180,45 180,30 210,30 C 240,30 240,20 270,20" stroke="#2D7A4F" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Points -->
+                        <circle cx="30"  cy="69" r="3.5" fill="#2D7A4F"/>
+                        <circle cx="90"  cy="57" r="3.5" fill="#2D7A4F"/>
+                        <circle cx="150" cy="45" r="3.5" fill="#2D7A4F"/>
+                        <circle cx="210" cy="30" r="3.5" fill="#2D7A4F"/>
+                        <!-- Last point highlighted -->
+                        <circle cx="270" cy="20" r="6" fill="white" stroke="#2D7A4F" stroke-width="2.2"/>
+                        <circle cx="270" cy="20" r="3"  fill="#2D7A4F"/>
+                        <!-- Value labels -->
+                        <text x="30"  y="63" text-anchor="middle" font-size="7.5" fill="#9aaa9a" font-family="Poppins">35%</text>
+                        <text x="90"  y="51" text-anchor="middle" font-size="7.5" fill="#9aaa9a" font-family="Poppins">48%</text>
+                        <text x="150" y="39" text-anchor="middle" font-size="7.5" fill="#9aaa9a" font-family="Poppins">61%</text>
+                        <text x="210" y="24" text-anchor="middle" font-size="7.5" fill="#9aaa9a" font-family="Poppins">78%</text>
+                        <text x="270" y="12" text-anchor="middle" font-size="8.5" fill="#2D7A4F" font-weight="600" font-family="Poppins">89%</text>
+                        <!-- Week labels -->
+                        <text x="30"  y="116" text-anchor="middle" font-size="8" fill="#c0d0c0" font-family="Poppins">Sem 1</text>
+                        <text x="90"  y="116" text-anchor="middle" font-size="8" fill="#c0d0c0" font-family="Poppins">Sem 2</text>
+                        <text x="150" y="116" text-anchor="middle" font-size="8" fill="#c0d0c0" font-family="Poppins">Sem 3</text>
+                        <text x="210" y="116" text-anchor="middle" font-size="8" fill="#c0d0c0" font-family="Poppins">Sem 4</text>
+                        <text x="270" y="116" text-anchor="middle" font-size="8" fill="#2D7A4F" font-weight="600" font-family="Poppins">Sem 5</text>
+                    </svg>
+                </div>
+
+                <div class="s-stats-row">
+                    <div class="s-stat"><span class="s-stat-val">+154%</span><span class="s-stat-lbl">Evolução</span></div>
+                    <div class="s-stat-sep"></div>
+                    <div class="s-stat"><span class="s-stat-val">89%</span><span class="s-stat-lbl">Consistência</span></div>
+                    <div class="s-stat-sep"></div>
+                    <div class="s-stat"><span class="s-stat-val">5 sem.</span><span class="s-stat-lbl">Sequência</span></div>
+                </div>
+
+                <p class="s-caption">Pequenas mudanças geram grandes resultados.</p>
+            </div>
+
+            <!-- ══ SLIDE 2 — Nutrição ══ -->
+            <div class="ob-slide" id="slide-2">
+                <div class="s-head">
+                    <span class="s-tag s-tag--blue">Nutrição</span>
+                    <h3 class="s-title">Alimentação personalizada</h3>
+                </div>
+
+                <div class="s-macro-wrap">
+                    <div class="s-donut-area">
+                        <div class="s-donut">
+                            <div class="s-donut-hole">
+                                <span class="s-donut-val">1.850</span>
+                                <span class="s-donut-sub">kcal</span>
+                            </div>
+                        </div>
+                        <ul class="s-legend">
+                            <li><span class="s-dot s-dot--green"></span><span class="s-leg-lbl">Proteína</span><span class="s-leg-pct">35%</span></li>
+                            <li><span class="s-dot s-dot--blue"></span><span class="s-leg-lbl">Carboidratos</span><span class="s-leg-pct">45%</span></li>
+                            <li><span class="s-dot s-dot--amber"></span><span class="s-leg-lbl">Gorduras</span><span class="s-leg-pct">20%</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="s-kcal-bar">
+                        <div class="s-kcal-top">
+                            <span class="s-kcal-label">Calorias do dia</span>
+                            <span class="s-kcal-val">1.850 <span class="s-kcal-max">/ 2.100 kcal</span></span>
+                        </div>
+                        <div class="s-bar-track">
+                            <div class="s-bar-fill" style="width: 88%"></div>
+                        </div>
+                    </div>
+
+                    <div class="s-meal-card">
+                        <div class="s-meal-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D7A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+                        </div>
+                        <div class="s-meal-info">
+                            <span class="s-meal-name">Sugestão Ayla</span>
+                            <span class="s-meal-detail">Frango grelhado + quinoa + legumes · 520 kcal</span>
+                        </div>
+                        <span class="s-meal-badge">Jantar</span>
+                    </div>
+                </div>
+
+                <p class="s-caption">Sugestões adaptadas ao seu perfil e objetivo.</p>
+            </div>
+
+            <!-- ══ SLIDE 3 — Hábitos ══ -->
+            <div class="ob-slide" id="slide-3">
+                <div class="s-head">
+                    <span class="s-tag s-tag--orange">Hábitos</span>
+                    <h3 class="s-title">Construindo hábitos saudáveis</h3>
+                </div>
+
+                <div class="s-streak">
+                    <div class="s-streak-icon" aria-hidden="true">
+                        <svg width="16" height="18" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C12 2 18 8 18 14C18 17.5 16 20 13.5 21C14 19 13.5 17 12 16C10.5 17 9 19.5 9 21.5C7 20 6 17.5 6 15C6 9 12 2 12 2Z" fill="#f97316"/>
+                            <path d="M12 19C12 19 14.5 17 14.5 19.5C14.5 22 13 24 11 24.5C11.5 23 11 21.5 10.5 20.5C10 21 9.5 22.5 9.5 24C8 22.5 7.5 21 7.5 20C7.5 17.5 9.5 16.5 12 19Z" fill="#ef4444"/>
+                        </svg>
+                    </div>
+                    <span class="s-streak-num">18</span>
+                    <span class="s-streak-lbl">dias consecutivos</span>
+                </div>
+
+                <div class="s-calendar">
+                    <div class="s-cal-header">
+                        <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+                    </div>
+                    <div class="s-cal-grid">
+                        <!-- Row 1: 1-7 -->
+                        <div class="s-day s-day--done">1</div><div class="s-day s-day--done">2</div><div class="s-day s-day--done">3</div><div class="s-day s-day--done">4</div><div class="s-day s-day--done">5</div><div class="s-day s-day--done">6</div><div class="s-day s-day--done">7</div>
+                        <!-- Row 2: 8-14 -->
+                        <div class="s-day s-day--done">8</div><div class="s-day s-day--done">9</div><div class="s-day s-day--done">10</div><div class="s-day s-day--done">11</div><div class="s-day s-day--done">12</div><div class="s-day s-day--done">13</div><div class="s-day s-day--done">14</div>
+                        <!-- Row 3: 15-21 -->
+                        <div class="s-day s-day--done">15</div><div class="s-day s-day--done">16</div><div class="s-day s-day--done">17</div><div class="s-day s-day--done">18</div><div class="s-day s-day--today">19</div><div class="s-day s-day--future">20</div><div class="s-day s-day--future">21</div>
+                        <!-- Row 4: 22-28 -->
+                        <div class="s-day s-day--future">22</div><div class="s-day s-day--future">23</div><div class="s-day s-day--future">24</div><div class="s-day s-day--future">25</div><div class="s-day s-day--future">26</div><div class="s-day s-day--future">27</div><div class="s-day s-day--future">28</div>
+                        <!-- Row 5: 29-30 -->
+                        <div class="s-day s-day--future">29</div><div class="s-day s-day--future">30</div>
+                    </div>
+                </div>
+
+                <div class="s-habits">
+                    <div class="s-habit"><div class="s-habit-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4L3 6.5L7 1.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Água</span></div>
+                    <div class="s-habit"><div class="s-habit-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4L3 6.5L7 1.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Sono</span></div>
+                    <div class="s-habit"><div class="s-habit-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4L3 6.5L7 1.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Exercício</span></div>
+                    <div class="s-habit"><div class="s-habit-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4L3 6.5L7 1.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Leitura</span></div>
+                </div>
+
+                <p class="s-caption">Consistência é mais importante que perfeição.</p>
+            </div>
+
+            <!-- ══ SLIDE 4 — Perfil ══ -->
+            <div class="ob-slide" id="slide-4">
+                <div class="s-head">
+                    <span class="s-tag s-tag--purple">Perfil</span>
+                    <h3 class="s-title">Análise inteligente do seu perfil</h3>
+                </div>
+
+                <div class="s-profile-wrap">
+                    <div class="s-profile-id">
+                        <span class="s-profile-label">Perfil identificado</span>
+                        <div class="s-profile-badge">MAGRO ANSIOSO</div>
+                        <span class="s-profile-desc">Metabolismo acelerado com padrões emocionais que afetam a alimentação.</span>
+                    </div>
+
+                    <div class="s-bars">
+                        <div class="s-bar-item">
+                            <div class="s-bar-meta"><span class="s-bar-name">Ansiedade</span><span class="s-bar-pct">82%</span></div>
+                            <div class="s-bar-track"><div class="s-bar-fill s-bar-fill--high" style="width:82%"></div></div>
+                        </div>
+                        <div class="s-bar-item">
+                            <div class="s-bar-meta"><span class="s-bar-name">Apetite</span><span class="s-bar-pct">45%</span></div>
+                            <div class="s-bar-track"><div class="s-bar-fill s-bar-fill--mid" style="width:45%"></div></div>
+                        </div>
+                        <div class="s-bar-item">
+                            <div class="s-bar-meta"><span class="s-bar-name">Rotina</span><span class="s-bar-pct">63%</span></div>
+                            <div class="s-bar-track"><div class="s-bar-fill s-bar-fill--mid" style="width:63%"></div></div>
+                        </div>
+                        <div class="s-bar-item">
+                            <div class="s-bar-meta"><span class="s-bar-name">Atividade Física</span><span class="s-bar-pct">58%</span></div>
+                            <div class="s-bar-track"><div class="s-bar-fill s-bar-fill--mid" style="width:58%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="s-caption">A Wellness entende seu comportamento antes de recomendar mudanças.</p>
+            </div>
+
+            <!-- Dots indicadores -->
+            <div class="slide-dots" role="tablist" aria-label="Slides">
+                <button class="slide-dot slide-dot--active" aria-label="Slide 1" aria-selected="true"></button>
+                <button class="slide-dot" aria-label="Slide 2" aria-selected="false"></button>
+                <button class="slide-dot" aria-label="Slide 3" aria-selected="false"></button>
+                <button class="slide-dot" aria-label="Slide 4" aria-selected="false"></button>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <span class="tt-icon">
+        <svg class="tt-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="tt-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </span>
+    <span class="tt-label">Claro</span>
+</button>
+
+<script src="../../js/pages/onboarding/onboarding.js"></script>
+<script src="../../js/utils/cursor.js"></script>
+</body>
+</html>

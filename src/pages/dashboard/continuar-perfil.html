@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalização — Wellness</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/pages/continuar-perfil.css">
+    <link rel="stylesheet" href="../../css/components/theme-toggle.css">
+    <script src="../../js/utils/theme-toggle.js"></script>
+</head>
+<body>
+
+<main class="cp-page">
+
+    <!-- Luz ambiente sutil -->
+    <div class="cp-bg" aria-hidden="true">
+        <div class="cp-orb cp-orb--1"></div>
+        <div class="cp-orb cp-orb--2"></div>
+    </div>
+
+    <div class="cp-content">
+
+        <!-- ── Ilustração SVG ── -->
+        <div class="cp-visual" aria-hidden="true">
+            <svg class="cp-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Anel exterior decorativo -->
+                <circle class="cpsvg-ring-outer" cx="120" cy="120" r="108"
+                    fill="none" stroke-width="1" stroke-dasharray="4 10"/>
+
+                <!-- Brilho sutil no anel exterior -->
+                <circle class="cpsvg-ring-glow" cx="120" cy="120" r="108"
+                    fill="none" stroke-width="0.5"/>
+
+                <!-- Anel médio (órbita dos nódulos) -->
+                <circle class="cpsvg-ring-mid" cx="120" cy="120" r="76"
+                    fill="none" stroke-width="1"/>
+
+                <!-- Arco verde animado sobre a órbita (progresso capturado) -->
+                <circle class="cp-arc" cx="120" cy="120" r="76"
+                    fill="none" stroke-width="2.5" stroke-linecap="round"
+                    transform="rotate(-90 120 120)"/>
+
+                <!-- Centro — base escura -->
+                <circle class="cpsvg-center-bg" cx="120" cy="120" r="46"/>
+                <circle class="cpsvg-center-inner" cx="120" cy="120" r="40"/>
+
+                <!-- Centro — ícone folha Wellness -->
+                <path class="cpsvg-leaf"
+                    d="M120 98 C116 106 104 114 103 125 C102 134 108 141 120 145 C132 141 138 134 137 125 C136 114 124 106 120 98Z"/>
+                <line class="cpsvg-leaf-vein" x1="120" y1="99" x2="120" y2="143"/>
+                <path class="cpsvg-leaf-nerve" d="M120 115 Q111 122 112 131" fill="none" stroke-width="0.9"/>
+                <path class="cpsvg-leaf-nerve" d="M120 115 Q129 122 128 131" fill="none" stroke-width="0.9"/>
+
+                <!-- ══ LINHAS DE CONEXÃO ══ -->
+
+                <!-- Lit: centro → nódulo topo (Dados Essenciais) -->
+                <line class="cpsvg-connect-lit" x1="120" y1="120" x2="120" y2="44"/>
+                <!-- Lit: centro → nódulo superior-direito (Objetivo) -->
+                <line class="cpsvg-connect-lit" x1="120" y1="120" x2="192" y2="97"/>
+                <!-- Lit: centro → nódulo superior-esquerdo (IMC) -->
+                <line class="cpsvg-connect-lit" x1="120" y1="120" x2="48" y2="97"/>
+
+                <!-- Dim: centro → nódulo inferior-direito -->
+                <line class="cpsvg-connect-dim" x1="120" y1="120" x2="165" y2="182" stroke-dasharray="3 5"/>
+                <!-- Dim: centro → nódulo inferior-esquerdo -->
+                <line class="cpsvg-connect-dim" x1="120" y1="120" x2="75" y2="182" stroke-dasharray="3 5"/>
+
+                <!-- ══ NÓDULOS LIT (dados capturados) ══ -->
+
+                <!-- Nódulo 1 — topo (Dados Essenciais) -->
+                <circle class="cpsvg-node-lit-ring" cx="120" cy="44" r="10" stroke-width="1.8"/>
+                <circle class="cpsvg-node-lit-dot"  cx="120" cy="44" r="5"/>
+                <circle class="cpsvg-node-lit-core" cx="120" cy="44" r="2"/>
+
+                <!-- Nódulo 2 — superior-direito (Objetivo) -->
+                <circle class="cpsvg-node-lit-ring" cx="192" cy="97" r="10" stroke-width="1.8"/>
+                <circle class="cpsvg-node-lit-dot"  cx="192" cy="97" r="5"/>
+                <circle class="cpsvg-node-lit-core" cx="192" cy="97" r="2"/>
+
+                <!-- Nódulo 3 — superior-esquerdo (IMC) -->
+                <circle class="cpsvg-node-lit-ring" cx="48" cy="97" r="10" stroke-width="1.8"/>
+                <circle class="cpsvg-node-lit-dot"  cx="48" cy="97" r="5"/>
+                <circle class="cpsvg-node-lit-core" cx="48" cy="97" r="2"/>
+
+                <!-- ══ NÓDULOS DIM (personalização adicional) ══ -->
+
+                <!-- Nódulo 4 — inferior-direito -->
+                <circle class="cpsvg-node-dim-ring" cx="165" cy="182" r="10" stroke-width="1.5"/>
+                <circle class="cpsvg-node-dim-dot"  cx="165" cy="182" r="4"/>
+                <text class="cpsvg-plus" x="165" y="186" text-anchor="middle"
+                    font-size="9" font-family="Poppins" font-weight="700">+</text>
+
+                <!-- Nódulo 5 — inferior-esquerdo -->
+                <circle class="cpsvg-node-dim-ring" cx="75" cy="182" r="10" stroke-width="1.5"/>
+                <circle class="cpsvg-node-dim-dot"  cx="75" cy="182" r="4"/>
+                <text class="cpsvg-plus" x="75" y="186" text-anchor="middle"
+                    font-size="9" font-family="Poppins" font-weight="700">+</text>
+
+                <!-- ══ ÓRBITA EXTERIOR — pequenos pontos decorativos ══ -->
+                <circle class="cpsvg-outer-dot" cx="120" cy="12"  r="4"/>
+                <circle class="cpsvg-outer-dot" cx="213" cy="48"  r="3"/>
+                <circle class="cpsvg-outer-dot" cx="228" cy="155" r="3"/>
+                <circle class="cpsvg-outer-dot" cx="27"  cy="155" r="3"/>
+                <circle class="cpsvg-outer-dot" cx="27"  cy="48"  r="3"/>
+
+                <!-- ══ PARTÍCULAS VERDES ══ -->
+                <circle class="cpsvg-sparkle" cx="152" cy="36"  r="2.2" opacity="0.60"/>
+                <circle class="cpsvg-sparkle" cx="214" cy="94"  r="1.6" opacity="0.40"/>
+                <circle class="cpsvg-sparkle" cx="200" cy="158" r="1.8" opacity="0.30"/>
+                <circle class="cpsvg-sparkle" cx="40"  cy="158" r="1.6" opacity="0.30"/>
+                <circle class="cpsvg-sparkle" cx="90"  cy="36"  r="1.8" opacity="0.45"/>
+
+                <!-- Pulso do centro (animado) -->
+                <circle class="cp-pulse" cx="120" cy="120" r="48" fill="none" stroke-width="1.5"/>
+
+            </svg>
+        </div>
+
+        <!-- Badge — etapa concluída -->
+        <div class="cp-badge" aria-label="Etapa inicial concluída">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                <path d="M2 5.5L4.5 8L9 2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Etapa inicial concluída
+        </div>
+
+        <!-- Título -->
+        <h1 class="cp-title">
+            Vamos personalizar<br>
+            ainda mais <em>sua experiência?</em>
+        </h1>
+
+        <!-- Texto de apoio -->
+        <p class="cp-body">
+            Você já concluiu as informações iniciais. Agora você pode responder algumas perguntas adicionais para que a Wellness compreenda melhor seus hábitos, rotina e objetivos.
+        </p>
+
+        <!-- Nota opcional -->
+        <p class="cp-note">
+            Esta etapa é opcional e pode ser realizada agora ou posteriormente.
+        </p>
+
+        <!-- Ações -->
+        <div class="cp-actions">
+            <button class="cp-btn-primary" id="cpBtnContinue">
+                Continuar Personalização
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="cp-btn-secondary" id="cpBtnApp">
+                Ir para o Aplicativo
+            </button>
+        </div>
+
+    </div>
+
+</main>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <span class="tt-icon">
+        <svg class="tt-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="tt-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </span>
+    <span class="tt-label">Claro</span>
+</button>
+
+<script src="../../js/pages/continuar-perfil.js"></script>
+<script src="../../js/utils/cursor.js"></script>
+</body>
+</html>

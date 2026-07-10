@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness — Criar Conta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/pages/cadastro.css">
+    <link rel="stylesheet" href="../../css/components/theme-toggle.css">
+    <script src="../../js/utils/theme-toggle.js"></script>
+</head>
+<body>
+
+<div class="cad-layout">
+
+    <!-- ── Painel esquerdo — Marca ── -->
+    <div class="cad-brand">
+
+        <div id="leaves-bg"></div>
+
+        <div class="brand-inner">
+
+            <div class="brand-text">
+                <p class="brand-label">Plataforma de bem-estar</p>
+                <h2 class="brand-headline">Bem-vindo à sua<br>nova jornada.</h2>
+                <p class="brand-quote" id="cadQuote"></p>
+            </div>
+
+            <div class="brand-features">
+                <div class="brand-feat">
+                    <div class="feat-dot"></div>
+                    <span>Plano 100% adaptado ao seu perfil</span>
+                </div>
+                <div class="brand-feat">
+                    <div class="feat-dot"></div>
+                    <span>Hábitos construídos no seu ritmo</span>
+                </div>
+                <div class="brand-feat">
+                    <div class="feat-dot"></div>
+                    <span>Assistente Ayla disponível 24h</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ── Painel direito — Formulário ── -->
+    <div class="cad-panel">
+        <div class="cad-inner">
+
+            <div class="form-header">
+                <img src="../../../assets/images/wellness-corp-logo.png" alt="Wellness Corp" class="form-wordmark-img">
+                <h1 class="form-title">Crie sua conta</h1>
+                <p class="form-sub">Comece sua jornada para uma vida mais saudável.</p>
+            </div>
+
+            <form class="cad-form" id="cadForm" novalidate>
+
+                <div class="field-group">
+                    <label for="fullName">Nome completo</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Digite seu nome completo"
+                        autocomplete="name"
+                        required>
+                </div>
+
+                <div class="field-group">
+                    <label for="email">E-mail</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <div class="field-group">
+                    <label for="password">Senha</label>
+                    <div class="password-wrap">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Mínimo 8 caracteres"
+                            autocomplete="new-password"
+                            required>
+                        <button type="button" class="toggle-pw" id="togglePw" aria-label="Mostrar senha">
+                            <svg class="eye-show" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <svg class="eye-hide" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                <line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span class="strength-label" id="strengthLabel"></span>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="confirmPassword">Confirmar senha</label>
+                    <div class="password-wrap">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Repita a senha"
+                            autocomplete="new-password"
+                            required>
+                        <button type="button" class="toggle-pw" id="toggleConfirmPw" aria-label="Mostrar senha">
+                            <svg class="eye-show" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <svg class="eye-hide" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                <line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="cadSubmit">Criar Conta</button>
+
+            </form>
+
+            <p class="form-footer">
+                Já possui uma conta?
+                <a href="login.html" class="link-login">Entrar</a>
+            </p>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <span class="tt-icon">
+        <svg class="tt-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="tt-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </span>
+    <span class="tt-label">Claro</span>
+</button>
+
+<script src="../../js/pages/script.js"></script>
+<script src="../../js/pages/cadastro.js"></script>
+
+</body>
+</html>
