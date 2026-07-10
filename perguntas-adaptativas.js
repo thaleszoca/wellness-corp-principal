@@ -1,49 +1,50 @@
 /* ============================================================
    WELLNESS — perguntas-adaptativas.js
-   Motor do fluxo comportamental:
+   MOTOR DO FLUXO ADAPTATIVO DE 40 PERGUNTAS
 
-     Objetivo (vindo das perguntas essenciais)
-       → Triagem            → classifica CATEGORIA
-       → Perguntas categoria → classifica SUBCATEGORIA
-       → Perguntas subcat.   → escolhe DIETA 1 ou DIETA 2
-       → Plano alimentar personalizado
+   Trilha (spec wellness_project — estrutura-completa-questionario.md):
+     Bloco 1 (1–5)   perfil e objetivo    → tela perguntas-essenciais
+     Blocos 2–4 (6–20) compartilhadas      → WELLNESS_BANCO.compartilhadas
+     Blocos 5–6 (21–30) por objetivo       → WELLNESS_BANCO.objetivos[goal]
+       → classifica CATEGORIA (após a 30)
+     Bloco 7 (31–35) por categoria         → WELLNESS_BANCO.categorias[cat]
+       → classifica SUBCATEGORIA (após a 35)
+     Bloco 8 (36–40) personalização        → WELLNESS_BANCO.personalizacao
+       → escolhe DIETA e monta o resultado
 
-   Depende de: dados.js  (window.WELLNESS_DADOS)
+   Regras:  WELLNESS_REGRAS      (limiares, blocos, segurança)
+   Nomes:   WELLNESS_CATEGORIAS / WELLNESS_SUBCATEGORIAS (humanizados)
+   Dietas:  WELLNESS_DADOS       (dados.js — refeições/planos)
+   Msgs:    WELLNESS_MENSAGENS
+
+   A pontuação é RECALCULADA de forma pura a partir de `respostas` nos
+   pontos de decisão — assim voltar e alterar respostas é sempre seguro.
    ============================================================ */
 
-/* ════════════════════════════════════════
-   ESTADO
-════════════════════════════════════════ */
+/* ════════════ CONFIG / DEPENDÊNCIAS ════════════ */
+const REGRAS = window.WELLNESS_REGRAS;
+const BANCO  = window.WELLNESS_BANCO;
+const MSG    = window.WELLNESS_MENSAGENS;
+const CATS   = window.WELLNESS_CATEGORIAS;
+const SUBS   = window.WELLNESS_SUBCATEGORIAS;
 
 const essentials = JSON.parse(localStorage.getItem('wellness_essentials') || '{}');
-const goalKey     = essentials.goal || 'ganhar-massa';
-const objetivo    = WELLNESS_DADOS[goalKey];
+const goalKey    = essentials.goal;
+const objetivoDados = window.WELLNESS_DADOS ? window.WELLNESS_DADOS[goalKey] : null;
 
-/* Fila de perguntas construída dinamicamente conforme a classificação avança */
-let fila       = [];       // [{ id, texto, tipo, opcoes?, dica?, fase }]
-let idx        = 0;        // índice da pergunta atual na fila
+/* ════════════ ESTADO ════════════ */
+const OFFSET = REGRAS.perguntas_essenciais;   // 5 → perguntas 6..40 são do motor
+const TOTAL  = REGRAS.total_perguntas;        // 40
+
+let fila = [];          // perguntas 6..40 (cresce por bloco)
+let idx  = 0;           // índice em `fila` (0 → pergunta 6)
 let transitioning = false;
 
-/* Respostas registradas: { <id>: valor } */
-const respostas = {};
+const respostas = {};   // { <id>: valor }
 
-/* Resultado da classificação, preenchido ao longo do fluxo */
-const resultado = {
-  objetivo:     goalKey,
-  categoria:    null,   // chave
-  subcategoria: null,   // chave
-  dieta:        null,   // 'dieta1' | 'dieta2'
-};
-
-/* Referências para os nós de dados atuais */
-let catNode = null;   // objeto da categoria escolhida
-let subNode = null;   // objeto da subcategoria escolhida
-
-/* Fases do fluxo (para o rótulo do topo) */
-const FASES = {
-  triagem:      'Perfil',
-  categoria:    'Comportamento',
-  subcategoria: 'Detalhamento',
+let resultado = {
+  objetivo: goalKey, categoria: null, subcategoria: null, dieta: null,
+  categoriaConfianca: null, safetyFlags: [],
 };
 
 /* ── Refs DOM ── */
@@ -57,72 +58,168 @@ const cardEl       = document.getElementById('questionCard');
 const quizMain     = document.getElementById('quizMain');
 const resultMain   = document.getElementById('resultMain');
 
+/* Rótulos de fase por bloco (topo) */
+function faseDoNumero(n) {
+  const b = REGRAS.blocos.find(bl => n >= bl.de && n <= bl.ate);
+  const rotulos = {
+    2:'Alimentação', 3:'Estado mental', 4:'Mente e comida',
+    5:'Comportamento', 6:'Confirmação', 7:'Detalhamento', 8:'Personalização',
+  };
+  return b ? (rotulos[b.n] || 'Perfil') : 'Perfil';
+}
 
-/* ════════════════════════════════════════
-   INICIALIZAÇÃO
-════════════════════════════════════════ */
-
+/* ════════════ INICIALIZAÇÃO ════════════ */
 function init() {
-  if (!objetivo) {
-    /* Sem objetivo salvo — volta para as perguntas essenciais */
+  if (!goalKey || !objetivoDados || !CATS[goalKey]) {
     window.location.href = 'perguntas-essenciais.html';
     return;
   }
-
-  /* Título do objetivo no cabeçalho */
   const goalNameEl = document.getElementById('goalName');
-  if (goalNameEl) goalNameEl.textContent = objetivo.nome;
+  if (goalNameEl) goalNameEl.textContent = objetivoDados.nome;
 
-  /* Começa pela triagem do objetivo */
-  fila = objetivo.triagem.map(q => ({ ...q, fase: 'triagem' }));
+  /* Fila inicial: blocos 2–4 (compartilhadas) + blocos 5–6 (objetivo) = Q6..Q30 */
+  fila = BANCO.compartilhadas.concat(BANCO.objetivos[goalKey] || []);
   idx  = 0;
-  render();
+
+  /* Mensagem "após a pergunta 5" como abertura */
+  mostrarMensagem(5, () => render());
 }
 
+/* ════════════ PONTUAÇÃO (recálculo puro) ════════════ */
+function tracked_cats() { return Object.keys(CATS[goalKey]); }
+function tracked_subs() { return resultado.categoria ? Object.keys(SUBS[resultado.categoria]) : []; }
 
-/* ════════════════════════════════════════
-   RENDERIZAÇÃO DA PERGUNTA ATUAL
-════════════════════════════════════════ */
+function computarEstado() {
+  const catScores = {}; tracked_cats().forEach(k => catScores[k] = 0);
+  const subScores = {}; tracked_subs().forEach(k => subScores[k] = 0);
+  const sinais = { ansiedade: 0, culpa_alimentar: false, rotina_corrida: false, ansiedade_alta: false };
+  const flags = new Set();
+
+  for (const q of fila) {
+    const val = respostas[q.id];
+    if (val === undefined || val === null || val === '') continue;
+    aplicarEfeitos(q, val, catScores, subScores);
+    aplicarSeguranca(q, val, flags);
+    aplicarSinais(q, val, sinais);
+  }
+  sinais.ansiedade_alta = sinais.ansiedade >= 7;
+  return { catScores, subScores, sinais, flags };
+}
+
+function aplicarEfeitos(q, val, catScores, subScores) {
+  const add = (ef) => {
+    if (!ef) return;
+    ef.forEach(e => {
+      if (e.alvo === 'cat' && e.chave in catScores) catScores[e.chave] += e.pts;
+      if (e.alvo === 'sub' && e.chave in subScores) subScores[e.chave] += e.pts;
+    });
+  };
+  if (q.tipo === 'escala' && q.efeitos_escala) {
+    const n = Number(val);
+    q.efeitos_escala.forEach(r => { if (n >= r.min && n <= r.max) add(r.ef); });
+  } else if (q.tipo === 'multipla' && Array.isArray(val)) {
+    val.forEach(v => add(q.efeitos && q.efeitos[v]));
+  } else if (q.efeitos) {
+    add(q.efeitos[val]);
+  }
+}
+
+function aplicarSeguranca(q, val, flags) {
+  if (q.tipo === 'multipla' && Array.isArray(val)) {
+    (q.opcoes || []).forEach(o => { if (o.safety && val.includes(o.value)) flags.add(o.safety); });
+  }
+  if (q.safety && q.safety[val]) flags.add(q.safety[val]);
+  if (q.tipo === 'escala' && q.safety_escala && Number(val) >= q.safety_escala.min) {
+    flags.add(q.safety_escala.flag);
+  }
+}
+
+function aplicarSinais(q, val, sinais) {
+  if (!q.sinal) return;
+  if (q.sinal.de === 'valor')       sinais[q.sinal.chave] = Number(val);
+  else if (q.sinal.quando)          sinais[q.sinal.chave] = q.sinal.quando.includes(val);
+}
+
+/* ════════════ CLASSIFICAÇÃO ════════════ */
+function classificarCategoria() {
+  const { catScores } = computarEstado();
+  const ordem = tracked_cats();
+  let winner = ordem[0], best = -Infinity, second = -Infinity;
+  for (const k of ordem) {
+    if (catScores[k] > best) { second = best; best = catScores[k]; winner = k; }
+    else if (catScores[k] > second) { second = catScores[k]; }
+  }
+  resultado.categoria = winner;
+  resultado.categoriaConfianca = {
+    pontos: best, segunda: second, diferenca: best - second,
+    provavel:   best >= REGRAS.limiares.categoria_provavel,
+    confirmada: best >= REGRAS.limiares.categoria_confirmada && (best - second) >= REGRAS.limiares.diferenca_minima,
+    scores: { ...catScores },
+  };
+  /* Reconstrói o Bloco 7 (Q31–35) da categoria vencedora */
+  fila = fila.slice(0, 25).concat(BANCO.categorias[winner] || []);
+}
+
+function classificarSubcategoria() {
+  const { subScores } = computarEstado();
+  const ordem = tracked_subs();
+  let winner = ordem[0], best = -Infinity;
+  for (const k of ordem) if (subScores[k] > best) { best = subScores[k]; winner = k; }
+  resultado.subcategoria = winner;
+  /* Anexa o Bloco 8 (Q36–40) */
+  fila = fila.slice(0, 30).concat(BANCO.personalizacao || []);
+}
+
+function escolherDieta() {
+  const sub = SUBS[resultado.categoria][resultado.subcategoria];
+  const regra = sub.dieta_regra;
+  if (!regra) return 'dieta1';
+  const ans = respostas[regra.pergunta];
+  if (ans === undefined) return REGRAS.dieta.empate_favorece; // padrão dieta1
+  return ans === regra.dieta1_se ? 'dieta1' : 'dieta2';
+}
+
+/* ════════════ RENDERIZAÇÃO DA PERGUNTA ════════════ */
+function numeroAtual() { return OFFSET + 1 + idx; }  // idx 0 → 6
 
 function render() {
   const q = fila[idx];
   if (!q) return;
-
-  /* Monta o HTML do card conforme o tipo */
   let controlHTML = '';
 
   if (q.tipo === 'sim-nao') {
     controlHTML = `
       <div class="pa-choice-grid" data-tipo="sim-nao">
         <button class="pa-choice" type="button" data-value="sim">
-          <span class="pa-choice-ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
+          <span class="pa-choice-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
           <span class="pa-choice-label">Sim</span>
         </button>
         <button class="pa-choice" type="button" data-value="nao">
-          <span class="pa-choice-ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </span>
+          <span class="pa-choice-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
           <span class="pa-choice-label">Não</span>
         </button>
       </div>`;
   }
-
-  else if (q.tipo === 'opcoes') {
-    const opts = q.opcoes.map(o => `
+  else if (q.tipo === 'opcoes' || q.tipo === 'frequencia') {
+    const opcoes = q.tipo === 'frequencia' ? FREQ_OPCOES : q.opcoes;
+    const opts = opcoes.map(o => `
       <button class="pa-option" type="button" data-value="${o.value}">
         <span class="pa-option-label">${o.label}</span>
-        <span class="pa-option-check">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
+        <span class="pa-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
       </button>`).join('');
     controlHTML = `<div class="pa-option-list" data-tipo="opcoes">${opts}</div>`;
   }
-
+  else if (q.tipo === 'multipla') {
+    const opts = q.opcoes.map(o => `
+      <button class="pa-option pa-option-multi" type="button" data-value="${o.value}">
+        <span class="pa-option-label">${o.label}</span>
+        <span class="pa-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      </button>`).join('');
+    controlHTML = `<div class="pa-option-list" data-tipo="multipla">${opts}</div>`;
+  }
   else if (q.tipo === 'escala') {
     const saved = respostas[q.id];
-    const val   = (saved === undefined || saved === null) ? 5 : saved;
+    const val = (saved === undefined || saved === null) ? 5 : saved;
     controlHTML = `
       <div class="pa-scale" data-tipo="escala">
         <div class="pa-scale-value"><span id="scaleDisplay">${val}</span><span class="pa-scale-max">/10</span></div>
@@ -132,10 +229,9 @@ function render() {
   }
 
   const dicaHTML = q.dica ? `<p class="pa-hint">${q.dica}</p>` : '';
-
   cardEl.innerHTML = `
     <div class="pa-qwrap">
-      <span class="pa-qbadge">Pergunta ${idx + 1}</span>
+      <span class="pa-qbadge">Pergunta ${numeroAtual()}</span>
       <h2 class="pa-question">${q.texto}</h2>
       ${dicaHTML}
       <div class="pa-control">${controlHTML}</div>
@@ -145,14 +241,19 @@ function render() {
   bindControls(q);
   restoreAnswer(q);
   updateUI();
-
-  /* Animação de entrada */
   cardEl.classList.remove('pa-enter', 'pa-enter-back');
   void cardEl.offsetWidth;
   cardEl.classList.add('pa-enter');
 }
 
-/* ── Liga os eventos dos controles renderizados ── */
+const FREQ_OPCOES = [
+  { value: 'nunca',          label: 'Nunca' },
+  { value: 'raramente',      label: 'Raramente' },
+  { value: 'as-vezes',       label: 'Às vezes' },
+  { value: 'frequentemente', label: 'Frequentemente' },
+  { value: 'quase-sempre',   label: 'Quase sempre' },
+];
+
 function bindControls(q) {
   if (q.tipo === 'sim-nao') {
     cardEl.querySelectorAll('.pa-choice').forEach(btn => {
@@ -161,26 +262,43 @@ function bindControls(q) {
         btn.classList.add('selected');
         respostas[q.id] = btn.dataset.value;
         clearError();
-        /* Sim/Não: avança automaticamente com leve atraso (feedback visual) */
-        setTimeout(() => advance(), 260);
+        setTimeout(advance, 240);
       });
     });
   }
-
-  else if (q.tipo === 'opcoes') {
+  else if (q.tipo === 'opcoes' || q.tipo === 'frequencia') {
     cardEl.querySelectorAll('.pa-option').forEach(btn => {
       btn.addEventListener('click', () => {
         cardEl.querySelectorAll('.pa-option').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         respostas[q.id] = btn.dataset.value;
         clearError();
-        setTimeout(() => advance(), 280);
+        setTimeout(advance, 260);
       });
     });
   }
-
+  else if (q.tipo === 'multipla') {
+    if (!Array.isArray(respostas[q.id])) respostas[q.id] = [];
+    cardEl.querySelectorAll('.pa-option-multi').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.value;
+        let sel = respostas[q.id] || [];
+        const nenhuma = (q.opcoes.find(o => o.value === v) && v === 'nenhuma');
+        if (nenhuma) {
+          sel = sel.includes('nenhuma') ? [] : ['nenhuma'];
+        } else {
+          sel = sel.filter(x => x !== 'nenhuma');
+          sel = sel.includes(v) ? sel.filter(x => x !== v) : sel.concat(v);
+        }
+        respostas[q.id] = sel;
+        cardEl.querySelectorAll('.pa-option-multi').forEach(b =>
+          b.classList.toggle('selected', sel.includes(b.dataset.value)));
+        clearError();
+      });
+    });
+  }
   else if (q.tipo === 'escala') {
-    const slider  = cardEl.querySelector('#scaleSlider');
+    const slider = cardEl.querySelector('#scaleSlider');
     const display = cardEl.querySelector('#scaleDisplay');
     const paint = () => {
       const pct = (slider.value / 10) * 100;
@@ -189,386 +307,246 @@ function bindControls(q) {
       respostas[q.id] = parseInt(slider.value, 10);
     };
     slider.addEventListener('input', paint);
-    /* Valor inicial já registrado */
     respostas[q.id] = parseInt(slider.value, 10);
     paint();
   }
 }
 
-/* ── Restaura seleção anterior ao voltar ── */
 function restoreAnswer(q) {
   const val = respostas[q.id];
   if (val === undefined || val === null) return;
-
   if (q.tipo === 'sim-nao') {
-    const btn = cardEl.querySelector(`.pa-choice[data-value="${val}"]`);
-    if (btn) btn.classList.add('selected');
-  } else if (q.tipo === 'opcoes') {
-    const btn = cardEl.querySelector(`.pa-option[data-value="${val}"]`);
-    if (btn) btn.classList.add('selected');
+    const b = cardEl.querySelector(`.pa-choice[data-value="${val}"]`); if (b) b.classList.add('selected');
+  } else if (q.tipo === 'opcoes' || q.tipo === 'frequencia') {
+    const b = cardEl.querySelector(`.pa-option[data-value="${val}"]`); if (b) b.classList.add('selected');
+  } else if (q.tipo === 'multipla' && Array.isArray(val)) {
+    val.forEach(v => { const b = cardEl.querySelector(`.pa-option-multi[data-value="${v}"]`); if (b) b.classList.add('selected'); });
   }
 }
 
-
-/* ════════════════════════════════════════
-   NAVEGAÇÃO
-════════════════════════════════════════ */
-
+/* ════════════ NAVEGAÇÃO ════════════ */
 function updateUI() {
-  const q = fila[idx];
-
-  /* Total é dinâmico: perguntas já enfileiradas (a fila cresce por fase) */
-  stepNumEl.textContent   = idx + 1;
-  stepTotalEl.textContent = fila.length;
-  faseLabelEl.textContent = FASES[q.fase] || '';
-
-  /* Progresso: 3 fases de peso igual, com fração dentro da fase atual */
-  progressFill.style.width = `${progressoPercentual()}%`;
-
+  const n = numeroAtual();
+  stepNumEl.textContent = n;
+  stepTotalEl.textContent = TOTAL;
+  faseLabelEl.textContent = faseDoNumero(n);
+  progressFill.style.width = `${Math.round((n / TOTAL) * 100)}%`;
   backBtn.disabled = idx === 0;
   clearError();
 }
 
-/* Progresso estimado em 3 blocos (triagem / categoria / subcategoria) */
-function progressoPercentual() {
-  const q = fila[idx];
-  const blocos = { triagem: 0, categoria: 1, subcategoria: 2 };
-  const bloco  = blocos[q.fase] ?? 0;
-
-  /* Perguntas da fase atual dentro da fila */
-  const idxsFase = fila
-    .map((f, i) => (f.fase === q.fase ? i : -1))
-    .filter(i => i >= 0);
-  const posNaFase = idxsFase.indexOf(idx);
-  const fracao    = (posNaFase + 1) / idxsFase.length;
-
-  return Math.min(100, Math.round(((bloco + fracao) / 3) * 100));
+function respostaValida(q) {
+  const v = respostas[q.id];
+  if (q.tipo === 'multipla') return Array.isArray(v) && v.length > 0;
+  return !(v === undefined || v === null || v === '');
 }
 
 function advance() {
   if (transitioning) return;
-
   const q = fila[idx];
-  if (respostas[q.id] === undefined || respostas[q.id] === null || respostas[q.id] === '') {
-    showError('Selecione uma opção para continuar.');
+  if (!respostaValida(q)) {
+    showError(q.tipo === 'multipla' ? 'Selecione ao menos uma opção (ou “Nenhuma dessas”).' : 'Selecione uma opção para continuar.');
     shakeCard();
     return;
   }
 
-  /* Se esta é a última pergunta da fase atual, faz a classificação e enfileira a próxima fase */
-  const ultimaDaFase = ehUltimaDaFase();
+  const n = numeroAtual();
 
-  if (ultimaDaFase) {
-    const avancou = classificarEEnfileirar(q.fase);
-    if (!avancou) return; /* fluxo terminou → foi para o resultado */
+  /* Pontos de classificação (recalculam do zero e reconstroem a fila) */
+  if (n === REGRAS.classificacao.categoria_apos)    classificarCategoria();
+  if (n === REGRAS.classificacao.subcategoria_apos) classificarSubcategoria();
+
+  /* Fim do questionário */
+  if (n >= TOTAL) {
+    mostrarMensagem(40, () => finalizar());
+    return;
   }
 
-  if (idx < fila.length - 1) {
+  /* Mensagem motivacional nos marcos, depois próxima pergunta */
+  if (REGRAS.marcos_mensagem.includes(n) && n !== 5) {
+    mostrarMensagem(n, () => goTo(idx + 1, 'forward'));
+  } else {
     goTo(idx + 1, 'forward');
   }
 }
 
-function ehUltimaDaFase() {
-  const q = fila[idx];
-  /* É a última se não existe pergunta seguinte com a MESMA fase depois dela */
-  for (let i = idx + 1; i < fila.length; i++) {
-    if (fila[i].fase === q.fase) return false;
-  }
-  return true;
-}
-
-/* Após concluir uma fase, classifica e adiciona as perguntas da próxima fase */
-function classificarEEnfileirar(fase) {
-  if (fase === 'triagem') {
-    const catKey = classificar(objetivo.categorias);
-    resultado.categoria = catKey;
-    catNode = objetivo.categorias[catKey];
-    /* Enfileira perguntas da categoria */
-    fila = fila.concat(catNode.perguntas.map(p => ({ ...p, fase: 'categoria' })));
-    return true;
-  }
-
-  if (fase === 'categoria') {
-    const subKey = classificar(catNode.subcategorias);
-    resultado.subcategoria = subKey;
-    subNode = catNode.subcategorias[subKey];
-    fila = fila.concat(subNode.perguntas.map(p => ({ ...p, fase: 'subcategoria' })));
-    return true;
-  }
-
-  if (fase === 'subcategoria') {
-    resultado.dieta = escolherDieta(subNode);
-    finalizar();
-    return false;
-  }
-
-  return true;
-}
-
-
-/* ════════════════════════════════════════
-   MOTOR DE CLASSIFICAÇÃO (pontuação)
-════════════════════════════════════════ */
-
-/* Recebe um mapa { chave: { criterios: [...] } } e devolve a chave vencedora */
-function classificar(mapa) {
-  let melhorChave  = null;
-  let melhorPonto  = -1;
-
-  for (const chave of Object.keys(mapa)) {
-    const criterios = mapa[chave].criterios || [];
-    let ponto = 0;
-    for (const c of criterios) {
-      if (criterioSatisfeito(c)) ponto++;
-    }
-    if (ponto > melhorPonto) {
-      melhorPonto = ponto;
-      melhorChave = chave;
-    }
-  }
-  return melhorChave;
-}
-
-/* Verifica se um critério { pergunta, valor } bate com a resposta registrada */
-function criterioSatisfeito(c) {
-  const resp = respostas[c.pergunta];
-  if (resp === undefined || resp === null) return false;
-
-  const esperado = c.valor;
-
-  /* Faixa de escala: { min, max } */
-  if (esperado && typeof esperado === 'object' && !Array.isArray(esperado)) {
-    const n = Number(resp);
-    return n >= esperado.min && n <= esperado.max;
-  }
-
-  /* Lista de valores aceitáveis */
-  if (Array.isArray(esperado)) {
-    return esperado.includes(resp);
-  }
-
-  /* Valor único */
-  return resp === esperado;
-}
-
-/* Escolhe Dieta 1 ou Dieta 2 comparando as respostas da subcategoria com `compat` */
-function escolherDieta(sub) {
-  const d1 = sub.dietas.dieta1.compat;
-  const d2 = sub.dietas.dieta2.compat;
-
-  let p1 = 0, p2 = 0;
-  for (const qId of Object.keys(d1)) {
-    const resp = respostas[qId];
-    if (resp === undefined) continue;
-    if (d1[qId] !== 'ambos' && d1[qId] === resp) p1++;
-  }
-  for (const qId of Object.keys(d2)) {
-    const resp = respostas[qId];
-    if (resp === undefined) continue;
-    if (d2[qId] !== 'ambos' && d2[qId] === resp) p2++;
-  }
-
-  /* Empate favorece a Dieta 1 (padrão da documentação) */
-  return p2 > p1 ? 'dieta2' : 'dieta1';
-}
-
-
-/* ════════════════════════════════════════
-   TRANSIÇÃO ENTRE PERGUNTAS
-════════════════════════════════════════ */
-
 function goTo(nextIdx, direction) {
   if (transitioning) return;
   transitioning = true;
-
   const exit = direction === 'forward' ? 'pa-exit' : 'pa-exit-back';
   cardEl.classList.remove('pa-enter', 'pa-enter-back');
   cardEl.classList.add(exit);
-
   setTimeout(() => {
     cardEl.classList.remove(exit);
     idx = nextIdx;
     render();
-    if (direction === 'back') {
-      cardEl.classList.remove('pa-enter');
-      cardEl.classList.add('pa-enter-back');
-    }
+    if (direction === 'back') { cardEl.classList.remove('pa-enter'); cardEl.classList.add('pa-enter-back'); }
     transitioning = false;
-  }, 240);
+  }, 220);
 }
 
-backBtn.addEventListener('click', () => {
-  if (idx > 0) goTo(idx - 1, 'back');
-});
-
+backBtn.addEventListener('click', () => { if (idx > 0) goTo(idx - 1, 'back'); });
 continueBtn.addEventListener('click', advance);
-
-/* Enter avança */
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter' || e.repeat) return;
   if (resultMain.classList.contains('active')) return;
-  e.preventDefault();
-  advance();
+  if (document.querySelector('.pa-msg-overlay')) { const b = document.querySelector('.pa-msg-btn'); if (b) b.click(); return; }
+  e.preventDefault(); advance();
 });
 
+/* ════════════ MENSAGENS MOTIVACIONAIS (overlay) ════════════ */
+function mostrarMensagem(marco, onContinue) {
+  const texto = escolherTextoMensagem(marco);
+  const overlay = document.createElement('div');
+  overlay.className = 'pa-msg-overlay';
+  overlay.innerHTML = `
+    <div class="pa-msg-card">
+      <div class="pa-msg-mark">${marco === 40 ? 'Concluído' : `${marco} de ${TOTAL}`}</div>
+      <p class="pa-msg-text">${texto}</p>
+      <button class="pa-msg-btn" type="button">${marco === 40 ? 'Ver meu resultado' : 'Continuar'}</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('visible'));
+  const close = () => {
+    overlay.classList.remove('visible');
+    setTimeout(() => { overlay.remove(); onContinue && onContinue(); }, 220);
+  };
+  overlay.querySelector('.pa-msg-btn').addEventListener('click', close);
+}
 
-/* ════════════════════════════════════════
-   FINALIZAÇÃO — monta o plano alimentar
-════════════════════════════════════════ */
+function escolherTextoMensagem(marco) {
+  const { sinais } = computarEstado();
+  for (const v of MSG.variantes) {
+    if (!v.marcos.includes(marco)) continue;
+    if (sinais[v.gatilho]) return v.texto;
+  }
+  return MSG.motivacionais[marco];
+}
 
+/* ════════════ FINALIZAÇÃO ════════════ */
 function finalizar() {
-  const dieta = subNode.dietas[resultado.dieta];
+  const st = computarEstado();
+  resultado.safetyFlags = Array.from(st.flags);
+  resultado.dieta = escolherDieta();
 
-  /* Persiste o resultado completo */
+  const goalNode = objetivoDados;
+  const catNode  = goalNode.categorias[resultado.categoria];
+  const subNode  = catNode.subcategorias[resultado.subcategoria];
+  const dieta    = subNode.dietas[resultado.dieta];
+
+  const catDisp = CATS[goalKey][resultado.categoria];
+  const subDisp = SUBS[resultado.categoria][resultado.subcategoria];
+
   const payload = {
-    ...resultado,
-    objetivoNome:     objetivo.nome,
-    categoriaNome:    catNode.nome,
-    subcategoriaNome: subNode.nome,
-    dietaTitulo:      dieta.titulo,
-    dietaObjetivo:    dieta.objetivo,
-    refeicoes:        dieta.refeicoes,
-    respostas:        { ...respostas },
-    completedAt:      new Date().toISOString(),
+    objetivo: goalKey,
+    categoria: resultado.categoria,
+    subcategoria: resultado.subcategoria,
+    dieta: resultado.dieta,
+    objetivoNome: goalNode.nome,
+    categoriaNome: catDisp.nome,        // nome humanizado (exibição)
+    categoriaInterna: catDisp.interno,
+    subcategoriaNome: subDisp.nome,     // nome humanizado (exibição)
+    subcategoriaInterna: subDisp.interno,
+    categoriaResumo: catDisp.resumo,
+    dietaTitulo: dieta.titulo,
+    dietaObjetivo: dieta.objetivo,
+    refeicoes: dieta.refeicoes,
+    confianca: resultado.categoriaConfianca,
+    safetyFlags: resultado.safetyFlags,
+    respostas: { ...respostas },
+    completedAt: new Date().toISOString(),
   };
   localStorage.setItem('wellness_plano', JSON.stringify(payload));
 
-  /* Botão em estado de carregamento */
   continueBtn.classList.add('loading');
   continueBtn.disabled = true;
-
-  setTimeout(() => renderResultado(payload), 900);
+  setTimeout(() => renderResultado(payload), 700);
 }
 
 function renderResultado(p) {
   progressFill.style.width = '100%';
-
   const numeroDieta = p.dieta === 'dieta1' ? '1' : '2';
 
   const refeicoesHTML = p.refeicoes.map((r, i) => `
     <div class="pa-meal reveal" style="--d:${i * 0.06}s">
-      <div class="pa-meal-head">
-        <span class="pa-meal-ico">${mealIcon(r.nome)}</span>
-        <span class="pa-meal-name">${r.nome}</span>
-      </div>
-      <ul class="pa-meal-items">
-        ${r.itens.map(it => `<li>${it}</li>`).join('')}
-      </ul>
+      <div class="pa-meal-head"><span class="pa-meal-ico">${mealIcon(r.nome)}</span><span class="pa-meal-name">${r.nome}</span></div>
+      <ul class="pa-meal-items">${r.itens.map(it => `<li>${it}</li>`).join('')}</ul>
     </div>`).join('');
+
+  const safetyHTML = (p.safetyFlags && p.safetyFlags.length) ? `
+    <div class="pa-safety reveal" style="--d:.10s">
+      <h3 class="pa-safety-title">${MSG.seguranca.titulo}</h3>
+      <p class="pa-safety-text">${MSG.seguranca.texto}</p>
+      <p class="pa-safety-foot">${MSG.seguranca.rodape}</p>
+    </div>` : '';
 
   resultMain.innerHTML = `
     <div class="pa-result">
-
       <div class="pa-result-hero reveal">
-        <div class="pa-result-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Plano gerado
-        </div>
-        <h1 class="pa-result-title">Seu plano alimentar<br><em>personalizado</em></h1>
-        <p class="pa-result-sub">Baseado no seu comportamento alimentar, hábitos e perfil — não apenas no seu objetivo.</p>
+        <div class="pa-result-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Orientação gerada</div>
+        <h1 class="pa-result-title">Sua orientação de<br><em>bem-estar</em></h1>
+        <p class="pa-result-sub">Baseada nas suas 40 respostas sobre mente, alimentação e rotina — não apenas no seu objetivo.</p>
       </div>
 
       <div class="pa-path reveal" style="--d:.08s">
-        <div class="pa-path-item">
-          <span class="pa-path-label">Objetivo</span>
-          <span class="pa-path-value">${p.objetivoNome}</span>
-        </div>
+        <div class="pa-path-item"><span class="pa-path-label">Objetivo</span><span class="pa-path-value">${p.objetivoNome}</span></div>
         <span class="pa-path-arrow">→</span>
-        <div class="pa-path-item">
-          <span class="pa-path-label">Categoria</span>
-          <span class="pa-path-value">${p.categoriaNome}</span>
-        </div>
+        <div class="pa-path-item"><span class="pa-path-label">Padrão principal</span><span class="pa-path-value">${p.categoriaNome}</span></div>
         <span class="pa-path-arrow">→</span>
-        <div class="pa-path-item">
-          <span class="pa-path-label">Subcategoria</span>
-          <span class="pa-path-value">${p.subcategoriaNome}</span>
-        </div>
+        <div class="pa-path-item"><span class="pa-path-label">Detalhamento</span><span class="pa-path-value">${p.subcategoriaNome}</span></div>
       </div>
 
+      ${p.categoriaResumo ? `<p class="pa-result-resumo reveal" style="--d:.11s">${p.categoriaResumo}</p>` : ''}
+      ${safetyHTML}
+
       <div class="pa-diet-card reveal" style="--d:.14s">
-        <span class="pa-diet-tag">Dieta ${numeroDieta}</span>
+        <span class="pa-diet-tag">Sugestão de cardápio ${numeroDieta}</span>
         <h2 class="pa-diet-title">${p.dietaTitulo}</h2>
         <p class="pa-diet-desc">${p.dietaObjetivo}</p>
       </div>
 
-      <div class="pa-meals">
-        ${refeicoesHTML}
-      </div>
+      <div class="pa-meals">${refeicoesHTML}</div>
+
+      <p class="pa-result-aviso reveal">${MSG.aviso_resultado}</p>
 
       <div class="pa-result-actions reveal">
-        <button class="pa-btn-primary" id="goDashboard">
-          Ir para o Aplicativo
+        <button class="pa-btn-primary" id="goDashboard">Ir para o Aplicativo
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <button class="pa-btn-ghost" id="restartQuiz">Refazer questionário</button>
       </div>
-
     </div>`;
 
-  /* Troca de telas */
-  quizMain.classList.remove('active');
-  quizMain.classList.add('hidden');
-  document.querySelector('.pa-footer').classList.add('hidden');
+  quizMain.classList.remove('active'); quizMain.classList.add('hidden');
+  const footer = document.querySelector('.pq-footer'); if (footer) footer.classList.add('hidden');
   resultMain.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  /* Ações */
-  document.getElementById('goDashboard').addEventListener('click', () => {
-    window.location.href = 'dashboard.html';
-  });
-  document.getElementById('restartQuiz').addEventListener('click', () => {
-    window.location.href = 'perguntas-adaptativas.html';
-  });
+  document.getElementById('goDashboard').addEventListener('click', () => { window.location.href = 'dashboard.html'; });
+  document.getElementById('restartQuiz').addEventListener('click', () => { window.location.href = 'perguntas-adaptativas.html'; });
 
-  /* Reveal on scroll */
   const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.12 });
   resultMain.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 }
 
-/* Ícone SVG por tipo de refeição */
 function mealIcon(nome) {
   const n = nome.toLowerCase();
-  if (n.includes('café')) {
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`;
-  }
-  if (n.includes('almoço')) {
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M5 2v20"/><path d="M18 2v20"/><path d="M18 2a3 3 0 0 0-3 3v6h3"/></svg>`;
-  }
-  if (n.includes('jantar')) {
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>`;
-  }
-  if (n.includes('ceia')) {
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-  }
-  /* Lanche */
+  if (n.includes('café')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`;
+  if (n.includes('almoço')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M5 2v20"/><path d="M18 2v20"/><path d="M18 2a3 3 0 0 0-3 3v6h3"/></svg>`;
+  if (n.includes('jantar')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>`;
+  if (n.includes('ceia')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3c0 1.5 1 2 1 3H8a6 6 0 0 0-6 6c0 3 2 5 5 5h10c3 0 5-2 5-5a6 6 0 0 0-6-6h-2c0-1 1-1.5 1-3a3 3 0 0 0-3-3z"/></svg>`;
 }
 
-
-/* ════════════════════════════════════════
-   HELPERS
-════════════════════════════════════════ */
-
-function showError(msg) {
-  const el = document.getElementById('fieldError');
-  if (el) el.textContent = msg;
-}
-function clearError() {
-  const el = document.getElementById('fieldError');
-  if (el) el.textContent = '';
-}
+/* ════════════ HELPERS ════════════ */
+function showError(msg) { const el = document.getElementById('fieldError'); if (el) el.textContent = msg; }
+function clearError()   { const el = document.getElementById('fieldError'); if (el) el.textContent = ''; }
 function shakeCard() {
   cardEl.classList.add('pa-shake');
   cardEl.addEventListener('animationend', () => cardEl.classList.remove('pa-shake'), { once: true });
 }
 
-
-/* ════════════════════════════════════════
-   START
-════════════════════════════════════════ */
-
+/* ════════════ START ════════════ */
 init();

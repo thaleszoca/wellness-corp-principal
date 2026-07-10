@@ -1,0 +1,2338 @@
+{
+  "_doc": "Banco de perguntas do fluxo adaptativo de 40 perguntas. Fonte espelhada de data-banco.js. Bloco 1 (1-5) é coletado na tela perguntas-essenciais.",
+  "total_no_banco": 110,
+  "compartilhadas": [
+    {
+      "id": "sh_06",
+      "bloco": 2,
+      "dim": "alimentacao_atual",
+      "texto": "Em quantos momentos do dia você costuma comer (refeições e lanches)?",
+      "tipo": "opcoes",
+      "opcoes": [
+        {
+          "value": "1-2",
+          "label": "1 a 2 vezes"
+        },
+        {
+          "value": "3-4",
+          "label": "3 a 4 vezes"
+        },
+        {
+          "value": "5+",
+          "label": "5 ou mais vezes"
+        }
+      ],
+      "efeitos": {
+        "1-2": [
+          {
+            "alvo": "cat",
+            "chave": "ectomorfo",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 1
+          }
+        ],
+        "5+": [
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_07",
+      "bloco": 2,
+      "dim": "alimentacao_atual",
+      "texto": "Com que frequência você passa mais de cinco horas acordado sem comer?",
+      "tipo": "frequencia",
+      "efeitos": {
+        "frequentemente": [
+          {
+            "alvo": "cat",
+            "chave": "ectomorfo",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 1
+          }
+        ],
+        "quase-sempre": [
+          {
+            "alvo": "cat",
+            "chave": "ectomorfo",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_08",
+      "bloco": 2,
+      "dim": "alimentacao_atual",
+      "texto": "Você costuma comer por perceber fome, ou começa por horário, hábito ou oportunidade?",
+      "tipo": "opcoes",
+      "opcoes": [
+        {
+          "value": "fome",
+          "label": "Percebo a fome antes de comer"
+        },
+        {
+          "value": "horario",
+          "label": "Como por horário ou hábito"
+        },
+        {
+          "value": "oportunidade",
+          "label": "Como quando surge a oportunidade"
+        }
+      ],
+      "efeitos": {
+        "oportunidade": [
+          {
+            "alvo": "cat",
+            "chave": "desconectado-distraido",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "paladar-infantil",
+            "pts": 1
+          }
+        ],
+        "horario": [
+          {
+            "alvo": "cat",
+            "chave": "desconectado-distraido",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_09",
+      "bloco": 3,
+      "dim": "conexao_mente_comida",
+      "texto": "Depois das refeições, como você costuma se sentir?",
+      "tipo": "opcoes",
+      "opcoes": [
+        {
+          "value": "ainda-fome",
+          "label": "Ainda com fome"
+        },
+        {
+          "value": "satisfeito",
+          "label": "Satisfeito"
+        },
+        {
+          "value": "cheio-demais",
+          "label": "Cheio demais"
+        },
+        {
+          "value": "varia",
+          "label": "Varia bastante"
+        },
+        {
+          "value": "dificuldade",
+          "label": "Tenho dificuldade de perceber"
+        }
+      ],
+      "efeitos": {
+        "dificuldade": [
+          {
+            "alvo": "cat",
+            "chave": "desconectado-distraido",
+            "pts": 2
+          }
+        ],
+        "cheio-demais": [
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_10",
+      "bloco": 2,
+      "dim": "alimentacao_atual",
+      "texto": "Em uma semana comum, com que frequência refeições completas são substituídas por fast food, lanches rápidos ou produtos prontos?",
+      "tipo": "frequencia",
+      "efeitos": {
+        "frequentemente": [
+          {
+            "alvo": "cat",
+            "chave": "paladar-infantil",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "falso-magro",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "sedentario-metabolismo-lento",
+            "pts": 1
+          }
+        ],
+        "quase-sempre": [
+          {
+            "alvo": "cat",
+            "chave": "paladar-infantil",
+            "pts": 3
+          },
+          {
+            "alvo": "cat",
+            "chave": "falso-magro",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "sedentario-metabolismo-lento",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_11",
+      "bloco": 3,
+      "dim": "estado_emocional",
+      "texto": "De 0 a 10, quanto a ansiedade interfere na sua rotina atualmente?",
+      "tipo": "escala",
+      "sinal": {
+        "chave": "ansiedade",
+        "de": "valor"
+      },
+      "efeitos_escala": [
+        {
+          "min": 7,
+          "max": 10,
+          "ef": [
+            {
+              "alvo": "cat",
+              "chave": "magro-ansioso",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "psicologico-compulsivo",
+              "pts": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh_12",
+      "bloco": 3,
+      "dim": "estado_emocional",
+      "texto": "De 0 a 10, quanto pensamentos sobre corpo, peso ou alimentação ocupam sua mente durante o dia?",
+      "tipo": "escala",
+      "efeitos_escala": [
+        {
+          "min": 7,
+          "max": 10,
+          "ef": [
+            {
+              "alvo": "cat",
+              "chave": "obcecado-estetica",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "terrorista-nutricional",
+              "pts": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh_13",
+      "bloco": 3,
+      "dim": "conexao_mente_comida",
+      "texto": "Quando algo sai diferente do planejado na alimentação, qual reação se aproxima mais da sua?",
+      "tipo": "opcoes",
+      "opcoes": [
+        {
+          "value": "tranquilo",
+          "label": "Sigo em frente tranquilamente"
+        },
+        {
+          "value": "frustrado",
+          "label": "Fico frustrado, mas passa"
+        },
+        {
+          "value": "culpa-forte",
+          "label": "Sinto culpa forte"
+        },
+        {
+          "value": "compenso",
+          "label": "Tento compensar depois"
+        }
+      ],
+      "efeitos": {
+        "culpa-forte": [
+          {
+            "alvo": "cat",
+            "chave": "terrorista-nutricional",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 1
+          }
+        ],
+        "compenso": [
+          {
+            "alvo": "cat",
+            "chave": "terrorista-nutricional",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "obcecado-estetica",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_14",
+      "bloco": 3,
+      "dim": "estado_emocional",
+      "texto": "Com que frequência você sente culpa depois de comer?",
+      "tipo": "frequencia",
+      "sinal": {
+        "chave": "culpa_alimentar",
+        "quando": [
+          "frequentemente",
+          "quase-sempre"
+        ]
+      },
+      "efeitos": {
+        "frequentemente": [
+          {
+            "alvo": "cat",
+            "chave": "terrorista-nutricional",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 1
+          }
+        ],
+        "quase-sempre": [
+          {
+            "alvo": "cat",
+            "chave": "terrorista-nutricional",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_15",
+      "bloco": 3,
+      "dim": "estado_emocional",
+      "texto": "Em dias difíceis, você sente que possui outras formas de lidar com as emoções além da comida?",
+      "tipo": "sim-nao",
+      "efeitos": {
+        "nao": [
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_16",
+      "bloco": 4,
+      "dim": "conexao_mente_comida",
+      "texto": "Quando você fica ansioso, o que costuma acontecer com seu apetite?",
+      "tipo": "opcoes",
+      "opcoes": [
+        {
+          "value": "diminui-muito",
+          "label": "Diminui muito"
+        },
+        {
+          "value": "diminui-pouco",
+          "label": "Diminui um pouco"
+        },
+        {
+          "value": "nao-muda",
+          "label": "Não muda"
+        },
+        {
+          "value": "aumenta-pouco",
+          "label": "Aumenta um pouco"
+        },
+        {
+          "value": "aumenta-muito",
+          "label": "Aumenta muito"
+        }
+      ],
+      "efeitos": {
+        "diminui-muito": [
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 3
+          },
+          {
+            "alvo": "cat",
+            "chave": "ectomorfo",
+            "pts": 1
+          }
+        ],
+        "diminui-pouco": [
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 1
+          }
+        ],
+        "aumenta-pouco": [
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 1
+          }
+        ],
+        "aumenta-muito": [
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 3
+          },
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_17",
+      "bloco": 4,
+      "dim": "conexao_mente_comida",
+      "texto": "Em momentos de estresse, você sente sintomas digestivos (nó no estômago, enjoo) que dificultam comer?",
+      "tipo": "frequencia",
+      "efeitos": {
+        "frequentemente": [
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 2
+          }
+        ],
+        "quase-sempre": [
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_18",
+      "bloco": 4,
+      "dim": "conexao_mente_comida",
+      "texto": "Quando está triste, cansado ou sozinho, com que frequência procura comida mesmo sem fome física?",
+      "tipo": "frequencia",
+      "efeitos": {
+        "as-vezes": [
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 1
+          }
+        ],
+        "frequentemente": [
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 3
+          },
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 2
+          }
+        ],
+        "quase-sempre": [
+          {
+            "alvo": "cat",
+            "chave": "comedor-emocional",
+            "pts": 3
+          },
+          {
+            "alvo": "cat",
+            "chave": "psicologico-compulsivo",
+            "pts": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_19",
+      "bloco": 4,
+      "dim": "alimentacao_atual",
+      "texto": "Após comer algo que considera fora do plano, você tenta compensar pulando refeições ou treinando mais?",
+      "tipo": "frequencia",
+      "efeitos": {
+        "frequentemente": [
+          {
+            "alvo": "cat",
+            "chave": "terrorista-nutricional",
+            "pts": 2
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 2
+          }
+        ],
+        "quase-sempre": [
+          {
+            "alvo": "cat",
+            "chave": "terrorista-nutricional",
+            "pts": 3
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "sh_20",
+      "bloco": 4,
+      "dim": "rotina_sono_atividade",
+      "texto": "Quando sua rotina fica corrida, o que costuma acontecer com sua alimentação?",
+      "tipo": "opcoes",
+      "sinal": {
+        "chave": "rotina_corrida",
+        "quando": [
+          "pulo-refeicoes",
+          "como-qualquer-coisa",
+          "esqueco"
+        ]
+      },
+      "opcoes": [
+        {
+          "value": "pulo-refeicoes",
+          "label": "Pulo refeições"
+        },
+        {
+          "value": "como-qualquer-coisa",
+          "label": "Como qualquer coisa rápida"
+        },
+        {
+          "value": "mantenho",
+          "label": "Consigo manter a rotina"
+        },
+        {
+          "value": "esqueco",
+          "label": "Esqueço de comer"
+        }
+      ],
+      "efeitos": {
+        "pulo-refeicoes": [
+          {
+            "alvo": "cat",
+            "chave": "ectomorfo",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "restritivo-efeito-sanfona",
+            "pts": 1
+          }
+        ],
+        "como-qualquer-coisa": [
+          {
+            "alvo": "cat",
+            "chave": "paladar-infantil",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "sedentario-metabolismo-lento",
+            "pts": 1
+          }
+        ],
+        "esqueco": [
+          {
+            "alvo": "cat",
+            "chave": "magro-ansioso",
+            "pts": 1
+          },
+          {
+            "alvo": "cat",
+            "chave": "ectomorfo",
+            "pts": 1
+          }
+        ]
+      }
+    }
+  ],
+  "objetivos": {
+    "ganhar-massa": [
+      {
+        "id": "gm_21",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você tem dificuldade em ganhar massa muscular, mesmo se alimentando?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "ectomorfo",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "magro-ansioso",
+              "pts": 1
+            },
+            {
+              "alvo": "cat",
+              "chave": "falso-magro",
+              "pts": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_22",
+        "bloco": 5,
+        "dim": "rotina_sono_atividade",
+        "tipo": "opcoes",
+        "texto": "Você pratica atividade física? Com qual frequência?",
+        "opcoes": [
+          {
+            "value": "nenhuma",
+            "label": "Nenhuma"
+          },
+          {
+            "value": "baixa",
+            "label": "Baixa (1–2x/semana)"
+          },
+          {
+            "value": "media",
+            "label": "Moderada (3–5x/semana)"
+          },
+          {
+            "value": "alta",
+            "label": "Alta (mais de 5x/semana)"
+          }
+        ],
+        "efeitos": {
+          "nenhuma": [
+            {
+              "alvo": "cat",
+              "chave": "falso-magro",
+              "pts": 3
+            }
+          ],
+          "baixa": [
+            {
+              "alvo": "cat",
+              "chave": "falso-magro",
+              "pts": 2
+            }
+          ],
+          "alta": [
+            {
+              "alvo": "cat",
+              "chave": "ectomorfo",
+              "pts": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_23",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você apresenta gordura localizada (abdômen, flancos) junto de baixa massa muscular?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "falso-magro",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_24",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você sente flacidez ou musculatura pouco firme, mesmo com peso baixo ou na média?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "falso-magro",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_25",
+        "bloco": 5,
+        "dim": "estado_emocional",
+        "tipo": "sim-nao",
+        "texto": "Você se considera uma pessoa que não consegue ficar parada (sempre em movimento)?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "ectomorfo",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "magro-ansioso",
+              "pts": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_26",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Ao comer um pouco menos, você perde peso muito rapidamente?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "ectomorfo",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_27",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Sua alimentação é bastante restrita a poucos alimentos que você aceita?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "apetite-seletivo",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_28",
+        "bloco": 6,
+        "dim": "estado_emocional",
+        "tipo": "sim-nao",
+        "texto": "Você rejeita muitos alimentos por textura, cheiro ou aparência?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "apetite-seletivo",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "gm_29",
+        "bloco": 6,
+        "dim": "conexao_mente_comida",
+        "tipo": "escala",
+        "texto": "De 0 a 10, quanto sua ansiedade atrapalha seu apetite e suas refeições?",
+        "efeitos_escala": [
+          {
+            "min": 7,
+            "max": 10,
+            "ef": [
+              {
+                "alvo": "cat",
+                "chave": "magro-ansioso",
+                "pts": 3
+              }
+            ]
+          },
+          {
+            "min": 4,
+            "max": 6,
+            "ef": [
+              {
+                "alvo": "cat",
+                "chave": "magro-ansioso",
+                "pts": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "gm_30",
+        "bloco": 6,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você costuma esquecer ou pular refeições por estar com a mente ocupada?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "magro-ansioso",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "ectomorfo",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "emagrecer": [
+      {
+        "id": "em_21",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você já fez muitas dietas restritivas ao longo da vida?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "restritivo-efeito-sanfona",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_22",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você recupera o peso rapidamente depois de emagrecer (efeito sanfona)?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "restritivo-efeito-sanfona",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_23",
+        "bloco": 5,
+        "dim": "rotina_sono_atividade",
+        "tipo": "sim-nao",
+        "texto": "Você passa muitas horas sentado e se movimenta pouco durante o dia?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "sedentario-metabolismo-lento",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_24",
+        "bloco": 5,
+        "dim": "estado_emocional",
+        "tipo": "escala",
+        "texto": "De 0 a 10, quão sedentária é a sua rotina atual?",
+        "efeitos_escala": [
+          {
+            "min": 7,
+            "max": 10,
+            "ef": [
+              {
+                "alvo": "cat",
+                "chave": "sedentario-metabolismo-lento",
+                "pts": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "em_25",
+        "bloco": 5,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você tem episódios de comer muito além do que pretendia, ligados a emoções?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "psicologico-compulsivo",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_26",
+        "bloco": 6,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Esses episódios vêm acompanhados de perda de controle e sofrimento intenso depois?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "psicologico-compulsivo",
+              "pts": 3
+            }
+          ]
+        },
+        "safety": {
+          "sim": "perda_controle_sofrimento"
+        }
+      },
+      {
+        "id": "em_27",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você prefere fortemente doces, frituras e ultraprocessados a alimentos naturais?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "paladar-infantil",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_28",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Alimentos naturais (frutas, verduras, comida caseira) costumam te parecer sem graça?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "paladar-infantil",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_29",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você bebe pouca água e às vezes confunde sede com fome?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "sedentario-metabolismo-lento",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "em_30",
+        "bloco": 6,
+        "dim": "estado_emocional",
+        "tipo": "sim-nao",
+        "texto": "Você tem medo de determinados alimentos (como carboidratos) e procura evitá-los?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "restritivo-efeito-sanfona",
+              "pts": 2
+            }
+          ]
+        }
+      }
+    ],
+    "melhorar-alimentacao": [
+      {
+        "id": "ml_21",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você segue regras alimentares muito rígidas e sente medo de certos alimentos?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "terrorista-nutricional",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_22",
+        "bloco": 5,
+        "dim": "estado_emocional",
+        "tipo": "sim-nao",
+        "texto": "Você evita eventos sociais ou sente ansiedade diante de comida que não controla?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "terrorista-nutricional",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_23",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você costuma comer no automático, distraído com telas, sem perceber direito?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "desconectado-distraido",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_24",
+        "bloco": 5,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você tem dificuldade de perceber quando está com fome ou quando está saciado?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "desconectado-distraido",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_25",
+        "bloco": 5,
+        "dim": "estado_emocional",
+        "tipo": "escala",
+        "texto": "De 0 a 10, quanto a sua imagem corporal afeta a sua autoestima no dia a dia?",
+        "efeitos_escala": [
+          {
+            "min": 7,
+            "max": 10,
+            "ef": [
+              {
+                "alvo": "cat",
+                "chave": "obcecado-estetica",
+                "pts": 3
+              }
+            ]
+          },
+          {
+            "min": 4,
+            "max": 6,
+            "ef": [
+              {
+                "alvo": "cat",
+                "chave": "obcecado-estetica",
+                "pts": 1
+              }
+            ]
+          }
+        ],
+        "safety_escala": {
+          "min": 9,
+          "flag": "sofrimento_imagem_corporal"
+        }
+      },
+      {
+        "id": "ml_26",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Você compara o seu corpo com o de outras pessoas com frequência?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "obcecado-estetica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_27",
+        "bloco": 6,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você usa a comida para aliviar emoções como tristeza, tédio ou estresse?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "comedor-emocional",
+              "pts": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_28",
+        "bloco": 6,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Esse alívio é temporário e os sentimentos costumam voltar depois de comer?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "comedor-emocional",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_29",
+        "bloco": 6,
+        "dim": "categoria_desempate",
+        "tipo": "sim-nao",
+        "texto": "Depois de sair da sua alimentação ideal, você compensa (pula refeição, treina mais)?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "terrorista-nutricional",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "obcecado-estetica",
+              "pts": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "ml_30",
+        "bloco": 6,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você come mesmo sem fome, como recompensa ou por hábito emocional?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "cat",
+              "chave": "comedor-emocional",
+              "pts": 2
+            },
+            {
+              "alvo": "cat",
+              "chave": "desconectado-distraido",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "categorias": {
+    "magro-ansioso": [
+      {
+        "id": "b7_ma_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Em períodos de muito estresse, seu apetite chega a desaparecer?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "ansiedade-digestiva",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ma_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "A ansiedade causa desconfortos digestivos que dificultam terminar as refeições?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "ansiedade-digestiva",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ma_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você sente necessidade constante de estar em movimento ou fazendo algo, mesmo ao descansar?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "hiperatividade-mental",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ma_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Sua mente permanece acelerada e você perde o horário das refeições por distração?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "hiperatividade-mental",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ma_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Em períodos emocionalmente difíceis, seu peso costuma cair sem que você tente emagrecer?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "ansiedade-digestiva",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "falso-magro": [
+      {
+        "id": "b7_fm_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você sente cansaço frequente mesmo em atividades simples do dia a dia?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "metabolicamente-descondicionado",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_fm_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Seu abdômen costuma permanecer inchado durante boa parte do dia?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "metabolicamente-descondicionado",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_fm_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você sente dificuldade em realizar tarefas que exigem força física?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "baixa-massa-muscular",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_fm_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Mesmo treinando, você teve pouca evolução de força e de músculo?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "baixa-massa-muscular",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_fm_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "opcoes",
+        "texto": "Qual sua frequência semanal de ultraprocessados, frituras ou açúcares refinados?",
+        "opcoes": [
+          {
+            "value": "baixa",
+            "label": "Baixa (raramente)"
+          },
+          {
+            "value": "media",
+            "label": "Moderada"
+          },
+          {
+            "value": "alta",
+            "label": "Alta (quase todos os dias)"
+          }
+        ],
+        "efeitos": {
+          "alta": [
+            {
+              "alvo": "sub",
+              "chave": "metabolicamente-descondicionado",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "ectomorfo": [
+      {
+        "id": "b7_ec_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você se movimenta muito ao longo do dia mesmo sem treinar (inquietude, anda bastante)?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alto-gasto-energetico",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ec_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Ao comer um pouco menos, você perde peso rapidamente?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alto-gasto-energetico",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ec_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você se sente satisfeito muito rápido, comendo pouco?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "baixa-ingestao-calorica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ec_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Suas porções costumam ser pequenas, ou você esquece refeições?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "baixa-ingestao-calorica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ec_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Apesar da dificuldade de ganhar peso, sua alimentação NÃO parece ser pouca?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alto-gasto-energetico",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "apetite-seletivo": [
+      {
+        "id": "b7_as_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você rejeita alimentos principalmente pela textura?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "sensibilidade-sensorial",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_as_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Misturar alimentos no prato te incomoda, a ponto de separar os ingredientes?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "sensibilidade-sensorial",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_as_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você sente resistência ou receio de experimentar alimentos novos?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "resistencia-novidade",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_as_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Sua alimentação é muito parecida com a que você tinha na infância?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "resistencia-novidade",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_as_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Quando evita um alimento, a textura costuma ser o motivo principal?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "sensibilidade-sensorial",
+              "pts": 1
+            }
+          ],
+          "nao": [
+            {
+              "alvo": "sub",
+              "chave": "resistencia-novidade",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "psicologico-compulsivo": [
+      {
+        "id": "b7_pc_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Depois do jantar, você costuma beliscar ou revisitar a cozinha de forma quase automática?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "beliscador-noturno",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pc_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "À noite, a ansiedade aumenta e acaba levando você a comer?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "beliscador-noturno",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pc_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Seus episódios de comer demais surgem após discussões ou notícias estressantes?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "comedor-impulsivo",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pc_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Durante esses episódios, você come muito rápido e só para ao sentir desconforto?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "comedor-impulsivo",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pc_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Depois de comer além do previsto, você sente culpa intensa?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "comedor-impulsivo",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "sedentario-metabolismo-lento": [
+      {
+        "id": "b7_sm_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você bebe pouca água ao longo do dia?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "desidratado-fome-invertida",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_sm_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você tem boca seca ou dor de cabeça, e a vontade de comer diminui depois de beber água?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "desidratado-fome-invertida",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_sm_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você passa mais de 6 horas por dia sentado?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "inativo-de-cadeira",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_sm_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Sua atividade física é baixa e com poucas pausas de movimento ao longo do dia?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "inativo-de-cadeira",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_sm_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você substitui água por refrigerantes, sucos ou bebidas adoçadas com frequência?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "desidratado-fome-invertida",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "restritivo-efeito-sanfona": [
+      {
+        "id": "b7_rs_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você evita ou tem medo de carboidratos como arroz, batata e massas?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "fobico-carboidratos",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_rs_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Após cortar carboidratos, você sente fraqueza ou irritabilidade e depois desejo intenso por eles?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "fobico-carboidratos",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_rs_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você tem histórico de dietas muito restritivas e agressivas?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "cicatriz-metabolica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_rs_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você recupera o peso rapidamente, chegando a oscilar 4–5 kg em um mês?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "cicatriz-metabolica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_rs_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você alterna entre foco total na dieta e momentos de desistência?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "cicatriz-metabolica",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "paladar-infantil": [
+      {
+        "id": "b7_pi_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você sente fissura por doces ou alimentos gordurosos?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "dependente-hiperpalataveis",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pi_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Alimentos naturais costumam te parecer sem graça?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "dependente-hiperpalataveis",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pi_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você prefere marcas específicas que te dão uma sensação de segurança?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "seletivo-industrial",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pi_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Seus lanches são, na maioria, industrializados?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "seletivo-industrial",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_pi_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você rejeita vegetais pela aparência ou pela textura?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "seletivo-industrial",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "terrorista-nutricional": [
+      {
+        "id": "b7_tn_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você analisa rótulos com ansiedade e evita ingredientes mesmo sem indicação médica?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "ortorexia-funcional",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_tn_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você evita eventos sociais por causa da comida que será servida?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "ortorexia-funcional",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_tn_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Depois de sair do plano, você pula refeições ou treina mais para compensar?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "compensador-punitivo",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_tn_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você pensa na alimentação de forma “tudo ou nada”?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "compensador-punitivo",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_tn_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "A culpa após comer algo “fora do plano” costuma ser intensa?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "compensador-punitivo",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "desconectado-distraido": [
+      {
+        "id": "b7_dd_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você costuma comer usando telas (celular, TV ou computador)?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alimentacao-automatica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_dd_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você termina refeições sem lembrar direito do sabor ou da quantidade?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alimentacao-automatica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_dd_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você tem dificuldade de reconhecer quando está com fome?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "desconexao-corporal",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_dd_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você só percebe a saciedade quando já está muito cheio?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "desconexao-corporal",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_dd_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você come no automático, mesmo sem sentir fome física?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alimentacao-automatica",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "obcecado-estetica": [
+      {
+        "id": "b7_oe_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Comentários sobre o seu corpo afetam muito o seu humor?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "dependente-validacao",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_oe_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você compara o seu corpo com o de outras pessoas com frequência?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "dependente-validacao",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_oe_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Mesmo alcançando metas, você encontra novos defeitos no seu corpo?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "insatisfacao-cronica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_oe_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Pequenas variações de peso afetam bastante a sua autoestima?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "insatisfacao-cronica",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_oe_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você busca aprovação visual de outras pessoas sobre a sua aparência?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "dependente-validacao",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ],
+    "comedor-emocional": [
+      {
+        "id": "b7_ce_1",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você usa a comida como recompensa ou prêmio após um dia cansativo?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alivio-recompensa",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ce_2",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "O seu objetivo ao comer nesses momentos costuma ser relaxar ou comemorar?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "alivio-recompensa",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ce_3",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "Você come para evitar ou não sentir emoções difíceis?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "fuga-emocional",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ce_4",
+        "bloco": 7,
+        "dim": "subcategoria_personal",
+        "tipo": "sim-nao",
+        "texto": "O alívio é temporário e os problemas continuam depois?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "fuga-emocional",
+              "pts": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "b7_ce_5",
+        "bloco": 7,
+        "dim": "conexao_mente_comida",
+        "tipo": "sim-nao",
+        "texto": "Você tem dificuldade de encontrar outras formas de lidar com as emoções além da comida?",
+        "efeitos": {
+          "sim": [
+            {
+              "alvo": "sub",
+              "chave": "fuga-emocional",
+              "pts": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "personalizacao": [
+    {
+      "id": "p_36",
+      "bloco": 8,
+      "dim": "rotina_sono_atividade",
+      "tipo": "escala",
+      "texto": "Como você avalia a sua qualidade de sono, de 0 a 10?",
+      "efeitos_escala": []
+    },
+    {
+      "id": "p_37",
+      "bloco": 8,
+      "dim": "alimentacao_atual",
+      "tipo": "opcoes",
+      "texto": "Em quantos dias da semana você prepara ou participa do preparo das próprias refeições?",
+      "opcoes": [
+        {
+          "value": "0-1",
+          "label": "0 a 1 dia"
+        },
+        {
+          "value": "2-3",
+          "label": "2 a 3 dias"
+        },
+        {
+          "value": "4-5",
+          "label": "4 a 5 dias"
+        },
+        {
+          "value": "6-7",
+          "label": "6 a 7 dias"
+        }
+      ]
+    },
+    {
+      "id": "p_38",
+      "bloco": 8,
+      "dim": "rotina_sono_atividade",
+      "tipo": "opcoes",
+      "texto": "Quanto apoio você recebe das pessoas próximas para mudar hábitos?",
+      "opcoes": [
+        {
+          "value": "nenhum",
+          "label": "Nenhum"
+        },
+        {
+          "value": "pouco",
+          "label": "Pouco"
+        },
+        {
+          "value": "moderado",
+          "label": "Moderado"
+        },
+        {
+          "value": "muito",
+          "label": "Muito"
+        }
+      ]
+    },
+    {
+      "id": "p_39",
+      "bloco": 8,
+      "dim": "estado_emocional",
+      "tipo": "escala",
+      "texto": "De 0 a 10, quanto você se sente pronto para realizar pequenas mudanças nas próximas semanas?",
+      "efeitos_escala": []
+    },
+    {
+      "id": "p_40",
+      "bloco": 8,
+      "dim": "alimentacao_atual",
+      "tipo": "multipla",
+      "texto": "Alguma destas situações fez parte da sua vida recentemente? (pode marcar mais de uma, ou “nenhuma”)",
+      "dica": "Estas informações servem apenas para cuidar de você com mais responsabilidade.",
+      "opcoes": [
+        {
+          "value": "desmaios",
+          "label": "Desmaios ou tonturas ligados a ficar sem comer",
+          "safety": "desmaios_restricao"
+        },
+        {
+          "value": "vomito",
+          "label": "Provocar vômito após comer",
+          "safety": "vomito_provocado"
+        },
+        {
+          "value": "laxantes",
+          "label": "Uso de laxantes ou remédios para compensar refeições",
+          "safety": "laxantes_compensacao"
+        },
+        {
+          "value": "jejum-longo",
+          "label": "Ficar muitas horas sem comer de propósito",
+          "safety": "jejum_prolongado_intencional"
+        },
+        {
+          "value": "perda-controle",
+          "label": "Episódios de perda de controle com muito sofrimento",
+          "safety": "perda_controle_sofrimento"
+        },
+        {
+          "value": "nenhuma",
+          "label": "Nenhuma dessas"
+        }
+      ]
+    }
+  ]
+}

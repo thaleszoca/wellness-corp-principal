@@ -1,0 +1,35 @@
+{
+  "_doc": "Tipos de resposta aceitos e suas opções (spec §7).",
+  "tipos": {
+    "sim-nao": {
+      "valores": [
+        "sim",
+        "nao"
+      ]
+    },
+    "frequencia": {
+      "valores": [
+        "nunca",
+        "raramente",
+        "as-vezes",
+        "frequentemente",
+        "quase-sempre"
+      ]
+    },
+    "escala": {
+      "min": 0,
+      "max": 10,
+      "ancoras": {
+        "0": "nada",
+        "5": "moderado",
+        "10": "extremo"
+      }
+    },
+    "opcoes": {
+      "descricao": "escolha única; opções definidas em cada pergunta"
+    },
+    "multipla": {
+      "descricao": "múltipla escolha; usada na pergunta de segurança (p_40)"
+    }
+  }
+}

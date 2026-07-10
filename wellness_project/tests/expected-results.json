@@ -1,0 +1,47 @@
+{
+  "_doc": "Resultados esperados dos fluxos de sample-flows.json.",
+  "resultados": [
+    {
+      "nome": "Fluxo A — Ganhar massa / Ansiedade que reduz o apetite",
+      "objetivo": "ganhar-massa",
+      "categoria_esperada": "magro-ansioso",
+      "subcategoria_esperada": "ansiedade-digestiva",
+      "resultado": {
+        "total": 40,
+        "categoria": "magro-ansioso",
+        "subcategoria": "ansiedade-digestiva",
+        "dieta": "dieta1",
+        "safetyFlags": []
+      },
+      "passou": true
+    },
+    {
+      "nome": "Fluxo B — Emagrecer / Efeito rebote após restrições",
+      "objetivo": "emagrecer",
+      "categoria_esperada": "restritivo-efeito-sanfona",
+      "subcategoria_esperada": "cicatriz-metabolica",
+      "resultado": {
+        "total": 40,
+        "categoria": "restritivo-efeito-sanfona",
+        "subcategoria": "cicatriz-metabolica",
+        "dieta": "dieta1",
+        "safetyFlags": []
+      },
+      "passou": true
+    },
+    {
+      "nome": "Fluxo C — Melhorar relação / Comida como fuga emocional",
+      "objetivo": "melhorar-alimentacao",
+      "categoria_esperada": "comedor-emocional",
+      "subcategoria_esperada": "fuga-emocional",
+      "resultado": {
+        "total": 40,
+        "categoria": "comedor-emocional",
+        "subcategoria": "fuga-emocional",
+        "dieta": "dieta1",
+        "safetyFlags": []
+      },
+      "passou": true
+    }
+  ]
+}

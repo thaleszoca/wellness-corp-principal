@@ -1,0 +1,88 @@
+{
+  "_doc": "Regras de fluxo: blocos, contagem de 40, marcos de mensagem e pontos de classificação. Espelho de data-regras.js.",
+  "total_perguntas": 40,
+  "perguntas_essenciais": 5,
+  "blocos": [
+    {
+      "n": 1,
+      "de": 1,
+      "ate": 5,
+      "fonte": "essenciais",
+      "funcao": "perfil físico, objetivo e segurança inicial"
+    },
+    {
+      "n": 2,
+      "de": 6,
+      "ate": 10,
+      "fonte": "compartilhado",
+      "funcao": "alimentação atual e rotina básica"
+    },
+    {
+      "n": 3,
+      "de": 11,
+      "ate": 15,
+      "fonte": "compartilhado",
+      "funcao": "estado mental e emocional"
+    },
+    {
+      "n": 4,
+      "de": 16,
+      "ate": 20,
+      "fonte": "compartilhado",
+      "funcao": "relação entre emoções e alimentação"
+    },
+    {
+      "n": 5,
+      "de": 21,
+      "ate": 25,
+      "fonte": "objetivo",
+      "funcao": "classificação da categoria principal"
+    },
+    {
+      "n": 6,
+      "de": 26,
+      "ate": 30,
+      "fonte": "objetivo",
+      "funcao": "desempate e confirmação da categoria"
+    },
+    {
+      "n": 7,
+      "de": 31,
+      "ate": 35,
+      "fonte": "categoria",
+      "funcao": "classificação da subcategoria"
+    },
+    {
+      "n": 8,
+      "de": 36,
+      "ate": 40,
+      "fonte": "personalizacao",
+      "funcao": "intensidade, preferências e personalização"
+    }
+  ],
+  "marcos_mensagem": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40
+  ],
+  "classificacao": {
+    "categoria_apos": 30,
+    "subcategoria_apos": 35
+  },
+  "dimensoes_minimas": {
+    "perfil_objetivo": 5,
+    "alimentacao_atual": 7,
+    "estado_emocional": 7,
+    "conexao_mente_comida": 8,
+    "rotina_sono_atividade": 4,
+    "categoria_desempate": 5,
+    "subcategoria_personal": 4
+  },
+  "regra_nao_repeticao": "Nenhuma pergunta aparece duas vezes: blocos fixos + fila incremental por objetivo/categoria; IDs únicos.",
+  "selecao_proxima": "Determinística por blocos (spec §9): a próxima pergunta é a próxima do bloco corrente; após o bloco 6 a categoria líder define o bloco 7; após o bloco 7 a subcategoria define a personalização."
+}

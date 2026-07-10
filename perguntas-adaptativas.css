@@ -841,3 +841,99 @@ body:has(button:hover) .cursor-ring { width: 46px; height: 46px; border-color: r
 [data-theme="light"] .pq-enter-hint { color: #8a9a8a; }
 [data-theme="light"] .pq-enter-hint kbd { background: #eef2ee; border-color: #d0ddd0; color: #4a5e4a; }
 [data-theme="light"] .pq-btn-back { background: #ffffff; border-color: #d0ddd0; color: #4a5e4a; }
+
+
+/* ============================================================
+   ADIÇÕES — mensagens motivacionais, múltipla escolha,
+   card de segurança e aviso de resultado (fluxo de 40 perguntas)
+   ============================================================ */
+
+/* ── Overlay de mensagem motivacional (a cada 5 perguntas) ── */
+.pa-msg-overlay {
+    position: fixed; inset: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    background: rgba(10, 15, 22, 0.72);
+    backdrop-filter: blur(6px);
+    opacity: 0; transition: opacity .22s ease;
+}
+.pa-msg-overlay.visible { opacity: 1; }
+.pa-msg-card {
+    width: 100%; max-width: 460px;
+    background: #1b2330;
+    border: 1px solid rgba(106,171,113,0.28);
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    transform: translateY(14px) scale(.98);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.pa-msg-overlay.visible .pa-msg-card { transform: translateY(0) scale(1); }
+.pa-msg-mark {
+    display: inline-block;
+    font-size: .72rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #6AAB71;
+    background: rgba(106,171,113,0.12);
+    border: 1px solid rgba(106,171,113,0.25);
+    border-radius: 999px;
+    padding: 5px 12px; margin-bottom: 16px;
+}
+.pa-msg-text {
+    font-size: 1.06rem; line-height: 1.5; color: #e6ecf2;
+    margin: 0 0 24px;
+}
+.pa-msg-btn {
+    width: 100%;
+    background: #6AAB71; color: #0f1620;
+    font-size: .98rem; font-weight: 600;
+    border: none; border-radius: 12px;
+    padding: 14px; cursor: pointer;
+    transition: filter .15s ease, transform .1s ease;
+}
+.pa-msg-btn:hover { filter: brightness(1.06); }
+.pa-msg-btn:active { transform: scale(.98); }
+
+[data-theme="light"] .pa-msg-overlay { background: rgba(30, 50, 35, 0.55); }
+[data-theme="light"] .pa-msg-card { background: #ffffff; border-color: #d0ddd0; box-shadow: 0 24px 60px rgba(0,0,0,0.18); }
+[data-theme="light"] .pa-msg-text { color: #24331f; }
+[data-theme="light"] .pa-msg-btn { color: #ffffff; }
+
+/* ── Múltipla escolha (checkbox) ── */
+.pa-option-multi .pa-option-check {
+    border-radius: 6px;
+}
+.pa-option-multi.selected .pa-option-check {
+    background: #6AAB71; border-color: #6AAB71;
+}
+
+/* ── Card de segurança / encaminhamento no resultado ── */
+.pa-safety {
+    background: rgba(224, 168, 74, 0.10);
+    border: 1px solid rgba(224, 168, 74, 0.40);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin: 4px 0 8px;
+}
+.pa-safety-title { margin: 0 0 8px; font-size: 1.02rem; font-weight: 600; color: #e0a84a; }
+.pa-safety-text  { margin: 0 0 10px; font-size: .94rem; line-height: 1.5; color: #d8dee6; }
+.pa-safety-foot  { margin: 0; font-size: .84rem; line-height: 1.45; color: #a8b2bd; }
+
+[data-theme="light"] .pa-safety      { background: rgba(198, 128, 20, 0.08); border-color: rgba(198,128,20,0.35); }
+[data-theme="light"] .pa-safety-title{ color: #b5771a; }
+[data-theme="light"] .pa-safety-text { color: #4a5e4a; }
+[data-theme="light"] .pa-safety-foot { color: #6a7a6a; }
+
+/* ── Resumo do padrão e aviso não-diagnóstico ── */
+.pa-result-resumo {
+    font-size: .98rem; line-height: 1.55; color: #c4ccd6;
+    text-align: center; max-width: 560px; margin: 2px auto 6px;
+}
+.pa-result-aviso {
+    font-size: .82rem; line-height: 1.5; color: #8a95a1;
+    text-align: center; max-width: 560px; margin: 18px auto 0;
+    font-style: italic;
+}
+[data-theme="light"] .pa-result-resumo { color: #4a5e4a; }
+[data-theme="light"] .pa-result-aviso  { color: #8a9a8a; }

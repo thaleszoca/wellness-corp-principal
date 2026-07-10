@@ -1,0 +1,35 @@
+{
+  "_doc": "Sistema de pontuação (spec §10). Os pesos por resposta vivem em questions.json (campo efeitos/efeitos_escala).",
+  "limiares": {
+    "categoria_provavel": 8,
+    "categoria_confirmada": 12,
+    "diferenca_minima": 4,
+    "evidencias_independentes": 3
+  },
+  "empate": {
+    "aciona_desempate_se_diferenca_menor_que": 4,
+    "criterio_final": "maior_pontuacao_depois_primeira_definida"
+  },
+  "dieta": {
+    "empate_favorece": "dieta1"
+  },
+  "seguranca": {
+    "flags_conhecidas": [
+      "desmaios_restricao",
+      "vomito_provocado",
+      "laxantes_compensacao",
+      "jejum_prolongado_intencional",
+      "perda_controle_sofrimento",
+      "variacao_peso_inexplicada",
+      "medo_extremo_de_comer",
+      "sofrimento_imagem_corporal",
+      "risco_emocional"
+    ],
+    "urgentes": [
+      "risco_emocional",
+      "vomito_provocado",
+      "laxantes_compensacao"
+    ]
+  },
+  "como_funciona": "Cada resposta soma pts a category (blocos 2-6) ou subcategory (bloco 7). Só pontuam alvos do objetivo/categoria em curso. Vence a maior pontuação; empate → primeira definida."
+}

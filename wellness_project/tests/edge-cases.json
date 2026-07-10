@@ -1,0 +1,55 @@
+{
+  "_doc": "Casos de borda: empate, segurança e contradição (spec §19.1).",
+  "casos": [
+    {
+      "caso": "Empate/baixa evidência (respostas neutras)",
+      "objetivo": "emagrecer",
+      "resultado": {
+        "total": 40,
+        "categoria": "psicologico-compulsivo",
+        "subcategoria": "beliscador-noturno",
+        "catScores": {
+          "psicologico-compulsivo": 4,
+          "sedentario-metabolismo-lento": 0,
+          "restritivo-efeito-sanfona": 0,
+          "paladar-infantil": 1
+        }
+      },
+      "regra": "Empate → primeira categoria definida na ordem do objetivo; total permanece 40.",
+      "passou": true
+    },
+    {
+      "caso": "Sinais de segurança (vômito + perda de controle + imagem 10/10)",
+      "objetivo": "melhorar-alimentacao",
+      "resultado": {
+        "total": 40,
+        "categoria": "obcecado-estetica",
+        "subcategoria": "insatisfacao-cronica",
+        "safetyFlags": [
+          "sofrimento_imagem_corporal",
+          "vomito_provocado",
+          "perda_controle_sofrimento"
+        ]
+      },
+      "regra": "safety_flag ativa mensagem de encaminhamento; fluxo ainda completa 40 (spec §15).",
+      "passou": true
+    },
+    {
+      "caso": "Respostas contraditórias (sinais de magro-ansioso e falso-magro)",
+      "objetivo": "ganhar-massa",
+      "resultado": {
+        "total": 40,
+        "categoria": "magro-ansioso",
+        "subcategoria": "ansiedade-digestiva",
+        "catScores": {
+          "magro-ansioso": 14,
+          "falso-magro": 9,
+          "ectomorfo": 8,
+          "apetite-seletivo": 0
+        }
+      },
+      "regra": "Vence a maior pontuação acumulada; sistema não acusa inconsistência (spec §10.4).",
+      "passou": true
+    }
+  ]
+}

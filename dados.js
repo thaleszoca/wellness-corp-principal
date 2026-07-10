@@ -1,5 +1,18 @@
 /* ============================================================
    WELLNESS — dados.js
+
+   ⚠️ NOTA (nova trilha de 40 perguntas):
+   O FLUXO adaptativo agora é definido pelos arquivos separados
+   (data-banco.js, data-regras.js, data-categorias.js,
+   data-subcategorias.js, data-mensagens.js) e pelo motor
+   perguntas-adaptativas.js — conforme wellness_project/.
+   Este arquivo permanece como FONTE DOS CARDÁPIOS (dietas/refeições)
+   e dos nomes internos de categoria/subcategoria, consumidos ao final
+   do questionário. As chaves de categoria/subcategoria aqui são as
+   mesmas usadas pelo novo motor. Os campos antigos `triagem` e
+   `criterios` NÃO são mais usados pelo fluxo (mantidos por
+   compatibilidade/histórico).
+
    Estrutura completa do fluxo adaptativo de perguntas.
 
    Baseado na Documentação Oficial da Wellness.

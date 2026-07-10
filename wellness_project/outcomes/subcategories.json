@@ -1,0 +1,245 @@
+{
+  "_doc": "Subcategorias por categoria com nome, regra explícita e regra de escolha de dieta.",
+  "subcategorias": {
+    "magro-ansioso": {
+      "ansiedade-digestiva": {
+        "interno": "Ansiedade Digestiva",
+        "nome": "Ansiedade que reduz o apetite",
+        "regra": "Apetite some no estresse + sintomas digestivos atrapalham as refeições + passa horas sem comer por preocupação.",
+        "dieta_regra": {
+          "pergunta": "b7_ma_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "hiperatividade-mental": {
+        "interno": "Hiperatividade Mental",
+        "nome": "Mente acelerada e refeições irregulares",
+        "regra": "Mente acelerada + necessidade constante de atividade + perde o horário das refeições por distração, com pouco desconforto digestivo.",
+        "dieta_regra": {
+          "pergunta": "b7_ma_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "falso-magro": {
+      "metabolicamente-descondicionado": {
+        "interno": "Metabolicamente Descondicionado",
+        "nome": "Baixo condicionamento e rotina alimentar irregular",
+        "regra": "Cansaço em atividades simples + inchaço frequente + ultraprocessados frequentes + baixa atividade física.",
+        "dieta_regra": {
+          "pergunta": "b7_fm_2",
+          "dieta1_se": "sim"
+        }
+      },
+      "baixa-massa-muscular": {
+        "interno": "Baixa Massa Muscular",
+        "nome": "Baixa massa muscular",
+        "regra": "Pouca força + musculatura pouco desenvolvida + pouca evolução mesmo treinando.",
+        "dieta_regra": {
+          "pergunta": "b7_fm_4",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "ectomorfo": {
+      "alto-gasto-energetico": {
+        "interno": "Alto Gasto Energético",
+        "nome": "Alto gasto energético",
+        "regra": "Muito movimento espontâneo + perde peso rápido ao comer menos + ingestão não parece baixa.",
+        "dieta_regra": {
+          "pergunta": "b7_ec_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "baixa-ingestao-calorica": {
+        "interno": "Baixa Ingestão Calórica",
+        "nome": "Baixa ingestão calórica",
+        "regra": "Saciedade precoce OU porções pequenas OU esquece refeições, com dificuldade de ganhar peso.",
+        "dieta_regra": {
+          "pergunta": "b7_ec_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "apetite-seletivo": {
+      "sensibilidade-sensorial": {
+        "interno": "Sensibilidade Sensorial",
+        "nome": "Sensibilidade sensorial",
+        "regra": "Rejeição por textura + mistura de alimentos incomoda + separa ingredientes.",
+        "dieta_regra": {
+          "pergunta": "b7_as_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "resistencia-novidade": {
+        "interno": "Resistência à Novidade Alimentar",
+        "nome": "Resistência à novidade alimentar",
+        "regra": "Medo/resistência a experimentar + textura não é o motivo principal + alimentação semelhante desde a infância.",
+        "dieta_regra": {
+          "pergunta": "b7_as_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "psicologico-compulsivo": {
+      "beliscador-noturno": {
+        "interno": "Belisco Noturno e Hipervigilância",
+        "nome": "Belisco noturno e hipervigilância",
+        "regra": "Ansiedade noturna alta + belisca depois do jantar + revisita armários automaticamente, com perda de controle aguda menos intensa.",
+        "dieta_regra": {
+          "pergunta": "b7_pc_2",
+          "dieta1_se": "sim"
+        }
+      },
+      "comedor-impulsivo": {
+        "interno": "Impulsividade em Crises Agudas",
+        "nome": "Impulsividade em momentos difíceis",
+        "regra": "Episódios após gatilho emocional + come muito rápido + para apenas com desconforto + culpa intensa depois.",
+        "dieta_regra": {
+          "pergunta": "b7_pc_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "sedentario-metabolismo-lento": {
+      "desidratado-fome-invertida": {
+        "interno": "Baixa hidratação e confusão entre sede e fome",
+        "nome": "Baixa hidratação e confusão entre sede e fome",
+        "regra": "Água baixa + boca seca ou dor de cabeça frequentes + vontade de comer diminui após beber água.",
+        "dieta_regra": {
+          "pergunta": "b7_sm_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "inativo-de-cadeira": {
+        "interno": "Imobilidade Ocupacional",
+        "nome": "Imobilidade na rotina",
+        "regra": "Mais de 6 horas sentado + atividade física abaixo de 150 min/semana + poucas pausas de movimento.",
+        "dieta_regra": {
+          "pergunta": "b7_sm_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "restritivo-efeito-sanfona": {
+      "fobico-carboidratos": {
+        "interno": "Medo Crônico de Carboidratos",
+        "nome": "Receio de carboidratos",
+        "regra": "Exclui carboidratos + medo de arroz/batata/massas + fraqueza ou irritabilidade após o corte + desejo intenso depois.",
+        "dieta_regra": {
+          "pergunta": "b7_rs_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "cicatriz-metabolica": {
+        "interno": "Efeito Rebote Agudo",
+        "nome": "Efeito rebote após restrições",
+        "regra": "Histórico de dietas agressivas + recupera peso rapidamente + oscilação de 4–5 kg em 30 dias + alterna foco total e desistência.",
+        "dieta_regra": {
+          "pergunta": "b7_rs_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "paladar-infantil": {
+      "dependente-hiperpalataveis": {
+        "interno": "Dependência de Hiperpalatáveis",
+        "nome": "Busca intensa por sabores hiperpalatáveis",
+        "regra": "Fissura por doce ou gordura + alimentos naturais parecem sem graça + bebidas adoçadas/zero frequentes.",
+        "dieta_regra": {
+          "pergunta": "b7_pi_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "seletivo-industrial": {
+        "interno": "Seletividade Industrial Monótona",
+        "nome": "Seletividade por industrializados",
+        "regra": "Marcas específicas trazem segurança + lanches majoritariamente industrializados + rejeição visual/textural de vegetais.",
+        "dieta_regra": {
+          "pergunta": "b7_pi_5",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "terrorista-nutricional": {
+      "ortorexia-funcional": {
+        "interno": "Ortorexia Funcional",
+        "nome": "Rigidez com alimentação “limpa”",
+        "regra": "Analisa rótulos com ansiedade + evita eventos sociais por comida + teme ingredientes sem indicação clínica, com compensação secundária.",
+        "dieta_regra": {
+          "pergunta": "b7_tn_2",
+          "dieta1_se": "sim"
+        }
+      },
+      "compensador-punitivo": {
+        "interno": "Compensação Punitiva",
+        "nome": "Compensação após sair do plano",
+        "regra": "Culpa alta após sair do plano + pula refeição ou treina para compensar + pensamento tudo ou nada.",
+        "dieta_regra": {
+          "pergunta": "b7_tn_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "desconectado-distraido": {
+      "alimentacao-automatica": {
+        "interno": "Alimentação Automática",
+        "nome": "Alimentação automática",
+        "regra": "Usa telas nas refeições + não lembra sabor ou quantidade + come sem fome por automatismo.",
+        "dieta_regra": {
+          "pergunta": "b7_dd_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "desconexao-corporal": {
+        "interno": "Desconexão Corporal",
+        "nome": "Desconexão dos sinais do corpo",
+        "regra": "Dificuldade de reconhecer fome + percebe saciedade apenas muito cheio + dificuldade de diferenciar fome emocional.",
+        "dieta_regra": {
+          "pergunta": "b7_dd_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "obcecado-estetica": {
+      "dependente-validacao": {
+        "interno": "Dependência de Validação Estética",
+        "nome": "Dependência de validação estética",
+        "regra": "Comentários afetam muito o humor + compara o corpo com frequência + busca aprovação visual.",
+        "dieta_regra": {
+          "pergunta": "b7_oe_2",
+          "dieta1_se": "sim"
+        }
+      },
+      "insatisfacao-cronica": {
+        "interno": "Insatisfação Corporal Persistente",
+        "nome": "Insatisfação corporal persistente",
+        "regra": "Nunca se sente satisfeito + encontra novos defeitos após metas + pequenas variações afetam a autoestima.",
+        "dieta_regra": {
+          "pergunta": "b7_oe_3",
+          "dieta1_se": "sim"
+        }
+      }
+    },
+    "comedor-emocional": {
+      "alivio-recompensa": {
+        "interno": "Recompensa Alimentar",
+        "nome": "Comida como recompensa",
+        "regra": "Comida como prêmio + vontade após dia cansativo + objetivo de relaxar ou comemorar, com fuga secundária.",
+        "dieta_regra": {
+          "pergunta": "b7_ce_1",
+          "dieta1_se": "sim"
+        }
+      },
+      "fuga-emocional": {
+        "interno": "Fuga Emocional",
+        "nome": "Comida como fuga emocional",
+        "regra": "Come para evitar sentimentos + alívio temporário + problemas continuam + dificuldade de encontrar outros recursos.",
+        "dieta_regra": {
+          "pergunta": "b7_ce_3",
+          "dieta1_se": "sim"
+        }
+      }
+    }
+  }
+}
