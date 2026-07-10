@@ -97,6 +97,6 @@ document.getElementById('epBtnContinue').addEventListener('click', () => {
     btn.disabled = true;
 
     setTimeout(() => {
-        window.location.href = 'index.html'; /* substituir pelas perguntas adaptativas */
+        window.location.href = 'perguntas-adaptativas.html';
     }, 1200);
 });
