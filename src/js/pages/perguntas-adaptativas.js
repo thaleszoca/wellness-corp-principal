@@ -467,11 +467,7 @@ function renderResultado(p) {
   progressFill.style.width = '100%';
   const numeroDieta = p.dieta === 'dieta1' ? '1' : '2';
 
-  const refeicoesHTML = p.refeicoes.map((r, i) => `
-    <div class="pa-meal reveal" style="--d:${i * 0.06}s">
-      <div class="pa-meal-head"><span class="pa-meal-ico">${mealIcon(r.nome)}</span><span class="pa-meal-name">${r.nome}</span></div>
-      <ul class="pa-meal-items">${r.itens.map(it => `<li>${it}</li>`).join('')}</ul>
-    </div>`).join('');
+  const nRefeicoes = (p.refeicoes || []).length;
 
   const safetyHTML = (p.safetyFlags && p.safetyFlags.length) ? `
     <div class="pa-safety reveal" style="--d:.10s">
@@ -503,9 +499,11 @@ function renderResultado(p) {
         <span class="pa-diet-tag">Sugestão de cardápio ${numeroDieta}</span>
         <h2 class="pa-diet-title">${p.dietaTitulo}</h2>
         <p class="pa-diet-desc">${p.dietaObjetivo}</p>
+        <button class="pa-diet-cta" id="verPlano">
+          <span class="pa-diet-cta-txt">Ver meu plano alimentar${nRefeicoes ? ` · ${nRefeicoes} refeições` : ''}</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-
-      <div class="pa-meals">${refeicoesHTML}</div>
 
       <p class="pa-result-aviso reveal">${MSG.aviso_resultado}</p>
 
@@ -522,8 +520,10 @@ function renderResultado(p) {
   resultMain.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  document.getElementById('goDashboard').addEventListener('click', () => { window.location.href = '../dashboard/dashboard.html'; });
+  document.getElementById('goDashboard').addEventListener('click', () => { window.location.href = '../dashboard/home.html'; });
   document.getElementById('restartQuiz').addEventListener('click', () => { window.location.href = 'perguntas-adaptativas.html'; });
+  const verPlano = document.getElementById('verPlano');
+  if (verPlano) verPlano.addEventListener('click', () => { window.location.href = '../dashboard/plano-alimentar.html'; });
 
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });

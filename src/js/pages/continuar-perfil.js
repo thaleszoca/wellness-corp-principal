@@ -18,5 +18,5 @@ document.getElementById('cpBtnContinue').addEventListener('click', () => {
 
 /* ── Botão Secundário: Ir para o Aplicativo ── */
 document.getElementById('cpBtnApp').addEventListener('click', () => {
-    window.location.href = 'dashboard.html';
+    window.location.href = 'home.html';
 });

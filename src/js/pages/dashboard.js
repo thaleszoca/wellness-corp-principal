@@ -66,6 +66,10 @@ function getFormattedDate() {
 /* ── localStorage ── */
 const essentials = JSON.parse(localStorage.getItem('wellness_essentials') || '{}');
 const userData   = JSON.parse(localStorage.getItem('wellness_user')        || '{}');
+const plano      = JSON.parse(localStorage.getItem('wellness_plano')       || 'null');
+const planoPronto = !!(plano && plano.refeicoes && plano.refeicoes.length);
+
+const PLANO_URL = 'plano-alimentar.html';
 
 
 /* ── Mapeamento de objetivos ── */
@@ -233,6 +237,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
 
+    /* ── Plano Alimentar: desbloqueia quando o plano existe ── */
+    const rcPlan = document.getElementById('rcPlan');
+    if (planoPronto && rcPlan) {
+        rcPlan.classList.remove('db-rc--locked');
+        rcPlan.classList.add('db-rc--active');
+        rcPlan.setAttribute('role', 'button');
+        rcPlan.setAttribute('tabindex', '0');
+        rcPlan.setAttribute('aria-label', 'Abrir plano alimentar');
+
+        const lock = rcPlan.querySelector('.db-rc-lock-icon');
+        if (lock) lock.remove();
+        const status = rcPlan.querySelector('.db-rc-status');
+        if (status) {
+            status.textContent = 'Disponível agora';
+            status.classList.remove('db-rc-status--waiting');
+            status.classList.add('db-rc-status--active');
+        }
+        const desc = rcPlan.querySelector('.db-rc-desc');
+        if (desc) desc.textContent = 'Veja sua dieta e as calorias de cada refeição.';
+
+        const abrirPlano = () => { window.location.href = PLANO_URL; };
+        rcPlan.addEventListener('click', abrirPlano);
+        rcPlan.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirPlano(); }
+        });
+    }
+
+
     /* ── Cards de recursos clicáveis ── */
     document.getElementById('aylaChatCard').addEventListener('click', () => {
         showToast('Ayla está sendo preparada para você!');
@@ -259,7 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('navPlan').addEventListener('click', () => {
-        showToast('Plano Alimentar em preparação.');
+        if (planoPronto) {
+            window.location.href = PLANO_URL;
+        } else {
+            showToast('Complete seu perfil para liberar o Plano Alimentar.');
+        }
     });
 
     document.getElementById('navAyla').addEventListener('click', () => {

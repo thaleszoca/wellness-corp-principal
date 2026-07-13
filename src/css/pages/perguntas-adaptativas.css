@@ -643,6 +643,20 @@ body:has(button:hover) .cursor-ring { width: 46px; height: 46px; border-color: r
     color: #B5BEC8;
     line-height: 1.68;
 }
+.pa-diet-cta {
+    margin-top: 20px;
+    width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: #6AAB71; color: #0F1115;
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    padding: 14px 20px; border: none; border-radius: 14px;
+    transition: background .2s, transform .2s, box-shadow .2s;
+}
+.pa-diet-cta:hover { background: #5F9D66; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(106,171,113,0.42); }
+.pa-diet-cta:active { transform: scale(0.98); }
+.pa-diet-cta svg { transition: transform .18s; }
+.pa-diet-cta:hover svg { transform: translateX(3px); }
+[data-theme="light"] .pa-diet-cta { color: #FFFFFF; }
 
 
 /* ── Refeições ── */

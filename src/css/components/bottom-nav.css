@@ -1,0 +1,103 @@
+/* ============================================================
+   WELLNESS — bottom-nav.css
+   Barra de navegação inferior fixa (estilo app / Instagram).
+   Componente compartilhado (prefixo wn-). Autossuficiente:
+   define as próprias variáveis de tema (claro/escuro).
+   Funciona em desktop e mobile — barra fixa embaixo, itens
+   centralizados num container com largura máxima.
+   ============================================================ */
+
+:root {
+    --wn-bg:      rgba(15,17,21,0.92);
+    --wn-border:  #273041;
+    --wn-text:    #8C95A3;
+    --wn-active:  #6AAB71;
+    --wn-core-bg: #6AAB71;
+    --wn-h:       68px;
+}
+[data-theme="light"] {
+    --wn-bg:      rgba(255,255,255,0.94);
+    --wn-border:  #E0EAE0;
+    --wn-text:    #7A8590;
+    --wn-active:  #2D7A4F;
+    --wn-core-bg: #2D7A4F;
+}
+
+.wn-nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 300;
+    height: calc(var(--wn-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--wn-bg);
+    border-top: 1px solid var(--wn-border);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.wn-nav-inner {
+    max-width: 560px; height: var(--wn-h);
+    margin: 0 auto; padding: 0 12px;
+    display: flex; align-items: center; justify-content: space-around;
+}
+
+.wn-nav-item {
+    flex: 1 1 0; min-width: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px;
+    background: none; border: none;
+    color: var(--wn-text);
+    font-family: inherit;
+    transition: color .18s, transform .18s;
+}
+.wn-nav-item:hover { transform: translateY(-2px); }
+.wn-nav-ico { width: 24px; height: 24px; display: inline-flex; }
+.wn-nav-ico svg { width: 100%; height: 100%; }
+.wn-nav-label { font-size: .64rem; font-weight: 500; letter-spacing: .01em; }
+
+.wn-nav-item.is-active { color: var(--wn-active); }
+.wn-nav-item.is-active .wn-nav-ico svg { fill: currentColor; stroke-width: 1.6; }
+
+/* pulso de chegada (transição do plano → home) */
+.wn-nav-item.wn-arrived { color: var(--wn-active); }
+.wn-nav-item.wn-arrived .wn-nav-ico { animation: wnArrive .55s ease 2; }
+@keyframes wnArrive {
+    0%, 100% { transform: scale(1); }
+    45%      { transform: scale(1.32); }
+}
+
+/* Item central em destaque (Plano) */
+.wn-nav-item--core { flex: 0 0 auto; }
+.wn-nav-item--core .wn-nav-ico {
+    width: 52px; height: 52px; border-radius: 50%;
+    align-items: center; justify-content: center;
+    background: var(--wn-core-bg); color: #fff;
+    margin-top: -20px;
+    box-shadow: 0 8px 22px rgba(106,171,113,0.45);
+    border: 4px solid var(--wn-bg);
+    transition: transform .2s, box-shadow .2s;
+}
+[data-theme="light"] .wn-nav-item--core .wn-nav-ico { box-shadow: 0 8px 22px rgba(45,122,79,0.35); }
+.wn-nav-item--core .wn-nav-ico svg { width: 24px; height: 24px; stroke: #fff; fill: none; }
+.wn-nav-item--core:hover .wn-nav-ico { transform: translateY(-2px) scale(1.05); }
+.wn-nav-item--core.is-active { color: var(--wn-active); }
+.wn-nav-item--core.is-active .wn-nav-ico svg { fill: none; }
+.wn-nav-item--core .wn-nav-label { margin-top: 2px; }
+
+/* Toast do componente */
+.wn-toast {
+    position: fixed; left: 50%; bottom: calc(var(--wn-h) + 22px);
+    transform: translateX(-50%) translateY(10px);
+    z-index: 400;
+    background: #1B2230; color: #fff;
+    border: 1px solid var(--wn-border);
+    padding: 11px 18px; border-radius: 12px; font-size: .84rem; font-weight: 500;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+    opacity: 0; transition: opacity .3s, transform .3s;
+    pointer-events: none;
+}
+[data-theme="light"] .wn-toast { background: #FFFFFF; color: #1A1A2E; }
+.wn-toast--visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 400px) {
+    .wn-nav-inner { padding: 0 4px; }
+    .wn-nav-label { font-size: .58rem; }
+    .wn-nav-ico { width: 22px; height: 22px; }
+}

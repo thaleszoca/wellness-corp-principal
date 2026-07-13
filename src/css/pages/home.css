@@ -1,0 +1,211 @@
+/* ============================================================
+   WELLNESS — home.css
+   Home: saudação + card "glass" do plano do dia.
+   A navegação fica na barra inferior fixa (componente wn-).
+   ============================================================ */
+
+:root {
+    --hm-bg:      #0F1115;
+    --hm-bg2:     #131720;
+    --hm-text:    #FFFFFF;
+    --hm-text2:   #B5BEC8;
+    --hm-text3:   #8C95A3;
+    --hm-green:   #6AAB71;
+    --hm-glass:      rgba(255,255,255,0.07);
+    --hm-glass-brd:  rgba(255,255,255,0.16);
+    --hm-glass-hi:   rgba(255,255,255,0.28);
+}
+
+[data-theme="light"] {
+    --hm-bg:      #EEF4EF;
+    --hm-bg2:     #FFFFFF;
+    --hm-text:    #1A1A2E;
+    --hm-text2:   #4B5563;
+    --hm-text3:   #7A8590;
+    --hm-green:   #2D7A4F;
+    --hm-glass:      rgba(255,255,255,0.55);
+    --hm-glass-brd:  rgba(255,255,255,0.85);
+    --hm-glass-hi:   rgba(255,255,255,0.95);
+}
+
+*, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+    cursor: none !important;
+}
+html { font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body {
+    min-height: 100vh;
+    width: 100%; max-width: 100vw;
+    background: var(--hm-bg);
+    color: var(--hm-text);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ── Cursor ── */
+.cursor-dot {
+    position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+    background: var(--hm-green); border-radius: 50%;
+    pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+    box-shadow: 0 0 8px rgba(106,171,113,0.45);
+    transition: width .15s, height .15s, opacity .2s; will-change: left, top; opacity: 0;
+}
+.cursor-ring {
+    position: fixed; top: 0; left: 0; width: 32px; height: 32px;
+    border: 1.5px solid rgba(106,171,113,0.35); border-radius: 50%;
+    pointer-events: none; z-index: 9998; transform: translate(-50%,-50%);
+    transition: width .22s, height .22s, opacity .2s; will-change: left, top; opacity: 0;
+}
+body:has(button:hover) .cursor-dot  { width: 12px; height: 12px; }
+body:has(button:hover) .cursor-ring { width: 46px; height: 46px; border-color: rgba(106,171,113,0.60); }
+
+/* ══════════════════════════════════════════
+   FUNDO (blobs para o glass ter o que desfocar)
+══════════════════════════════════════════ */
+.hm-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.hm-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .45; }
+.hm-blob--1 { width: 460px; height: 460px; background: #2f6b3f; top: -100px; left: -80px; }
+.hm-blob--2 { width: 420px; height: 420px; background: #1f4d6b; bottom: -120px; right: -80px; }
+.hm-blob--3 { width: 360px; height: 360px; background: #3a7a52; bottom: 15%; left: 35%; opacity: .3; }
+[data-theme="light"] .hm-blob { opacity: .38; }
+[data-theme="light"] .hm-blob--1 { background: #8fd4a6; }
+[data-theme="light"] .hm-blob--2 { background: #9cc6e0; }
+[data-theme="light"] .hm-blob--3 { background: #b6e2c5; }
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+.hm-header {
+    position: relative; z-index: 5;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 26px;
+    max-width: 1000px; margin: 0 auto;
+}
+.hm-brand { display: flex; align-items: center; gap: 10px; }
+.hm-logo-img { width: 30px; height: 30px; object-fit: contain; }
+.hm-brand-name { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+.hm-icon-btn {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--hm-glass); border: 1px solid var(--hm-glass-brd);
+    color: var(--hm-text2);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    transition: border-color .2s, color .2s, transform .2s;
+}
+.hm-icon-btn:hover { border-color: var(--hm-green); color: var(--hm-green); transform: translateY(-1px); }
+
+/* ══════════════════════════════════════════
+   MAIN
+══════════════════════════════════════════ */
+.hm-main {
+    position: relative; z-index: 2;
+    max-width: 520px; margin: 0 auto;
+    padding: 8px 24px calc(var(--wn-h, 68px) + 48px);
+    display: flex; flex-direction: column; align-items: center;
+    min-height: calc(100vh - 82px); justify-content: center;
+}
+.hm-welcome { text-align: center; margin-bottom: 28px; width: 100%; }
+.hm-greeting { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+.hm-quote { margin-top: 6px; font-size: .92rem; color: var(--hm-text2); max-width: 100%; }
+
+/* ══════════════════════════════════════════
+   CARD PRINCIPAL (glass) → plano do dia
+══════════════════════════════════════════ */
+.hm-hero {
+    position: relative;
+    width: 100%; max-width: 400px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 4px;
+    padding: 40px 32px 34px;
+    border-radius: 28px;
+    background: var(--hm-glass);
+    border: 1.5px solid var(--hm-glass-brd);
+    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+        0 24px 60px rgba(0,0,0,0.42),
+        inset 0 1px 0 var(--hm-glass-hi);
+    color: var(--hm-text);
+    overflow: hidden;
+    transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
+}
+[data-theme="light"] .hm-hero { box-shadow: 0 24px 60px rgba(45,122,79,0.18), inset 0 1px 0 var(--hm-glass-hi); }
+.hm-hero:hover { transform: translateY(-4px); }
+.hm-hero:active { transform: translateY(-1px) scale(.995); }
+
+.hm-hero-glow {
+    position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+    width: 260px; height: 260px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(106,171,113,0.45) 0%, rgba(106,171,113,0) 70%);
+    pointer-events: none;
+}
+[data-theme="light"] .hm-hero-glow { background: radial-gradient(circle, rgba(45,122,79,0.28) 0%, rgba(45,122,79,0) 70%); }
+
+.hm-hero-logo {
+    position: relative;
+    width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px;
+    filter: drop-shadow(0 8px 20px rgba(106,171,113,0.45));
+}
+.hm-hero-tag {
+    font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--hm-green);
+}
+.hm-hero-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+.hm-hero-sub { font-size: .9rem; color: var(--hm-text2); margin-top: 2px; }
+.hm-hero-cta {
+    margin-top: 20px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--hm-green); color: #fff;
+    font-size: .9rem; font-weight: 600;
+    padding: 11px 26px; border-radius: 999px;
+    box-shadow: 0 10px 26px rgba(106,171,113,0.4);
+    transition: transform .2s;
+}
+.hm-hero:hover .hm-hero-cta { transform: translateY(-1px); }
+.hm-hero-cta svg { display: block; }
+
+/* Entrada animada */
+.hm-hero { animation: hmRise .6s cubic-bezier(.2,.9,.25,1.05) both; }
+.hm-welcome { animation: hmRise .5s ease both; }
+@keyframes hmRise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hm-hero, .hm-welcome { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ══════════════════════════════════════════
+   BALÃO DE CHEGADA ("Dieta de hoje concluída")
+══════════════════════════════════════════ */
+.hm-arrival {
+    position: fixed; z-index: 500;
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+    background: var(--hm-green); color: #fff;
+    font-size: .84rem; font-weight: 600;
+    padding: 10px 16px; border-radius: 13px;
+    box-shadow: 0 14px 34px rgba(106,171,113,0.5);
+    transform: translateX(-50%) translateY(12px) scale(.96);
+    opacity: 0;
+    transition: opacity .45s ease, transform .55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+.hm-arrival.visible { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+.hm-arrival::after {
+    content: ''; position: absolute; bottom: -5px;
+    left: calc(50% + var(--arrow, 0px)); transform: translateX(-50%) rotate(45deg);
+    width: 11px; height: 11px; background: var(--hm-green); border-radius: 2px;
+}
+.hm-arrival-ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(255,255,255,0.22);
+}
+
+@media (max-width: 480px) {
+    .hm-main { padding-left: 18px; padding-right: 18px; }
+    .hm-greeting { font-size: 1.35rem; }
+    .hm-quote { font-size: .84rem; }
+    .hm-hero { padding: 34px 24px 30px; }
+    .hm-hero-title { font-size: 1.3rem; }
+}
