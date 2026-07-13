@@ -116,10 +116,35 @@ form.addEventListener('submit', e => {
     btnSubmit.textContent = 'Criando conta...';
     btnSubmit.disabled    = true;
 
-    /* Simula criação e redireciona para as perguntas essenciais */
-    setTimeout(() => {
-        window.location.href = '../onboarding/perguntas-essenciais.html';
-    }, 1400);
+    /* Envia os dados para o backend (PHP) */
+    const dados = new FormData();
+    dados.append('nome',  name);
+    dados.append('email', email);
+    dados.append('senha', password);
+
+    fetch('../../../backend/auth/cadastro.php', {
+        method: 'POST',
+        body: dados,
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.sucesso) {
+                // Cadastrou no banco — segue para as perguntas essenciais
+                window.location.href = '../onboarding/perguntas-essenciais.html';
+            } else {
+                // Ex.: e-mail já cadastrado
+                showError('email', data.mensagem);
+                shake(btnSubmit);
+                btnSubmit.textContent = 'Criar Conta';
+                btnSubmit.disabled    = false;
+            }
+        })
+        .catch(() => {
+            showError('email', 'Erro de conexão com o servidor. O Apache está ligado?');
+            shake(btnSubmit);
+            btnSubmit.textContent = 'Criar Conta';
+            btnSubmit.disabled    = false;
+        });
 });
 
 

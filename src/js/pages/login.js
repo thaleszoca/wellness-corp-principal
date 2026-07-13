@@ -55,10 +55,34 @@ form.addEventListener('submit', e => {
     btnSubmit.textContent = 'Entrando...';
     btnSubmit.disabled    = true;
 
-    /* Simula autenticação e redireciona para o app */
-    setTimeout(() => {
-        window.location.href = '../dashboard/home.html';
-    }, 1200);
+    /* Envia as credenciais para o backend (PHP) */
+    const dados = new FormData();
+    dados.append('email', email);
+    dados.append('senha', password);
+
+    fetch('../../../backend/auth/login.php', {
+        method: 'POST',
+        body: dados,
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.sucesso) {
+                // Autenticou — vai para o app
+                window.location.href = '../dashboard/home.html';
+            } else {
+                // Ex.: e-mail ou senha incorretos
+                showError('password', data.mensagem);
+                shake(btnSubmit);
+                btnSubmit.textContent = 'Entrar';
+                btnSubmit.disabled    = false;
+            }
+        })
+        .catch(() => {
+            showError('email', 'Erro de conexão. Abra a página por http://localhost/wellness/...');
+            shake(btnSubmit);
+            btnSubmit.textContent = 'Entrar';
+            btnSubmit.disabled    = false;
+        });
 });
 
 
