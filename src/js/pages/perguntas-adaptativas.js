@@ -39,6 +39,7 @@ const TOTAL  = REGRAS.total_perguntas;        // 40
 let fila = [];          // perguntas 6..40 (cresce por bloco)
 let idx  = 0;           // índice em `fila` (0 → pergunta 6)
 let transitioning = false;
+let finalizado = false; // trava: o resultado só é gerado/salvo uma vez
 
 const respostas = {};   // { <id>: valor }
 
@@ -425,6 +426,8 @@ function escolherTextoMensagem(marco) {
 
 /* ════════════ FINALIZAÇÃO ════════════ */
 function finalizar() {
+  if (finalizado) return;   // evita salvar/gerar o resultado mais de uma vez
+  finalizado = true;
   const st = computarEstado();
   resultado.safetyFlags = Array.from(st.flags);
   resultado.dieta = escolherDieta();
@@ -457,10 +460,25 @@ function finalizar() {
     completedAt: new Date().toISOString(),
   };
   localStorage.setItem('wellness_plano', JSON.stringify(payload));
+  salvarDietaNoBanco(payload);
 
   continueBtn.classList.add('loading');
   continueBtn.disabled = true;
   setTimeout(() => renderResultado(payload), 700);
+}
+
+/* Envia o resultado ao backend (só grava se estiver logado). Não bloqueia a UI:
+   o plano já está salvo no localStorage; se falhar (offline/sem login), segue igual. */
+function salvarDietaNoBanco(p) {
+  const dados = new FormData();
+  dados.append('objetivo',     p.objetivo);
+  dados.append('categoria',    p.categoria);
+  dados.append('subcategoria', p.subcategoria);
+  dados.append('dieta',        p.dieta);
+  dados.append('pontuacao',    p.confianca ? String(p.confianca.pontos) : '');
+
+  fetch('../../../backend/dieta/salvar-dieta.php', { method: 'POST', body: dados })
+    .catch(() => { /* sem conexão ou não logado — o plano continua salvo localmente */ });
 }
 
 function renderResultado(p) {

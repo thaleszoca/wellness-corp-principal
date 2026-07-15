@@ -264,6 +264,9 @@ function finish() {
         completedAt: new Date().toISOString(),
     }));
 
+    /* Envia o perfil para o banco (só grava se estiver logado). Não bloqueia a tela. */
+    salvarPerfilNoBanco();
+
     /* Estado de carregamento */
     continueBtn.classList.add('loading');
     continueBtn.disabled = true;
@@ -271,6 +274,22 @@ function finish() {
     setTimeout(() => {
         window.location.href = '../dashboard/continuar-perfil.html';
     }, 1600);
+}
+
+
+/* Envia o perfil ao backend. O plano já está salvo no localStorage; se falhar
+   (offline ou sem login), o fluxo continua normalmente. */
+function salvarPerfilNoBanco() {
+    const dados = new FormData();
+    dados.append('idade',    answers.age);
+    dados.append('sexo',     answers.gender);
+    dados.append('altura',   answers.height);
+    dados.append('peso',     answers.weight);
+    dados.append('imc',      answers.bmi);
+    dados.append('objetivo', answers.goal);
+
+    fetch('../../../backend/perfil/salvar-perfil.php', { method: 'POST', body: dados })
+        .catch(() => { /* sem conexão ou não logado — segue o fluxo */ });
 }
 
 

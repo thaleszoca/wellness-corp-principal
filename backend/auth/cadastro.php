@@ -1,6 +1,7 @@
 <?php
 // Cadastro de novo usuário — responde em JSON (consumido via fetch no cadastro.js)
 header('Content-Type: application/json; charset=utf-8');
+session_start();
 require_once __DIR__ . '/../config/conexao.php';
 
 // Função auxiliar para responder e encerrar
@@ -42,6 +43,11 @@ try {
     // Insere usando prepared statement (evita SQL injection)
     $stmt = $pdo->prepare('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)');
     $stmt->execute([$nome, $email, $senhaHash]);
+
+    // Já loga o usuário recém-criado (abre a sessão) — assim o questionário
+    // consegue salvar a dieta logo em seguida.
+    $_SESSION['usuario_id']   = $pdo->lastInsertId();
+    $_SESSION['usuario_nome'] = $nome;
 
     responder(true, 'Usuário cadastrado com sucesso!');
 } catch (PDOException $e) {

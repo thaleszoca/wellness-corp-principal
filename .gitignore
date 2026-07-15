@@ -9,3 +9,6 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Ferramenta de desenvolvimento (auto-preenchimento do questionário)
+/botao/
