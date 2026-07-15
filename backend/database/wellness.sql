@@ -32,6 +32,6 @@ CREATE TABLE IF NOT EXISTS `dieta` {
     `categoria`     VARCHAR (255) NOT NULL,
     `subcategoria`  VARCHAR (100) NOT NULL,
     `dieta`         VARCHAR (100) NOT NULL,
-    `pontuacao`     VARCHAR (100) NOT NULL,
+    `pontuacao`     VARCHAR (150) NOT NULL,
     `data`          VARCHAR (100) NOT NULL,
 }
