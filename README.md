@@ -47,3 +47,5 @@ Pronto! Já dá pra cadastrar e fazer login.
 - **Sempre acesse por `http://localhost/wellness/...`** — quem executa o PHP é o Apache. Abrir o `.html` por clique duplo (`file:///...`) ou pelo Live Server do VS Code **não funciona** com PHP.
 - A conexão com o banco está em [`backend/config/conexao.php`](backend/config/conexao.php) com o usuário padrão do XAMPP (`root`, sem senha). Se o seu XAMPP tiver outra senha para o MySQL, ajuste ali.
 - O arquivo `backend/database/wellness.sql` guarda apenas a **estrutura** do banco (sem dados de usuários). Cada pessoa cria seus próprios cadastros localmente.
+
+oi bigode, se vc ta lendo isso me da um oi no  whatsaap kkkkk tmj 
