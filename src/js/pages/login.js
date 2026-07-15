@@ -86,8 +86,65 @@ form.addEventListener('submit', e => {
 });
 
 
-/* ── Botões sociais ── */
+/* ── Login com Google ──
+   IMPORTANTE: cole o MESMO Client ID que está em backend/config/google.php */
+const GOOGLE_CLIENT_ID = '958630046627-j73trbi40hq3i7ecquu4ahamukinbkv8.apps.googleusercontent.com';
+
+const googleBtn = document.getElementById('googleBtn');
+let googleTokenClient = null;
+
+googleBtn.addEventListener('click', () => {
+    // A biblioteca do Google carrega de forma assíncrona; garante que já veio
+    if (typeof google === 'undefined' || !google.accounts) {
+        showToast('Aguarde um instante e clique novamente.');
+        return;
+    }
+
+    // Cria o cliente uma vez só
+    if (!googleTokenClient) {
+        googleTokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: GOOGLE_CLIENT_ID,
+            scope: 'openid email profile',
+            callback: (resposta) => {
+                if (resposta && resposta.access_token) {
+                    enviarTokenGoogle(resposta.access_token);
+                } else {
+                    showToast('Login com Google cancelado.');
+                }
+            },
+        });
+    }
+
+    // Abre o popup do Google
+    googleTokenClient.requestAccessToken();
+});
+
+// Envia o token para o backend validar e criar/logar o usuário
+function enviarTokenGoogle(accessToken) {
+    const dados = new FormData();
+    dados.append('access_token', accessToken);
+
+    fetch('../../../backend/auth/google-login.php', {
+        method: 'POST',
+        body: dados,
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.sucesso) {
+                window.location.href = '../dashboard/home.html';
+            } else {
+                showToast(data.mensagem || 'Erro no login com Google.');
+            }
+        })
+        .catch(() => {
+            showToast('Erro de conexão. Abra a página por http://localhost/wellness/...');
+        });
+}
+
+
+/* ── Botões sociais (Apple / Microsoft — ainda não implementados) ── */
 document.querySelectorAll('.social-btn').forEach(btn => {
+    if (btn.id === 'googleBtn') return; // o Google tem seu próprio tratamento acima
     btn.addEventListener('click', () => {
         const name = btn.querySelector('span').textContent;
         showToast(`Login com ${name.replace('Continuar com ', '')} em breve.`);
