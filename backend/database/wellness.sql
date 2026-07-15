@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `dieta` {
     `id_usuario`    VARCHAR(100) NOT NULL, 
     `objetivo`      VARCHAR (100) NOT NULL, 
     `categoria`     VARCHAR (255) NOT NULL,
-    `subcategoria`  VARCHAR (100) NOT NULL,
+    `subcategoria`  VARCHAR (150) NOT NULL,
     `dieta`         VARCHAR (100) NOT NULL,
     `pontuacao`     VARCHAR (100) NOT NULL,
     `data`          VARCHAR (100) NOT NULL,
